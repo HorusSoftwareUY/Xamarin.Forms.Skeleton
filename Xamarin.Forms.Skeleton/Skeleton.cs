@@ -138,12 +138,11 @@ namespace Xamarin.Forms.Skeleton
                 if (animationType != AnimationsPack.None)
                     SetCancelAnimation(bindable, true);
 
-                ((Layout)bindable).BackgroundColor = GetOriginalBackgroundColor(bindable) != default(Color) ? GetOriginalBackgroundColor(bindable) : Color.Transparent;
+                self.BackgroundColor = GetOriginalBackgroundColor(bindable) != default(Color) ? GetOriginalBackgroundColor(bindable) : Color.Transparent;
                 self.Children.ToList().ForEach(i =>
                 {
                     HandleChildOnStop(i);
                 });
-                self.IsVisible = true;
             }         }
 
         private static void HandleChildOnStop(Element i)
