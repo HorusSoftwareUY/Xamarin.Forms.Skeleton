@@ -19,7 +19,7 @@ namespace Xamarin.Forms.Skeleton
 
         public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(AnimationsPack), typeof(Layout), AnimationsPack.None);
 
-        public static void SetAnimation(BindableObject b, bool value)
+        public static void SetAnimation(BindableObject b, AnimationsPack value)
         {
             b.SetValue(AnimationProperty, value);
         }
@@ -44,11 +44,10 @@ namespace Xamarin.Forms.Skeleton
         static void OnIsBusyChanged(BindableObject bindable, bool oldValue, bool newValue)
         {
             if (bindable.GetType().IsSubclassOf(typeof(Layout)))
-                HandleBeat(bindable, newValue);
+                HandleAnimation(bindable, newValue);
             else
                 throw new NotSupportedException();
         }
-
 
         public static readonly BindableProperty AnimatingProperty = BindableProperty.CreateAttached("Animating", typeof(bool), typeof(Layout), default(bool));
 
@@ -98,25 +97,12 @@ namespace Xamarin.Forms.Skeleton
             return (Color)b.GetValue(OriginalBackgroundColorProperty);
         }
 
-
-        internal static readonly BindableProperty EscalationProperty = BindableProperty.CreateAttached("Escalation", typeof(double), typeof(Layout), 1.1);
-
-        internal static void SetEscalation(BindableObject b, double value)
-        {
-            b.SetValue(EscalationProperty, value);
-        }
-
-        internal static double GetEscalation(BindableObject b)
-        {
-            return (double)b.GetValue(EscalationProperty);
-        }
-
         public static bool IsSkeleton(BindableObject bindable)
         {
             return GetBackgroundColor(bindable) != default(Color) || GetIsBusy(bindable);
         }
 
-        static void HandleBeat(BindableObject bindable, bool newValue)         {             if (!(bindable is Layout))
+        static void HandleAnimation(BindableObject bindable, bool newValue)         {             if (!(bindable is Layout))
                 return;
 
             AnimationsPack animationType = GetAnimation(bindable);
@@ -159,16 +145,18 @@ namespace Xamarin.Forms.Skeleton
             if (i is VisualElement)
             {
                 VisualElement child = (VisualElement)i;
-                if (IsSkeleton(i))
-                {
-                    child.SetValue(VisualElement.IsVisibleProperty, true);
-                    SetOriginalBackgroundColor(child, child.BackgroundColor);
-                    child.BackgroundColor = GetBackgroundColor(child);
-                }
-                else
-                {
-                    child.SetValue(VisualElement.IsVisibleProperty, false);
-                }
+                child.SetValue(VisualElement.IsVisibleProperty, false);
+
+                //if (IsSkeleton(i))
+                //{
+                //    child.SetValue(VisualElement.IsVisibleProperty, true);
+                //    SetOriginalBackgroundColor(child, child.BackgroundColor);
+                //    child.BackgroundColor = GetBackgroundColor(child);
+                //}
+                //else
+                //{
+                //    child.SetValue(VisualElement.IsVisibleProperty, false);
+                //}
             }
         }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+   <metadata minClientVersion="2.8.1">
+       <id>Plugin.MaterialDesignControls</id>
+       <version>1.0.0</version>
+       <title>MaterialDesignControls Plugin for Xamarin Forms</title>
+       <authors>Horus</authors>
+       <owners>AgustinBonillaHorus</owners>
+       <licenseUrl>https://github.com/HorusSoftwareUY/MaterialDesignControlsPlugin/blob/master/LICENSE</licenseUrl>
+       <projectUrl>https://github.com/HorusSoftwareUY/MaterialDesignControlsPlugin</projectUrl> 
+       <iconUrl>https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Templates/icons/plugin_icon_nuget.png</iconUrl>
+       <requireLicenseAcceptance>false</requireLicenseAcceptance>
+       <description>Material Design Controls for Xamarin Forms</description>
+       <releaseNotes></releaseNotes>
+       <summary>Material Design Controls for Xamarin Forms</summary>
+       <tags>xamarin, ios, android, xamarin.forms, plugin, materialdesigncontrols, materialdesign, materialcontrols</tags>
+       <dependencies>
+       </dependencies>
+   </metadata>
+   <files>
+     <!--Core-->
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.dll" target="lib\netstandard1.0\Plugin.MaterialDesignControls.dll" />
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.xml" target="lib\netstandard1.0\Plugin.MaterialDesignControls.xml" />
+
+     <!--Xamarin.Android-->
+     <file src="src/MaterialDesignControls.Android/bin/Release/Plugin.MaterialDesignControls.Android.dll" target="lib\MonoAndroid10\Plugin.MaterialDesignControls.Android.dll" />
+     <file src="src/MaterialDesignControls.Android/bin/Release/Plugin.MaterialDesignControls.Android.xml" target="lib\MonoAndroid10\Plugin.MaterialDesignControls.Android.xml" />
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.dll" target="lib\MonoAndroid10\Plugin.MaterialDesignControls.dll" />
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.xml" target="lib\MonoAndroid10\Plugin.MaterialDesignControls.xml" />
+
+     <!--Xamarin.iOS Unified-->
+     <file src="src/MaterialDesignControls.iOS/bin/Release/Plugin.MaterialDesignControls.iOS.dll" target="lib\Xamarin.iOS10\Plugin.MaterialDesignControls.iOS.dll" />
+     <file src="src/MaterialDesignControls.iOS/bin/Release/Plugin.MaterialDesignControls.iOS.xml" target="lib\Xamarin.iOS10\Plugin.MaterialDesignControls.iOS.xml" />
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.dll" target="lib\Xamarin.iOS10\Plugin.MaterialDesignControls.dll" />
+     <file src="src/MaterialDesignControls/bin/Release/netstandard2.0/Plugin.MaterialDesignControls.xml" target="lib\Xamarin.iOS10\Plugin.MaterialDesignControls.xml" />
+   </files>
+</package>

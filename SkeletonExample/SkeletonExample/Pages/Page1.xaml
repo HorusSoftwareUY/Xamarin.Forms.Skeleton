@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+    x:Class="SkeletonExample.Pages.Page1"
+    Title="Sample 1">
+    <ContentPage.Content>
+        <StackLayout Spacing="16" Padding="16">
+            <Button Text="Load" Command="{Binding LoadCommand}" />
+
+            <StackLayout Spacing="8" Padding="16"
+                         extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#c6c6c5" extension:Skeleton.Animation="Beat">
+                <StackLayout Spacing="16" Orientation="Horizontal">
+                    <StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#ffffff">
+                        <BoxView HeightRequest="100" WidthRequest="100" Color="#4c6277" />
+                    </StackLayout>
+                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand"
+                                 extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#ffffff">
+                        <Label Text="Skeleton Sample" TextColor="#c92726" FontSize="Large" />
+                        <Label Text="What is Skeleton?" TextColor="#4c6277" FontSize="Medium" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#ffffff">
+                    <Label Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                       TextColor="#4c6277" FontSize="Small" />
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

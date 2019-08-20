@@ -1,23 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 namespace Xamarin.Forms.Skeleton.Animations
 {
-    public interface IAnimation
-    {
-        void Start(BindableObject bindable);
-        Task<bool> Run(BindableObject bindable, double scaleTo, uint interval);
-        void InitialStatus(BindableObject bindable);
-        //Task<bool> Animate(BindableObject bindable, double scaleTo, uint interval);
-    }
-
-    public class BaseAnimation : IAnimation
+    public abstract class BaseAnimation : IAnimation
     {
         public uint Interval { get; set; }
         public double Parameter { get; set; }
 
-        public void InitialStatus(BindableObject bindable)
+        public abstract Task<bool> Animate(BindableObject bindable);
+
+        public void Start(BindableObject bindable)
+        {
+            Task.Run(async () => { await this.Run(bindable); });
+        }
+
+        private async Task<bool> Run(BindableObject bindable)
+        {
+            if (Skeleton.GetCancelAnimation(bindable))
+            {
+                InitialStatus(bindable);
+                return false;
+            }
+            else
+            {
+                await Animate(bindable);
+                return await Run(bindable);
+            }
+        }
+
+        private void InitialStatus(BindableObject bindable)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -36,34 +48,6 @@ namespace Xamarin.Forms.Skeleton.Animations
                 });
                 self.BackgroundColor = Skeleton.GetOriginalBackgroundColor(bindable);
             });
-        }
-
-        public void Start(BindableObject bindable)
-        {
-            Task.Run(async () =>
-            {
-                var self = (Layout)bindable;
-                double scaleTo = Skeleton.GetEscalation(bindable) > 0 ? Skeleton.GetEscalation(bindable) : 1.1;
-                int animationTime = 800;//self.AnimationTime > 0 ? self.AnimationTime : self.DefaultAnimationTime;
-                uint interval = (uint)animationTime / 2;
-                await Run(bindable, scaleTo, interval);
-            });
-        }
-
-        public async Task<bool> Run(BindableObject bindable, double scaleTo, uint interval)
-        {
-            if (Skeleton.GetCancelAnimation(bindable))
-            {
-                InitialStatus(bindable);
-                return false;
-            }
-            await Animate(bindable);
-            return await Run(bindable, scaleTo, interval);
-        }
-
-        public virtual async Task<bool> Animate(BindableObject bindable)
-        {
-            return true;
         }
     }
 }
