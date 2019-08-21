@@ -6,8 +6,8 @@ namespace Xamarin.Forms.Skeleton.Animations
     {
         public BeatAnimation()
         {
-            this.Interval = 350;
-            this.Parameter = 1.1;
+            this.Interval = 600;
+            this.Parameter = 1.04;
         }
 
         public override async Task<bool> Animate(BindableObject bindable)

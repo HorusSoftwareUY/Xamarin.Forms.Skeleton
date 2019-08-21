@@ -12,5 +12,14 @@ namespace SkeletonExample.Pages
             InitializeComponent();
             this.BindingContext = new Page2ViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            var viewModel = this.BindingContext as Page2ViewModel;
+            if (viewModel != null)
+            {
+                viewModel.LoadCommand.Execute(null);
+            }
+        }
     }
 }

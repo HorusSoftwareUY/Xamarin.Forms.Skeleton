@@ -3,60 +3,48 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+    xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
     x:Class="SkeletonExample.Pages.Page2"
     Title="Sample 2">
     <ContentPage.Content>
-        <StackLayout>
-           <!--<StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#A9A9A9" extension:Skeleton.Animation="VerticalShake" HeightRequest="100" Margin="16" WidthRequest="100">
-                <Label Text="Test" BackgroundColor="ForestGreen">
-                </Label>
-                <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="20" extension:Skeleton.BackgroundColor="Gray" BackgroundColor="Green" />
-                <Label Text="Test2" BackgroundColor="DarkTurquoise">
-                </Label>
-                <Label Text="Test3" BackgroundColor="DarkRed">
-                </Label>
-            </StackLayout>
-            <StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="#A9A9A9" extension:Skeleton.Animation="Beat" HeightRequest="80" Margin="16" WidthRequest="80">
-                <Label Text="Test" BackgroundColor="ForestGreen">
-                </Label>
-                <StackLayout WidthRequest="20" HeightRequest="50" extension:Skeleton.BackgroundColor="White" BackgroundColor="Yellow" />
-                <Label Text="Test2" BackgroundColor="DarkTurquoise">
-                </Label>
-                <Label Text="Test3" BackgroundColor="DarkRed">
-                </Label>
-            </StackLayout>
-            <StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="Blue" extension:Skeleton.Animation="HorizontalShake" Margin="0,16,0,0" HeightRequest="100" HorizontalOptions="FillAndExpand">
-                <Label Text="Test" BackgroundColor="ForestGreen">
-                </Label>
-                <Label Text="Test2" BackgroundColor="DarkTurquoise" extension:Skeleton.BackgroundColor="Gray">
-                </Label>
-                <Label Text="Test3" BackgroundColor="DarkRed">
-                </Label>
-            </StackLayout>
-            <StackLayout extension:Skeleton.IsBusy="{Binding IsBusy}" extension:Skeleton.BackgroundColor="Red" extension:Skeleton.Animation="Fade" HeightRequest="50" Margin="16" WidthRequest="50">
-                <Label Text="Test" BackgroundColor="ForestGreen">
-                </Label>
-                <StackLayout WidthRequest="100" HeightRequest="80" BackgroundColor="Black" />
-                <Label Text="Test2" BackgroundColor="DarkTurquoise">
-                </Label>
-                <Label Text="Test3" BackgroundColor="DarkRed">
-                </Label>
-            </StackLayout>-->
-            <Button Text="Load" Margin="0,16,0,0" Command="{Binding LoadCommand}" HeightRequest="50" WidthRequest="100" />
-            <!--<ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" ItemSelected="OnItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Text}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                                <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
+        <StackLayout Spacing="16" Padding="16"
+                     extension:Skeleton.IsParent="True"
+                     extension:Skeleton.IsBusy="{Binding IsBusy}"
+                     extension:Skeleton.BackgroundColor="#ffffff"
+                     extension:Skeleton.Animation="Beat">
+
+            <material:MaterialEntry Type="Outlined" LabelText="Name" Placeholder="Enter your name"
+                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                    extension:Skeleton.BackgroundColor="#c6c6c5" />
+            <material:MaterialDatePicker Type="Outlined" LabelText="Date" Format="dd/MM/yyyy"
+                                         extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                         extension:Skeleton.BackgroundColor="#c6c6c5" />
+            <material:MaterialTimePicker Type="Outlined" LabelText="Time" Format="HH:mm"
+                                         extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                         extension:Skeleton.BackgroundColor="#c6c6c5" />
+            <material:MaterialEditor Type="Outlined" LabelText="Description" Placeholder="Enter your description" HeightRequest="150"
+                                     extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                     extension:Skeleton.BackgroundColor="#c6c6c5" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <material:MaterialChips Grid.Column="0" Grid.Row="0" IsSelected="true" IsEnabled="true" Text="Option A"
+                                        extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                        extension:Skeleton.BackgroundColor="#c6c6c5" />
+                <material:MaterialChips Grid.Column="1" Grid.Row="0" IsSelected="false" IsEnabled="true" Text="Option B"
+                                        extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                        extension:Skeleton.BackgroundColor="#c6c6c5" />
+            </Grid>
+
+            <material:MaterialButton Text="Load" Command="{Binding LoadCommand}"
+                                     extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                     extension:Skeleton.BackgroundColor="#c6c6c5" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

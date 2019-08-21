@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using SkeletonExample.Models;
 using Xamarin.Forms;
@@ -8,18 +9,21 @@ namespace SkeletonExample.ViewModels
 {
     public class Page2ViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        private Item item;
+
+        public Item Item
+        {
+            get { return item; }
+            set { SetProperty(ref item, value); }
+        }
 
         public ICommand LoadCommand => new Command(OnLoadCommand);
 
-        public Page2ViewModel()
+        private async void OnLoadCommand()
         {
-            this.Items = new ObservableCollection<Item>();
-        }
-
-        private void OnLoadCommand()
-        {
-            IsBusy = !IsBusy;
+            this.IsBusy = true;
+            await Task.Delay(2000);
+            this.IsBusy = false;
         }
     }
 }
