@@ -1,6 +1,6 @@
 ﻿namespace Xamarin.Forms.Skeleton.Animations
 {
-    public enum AnimationsPack
+    public enum AnimationTypes
     {
         None,
         Beat,
