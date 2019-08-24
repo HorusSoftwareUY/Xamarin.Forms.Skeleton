@@ -10,13 +10,19 @@ namespace Xamarin.Forms.Skeleton.Animations
             this.Parameter = parameter.HasValue ? parameter.Value : 0.6;
         }
 
-        public override async Task<bool> Animate(BindableObject bindable)
+        protected override async Task<bool> Animate(BindableObject bindable)
         {
             Skeleton.SetAnimating(bindable, true);
             Layout self = (Layout)bindable;
             await self.FadeTo(this.Parameter, this.Interval);
             await self.FadeTo(1, this.Interval);
             return true;
+        }
+
+        protected override async Task StopAnimation(BindableObject bindable)
+        {
+            Layout self = (Layout)bindable;
+            await self.FadeTo(1, 100);
         }
     }
 }

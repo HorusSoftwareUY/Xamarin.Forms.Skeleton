@@ -7,16 +7,6 @@ namespace Xamarin.Forms.Skeleton
 {
     public static class Skeleton
     {
-        //private double DefaultScaleTo { get; set; }
-        //private int DefaultAnimationTime { get; set; }
-        //public double ScaleTo { get; set; }
-        //public int AnimationTime { get; set; }
-        //public bool CancelAnimation { get; set; }
-
-        //public bool Animating { get; set; }
-        //public int Timeout { get; set; } //seconds
-        //public DateTime StartTime { get; set; }
-
         #region Public Properties
 
         public static readonly BindableProperty IsParentProperty = BindableProperty.CreateAttached("IsParent", typeof(bool), typeof(View), false);
@@ -82,6 +72,12 @@ namespace Xamarin.Forms.Skeleton
         internal static void SetOriginalTextColor(BindableObject b, Color value) => b.SetValue(OriginalTextColorProperty, value);
 
         internal static Color GetOriginalTextColor(BindableObject b) => (Color)b.GetValue(OriginalTextColorProperty);
+
+        internal static readonly BindableProperty BaseAnimationProperty = BindableProperty.CreateAttached("BaseAnimation", typeof(BaseAnimation), typeof(View), null);
+
+        internal static void SetBaseAnimation(BindableObject b, BaseAnimation value) => b.SetValue(BaseAnimationProperty, value);
+
+        internal static BaseAnimation GetBaseAnimation(BindableObject b) => (BaseAnimation)b.GetValue(BaseAnimationProperty);
 
         #endregion Internal Properties
 
@@ -199,13 +195,15 @@ namespace Xamarin.Forms.Skeleton
             {
                 SetCancelAnimation(view, false);
 
+                BaseAnimation animation = null;
+
                 switch (animationType)
                 {
                     case AnimationTypes.Beat:
-                        new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view)).Start(view);
+                        animation = new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
                         break;
                     case AnimationTypes.Fade:
-                        new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view)).Start(view);
+                        animation = new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
                         break;
                     //case AnimationTypes.VerticalShake:
                     //    new VerticalShakeAnimation().Start(view);
@@ -216,6 +214,12 @@ namespace Xamarin.Forms.Skeleton
                     default:
                         break;
                 }
+
+                if (animation != null)
+                {
+                    SetBaseAnimation(view, animation);
+                    animation.Start(view);
+                }
             }
         }
 
@@ -224,6 +228,9 @@ namespace Xamarin.Forms.Skeleton
             if (GetAnimation(view) != AnimationTypes.None)
             {
                 SetCancelAnimation(view, true);
+
+                var animation = GetBaseAnimation(view);
+                animation.Stop(view);
             }
         }
 
