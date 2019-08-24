@@ -5,7 +5,7 @@
         None,
         Beat,
         Fade,
-        VerticalShake,
-        HorizontalShake
+        //VerticalShake,
+        //HorizontalShake
     }
 }

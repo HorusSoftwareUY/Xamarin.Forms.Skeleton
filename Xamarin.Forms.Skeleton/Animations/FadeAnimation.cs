@@ -4,10 +4,10 @@ namespace Xamarin.Forms.Skeleton.Animations
 {
     public class FadeAnimation : BaseAnimation
     {
-        public FadeAnimation()
+        public FadeAnimation(int interval, double? parameter)
         {
-            this.Interval = 700;
-            this.Parameter = 90;
+            this.Interval = (uint)interval;
+            this.Parameter = parameter.HasValue ? parameter.Value : 0.6;
         }
 
         public override async Task<bool> Animate(BindableObject bindable)
@@ -15,7 +15,7 @@ namespace Xamarin.Forms.Skeleton.Animations
             Skeleton.SetAnimating(bindable, true);
             Layout self = (Layout)bindable;
             await self.FadeTo(this.Parameter, this.Interval);
-            await self.FadeTo(0, this.Interval);
+            await self.FadeTo(1, this.Interval);
             return true;
         }
     }

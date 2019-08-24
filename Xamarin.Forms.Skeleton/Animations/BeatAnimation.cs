@@ -4,10 +4,10 @@ namespace Xamarin.Forms.Skeleton.Animations
 {
     public class BeatAnimation : BaseAnimation
     {
-        public BeatAnimation()
+        public BeatAnimation(int interval, double? parameter)
         {
-            this.Interval = 600;
-            this.Parameter = 1.04;
+            this.Interval = (uint)interval;
+            this.Parameter = parameter.HasValue ? parameter.Value : 1.03;
         }
 
         public override async Task<bool> Animate(BindableObject bindable)

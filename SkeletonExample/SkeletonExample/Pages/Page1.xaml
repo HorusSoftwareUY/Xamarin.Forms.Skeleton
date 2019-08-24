@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
     x:Class="SkeletonExample.Pages.Page1"
-    Title="Sample 1">
+    Title="Fade">
     <ContentPage.Content>
         <StackLayout Spacing="16" Padding="16">
             
@@ -15,7 +16,7 @@
                          extension:Skeleton.IsParent="True"
                          extension:Skeleton.IsBusy="{Binding IsBusy}"
                          extension:Skeleton.BackgroundColor="#c6c6c5"
-                         extension:Skeleton.Animation="Beat">
+                         extension:Skeleton.Animation="Fade">
                 <StackLayout Spacing="16" Orientation="Horizontal">
 
                     <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
@@ -39,10 +40,40 @@
                        TextColor="#4c6277" FontSize="Small"
                        extension:Skeleton.IsBusy="{Binding IsBusy}"
                        extension:Skeleton.BackgroundColor="#ffffff" />
-                <Button Text="Load" Command="{Binding LoadCommand}"
-                        extension:Skeleton.IsBusy="{Binding IsBusy}"
-                        extension:Skeleton.BackgroundColor="#ffffff"/>
             </StackLayout>
+
+            <StackLayout Spacing="8" Padding="16"
+                         extension:Skeleton.IsParent="True"
+                         extension:Skeleton.IsBusy="{Binding IsBusy}"
+                         extension:Skeleton.Animation="Fade"
+                         extension:Skeleton.AnimationInterval="800"
+                         extension:Skeleton.AnimationParameter="0.3">
+                <StackLayout Spacing="16" Orientation="Horizontal">
+
+                    <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
+			                                    Source="{Binding Item.Image}"
+                                                extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                                extension:Skeleton.BackgroundColor="#c6c6c5"/>
+
+                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Item.Title}" TextColor="#c92726" FontSize="Large"
+                               extension:Skeleton.IsBusy="{Binding IsBusy}"
+                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
+                        <Label Text="{Binding Item.Subtitle}" TextColor="#4c6277" FontSize="Medium"
+                               extension:Skeleton.IsBusy="{Binding IsBusy}"
+                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
+                    </StackLayout>
+                </StackLayout>
+                <BoxView HeightRequest="8" BackgroundColor="#c92726"
+                             extension:Skeleton.IsBusy="{Binding IsBusy}"
+                             extension:Skeleton.BackgroundColor="#c6c6c5"/>
+                <Label Text="{Binding Item.Description}"
+                       TextColor="#4c6277" FontSize="Small"
+                       extension:Skeleton.IsBusy="{Binding IsBusy}"
+                       extension:Skeleton.BackgroundColor="#c6c6c5" />
+            </StackLayout>
+
+            <Button Text="Load" Command="{Binding LoadCommand}" />
 
         </StackLayout>
     </ContentPage.Content>

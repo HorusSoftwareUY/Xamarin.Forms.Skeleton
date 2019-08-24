@@ -43,6 +43,18 @@ namespace Xamarin.Forms.Skeleton
 
         public static AnimationTypes GetAnimation(BindableObject b) => (AnimationTypes)b.GetValue(AnimationProperty);
 
+        public static readonly BindableProperty AnimationIntervalProperty = BindableProperty.CreateAttached("AnimationInterval", typeof(int), typeof(View), 500);
+
+        public static void SetAnimationInterval(BindableObject b, int value) => b.SetValue(AnimationIntervalProperty, value);
+
+        public static int GetAnimationInterval(BindableObject b) => (int)b.GetValue(AnimationIntervalProperty);
+
+        public static readonly BindableProperty AnimationParameterProperty = BindableProperty.CreateAttached("AnimationParameter", typeof(double?), typeof(View), null);
+
+        public static void SetAnimationParameter(BindableObject b, double? value) => b.SetValue(AnimationParameterProperty, value);
+
+        public static double? GetAnimationParameter(BindableObject b) => (double?)b.GetValue(AnimationParameterProperty);
+
         #endregion Public Properties
 
         #region Internal Properties
@@ -190,17 +202,17 @@ namespace Xamarin.Forms.Skeleton
                 switch (animationType)
                 {
                     case AnimationTypes.Beat:
-                        new BeatAnimation().Start(view);
+                        new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view)).Start(view);
                         break;
                     case AnimationTypes.Fade:
-                        new FadeAnimation().Start(view);
+                        new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view)).Start(view);
                         break;
-                    case AnimationTypes.VerticalShake:
-                        new VerticalShakeAnimation().Start(view);
-                        break;
-                    case AnimationTypes.HorizontalShake:
-                        new HorizontalShakeAnimation().Start(view);
-                        break;
+                    //case AnimationTypes.VerticalShake:
+                    //    new VerticalShakeAnimation().Start(view);
+                    //    break;
+                    //case AnimationTypes.HorizontalShake:
+                    //    new HorizontalShakeAnimation().Start(view);
+                    //    break;
                     default:
                         break;
                 }
