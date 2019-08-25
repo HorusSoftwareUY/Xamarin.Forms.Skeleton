@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using SkeletonExample.Models;
@@ -7,7 +6,7 @@ using Xamarin.Forms;
 
 namespace SkeletonExample.ViewModels
 {
-    public class Page2ViewModel : BaseViewModel
+    public class Page3ViewModel : BaseViewModel
     {
         private Item item;
 
@@ -37,7 +36,7 @@ namespace SkeletonExample.ViewModels
             {
                 Title = "Skeleton Control",
                 Subtitle = "What is Skeleton?",
-                Image = "xamarin.png",
+                Image = "monkey.png",
                 Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             };
         }

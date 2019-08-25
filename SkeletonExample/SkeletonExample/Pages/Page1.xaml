@@ -4,77 +4,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
     x:Class="SkeletonExample.Pages.Page1"
-    Title="Fade">
+    Title="Skeleton"
+    x:Name="Parent">
     <ContentPage.Content>
-        <StackLayout Spacing="16" Padding="16">
-            
-            <StackLayout Spacing="8" Padding="16"
-                         extension:Skeleton.IsParent="True"
-                         extension:Skeleton.IsBusy="{Binding IsBusy}"
-                         extension:Skeleton.BackgroundColor="#c6c6c5"
-                         extension:Skeleton.Animation="Fade">
-                <StackLayout Spacing="16" Orientation="Horizontal">
-
-                    <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
-			                                    Source="{Binding Item.Image}"
-                                                extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                extension:Skeleton.BackgroundColor="#ffffff"/>
-
-                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Item.Title}" TextColor="#c92726" FontSize="Large"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#ffffff"/>
-                        <Label Text="{Binding Item.Subtitle}" TextColor="#4c6277" FontSize="Medium"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#ffffff"/>
-                    </StackLayout>
-                </StackLayout>
-                <BoxView HeightRequest="8" BackgroundColor="#c92726"
-                             extension:Skeleton.IsBusy="{Binding IsBusy}"
-                             extension:Skeleton.BackgroundColor="#ffffff"/>
-                <Label Text="{Binding Item.Description}"
-                       TextColor="#4c6277" FontSize="Small"
-                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                       extension:Skeleton.BackgroundColor="#ffffff" />
-            </StackLayout>
-
-            <StackLayout Spacing="8" Padding="16"
-                         extension:Skeleton.IsParent="True"
-                         extension:Skeleton.IsBusy="{Binding IsBusy}"
-                         extension:Skeleton.Animation="Fade"
-                         extension:Skeleton.AnimationInterval="800"
-                         extension:Skeleton.AnimationParameter="0.3">
-                <StackLayout Spacing="16" Orientation="Horizontal">
-
-                    <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
-			                                    Source="{Binding Item.Image}"
-                                                extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                extension:Skeleton.BackgroundColor="#c6c6c5"/>
-
-                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Item.Title}" TextColor="#c92726" FontSize="Large"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
-                        <Label Text="{Binding Item.Subtitle}" TextColor="#4c6277" FontSize="Medium"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
-                    </StackLayout>
-                </StackLayout>
-                <BoxView HeightRequest="8" BackgroundColor="#c92726"
-                             extension:Skeleton.IsBusy="{Binding IsBusy}"
-                             extension:Skeleton.BackgroundColor="#c6c6c5"/>
-                <Label Text="{Binding Item.Description}"
-                       TextColor="#4c6277" FontSize="Small"
-                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                       extension:Skeleton.BackgroundColor="#c6c6c5" />
-            </StackLayout>
-
-            <Button Text="Load" Command="{Binding LoadCommand}" />
-
+        <StackLayout>
+            <ListView RowHeight="109"
+                      SeparatorVisibility="None"
+                      SelectionMode="None"
+                      VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding Items}"
+                      extension:Skeleton.IsParent="True"
+                      extension:Skeleton.IsBusy="{Binding IsBusy}"
+                      extension:Skeleton.Animation="Fade">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="16"
+                                  RowSpacing="8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage Source="{Binding Image}"
+                                                            WidthRequest="92"
+                                                            HeightRequest="92"
+                                                            Margin="8,8,0,0"
+                                                            Aspect="AspectFit"
+                                                            extension:Skeleton.IsBusy="{Binding Source={x:Reference Parent}, Path=BindingContext.IsBusy}"
+                                                            extension:Skeleton.BackgroundColor="#c6c6c5" />
+                                <StackLayout Grid.Column="1"
+                                             Spacing="2"
+                                             Margin="0,0,8,0"
+                                             VerticalOptions="End">
+                                    <Label Text="{Binding Title}"
+                                           TextColor="#c92726"
+                                           FontSize="Large"
+                                           extension:Skeleton.IsBusy="{Binding Source={x:Reference Parent}, Path=BindingContext.IsBusy}"
+                                           extension:Skeleton.BackgroundColor="#c6c6c5" />
+                                    <Label Text="{Binding Subtitle}"
+                                           TextColor="#4c6277"
+                                           FontSize="Medium"
+                                           extension:Skeleton.IsBusy="{Binding Source={x:Reference Parent}, Path=BindingContext.IsBusy}"
+                                           extension:Skeleton.BackgroundColor="#c6c6c5" />
+                                </StackLayout>
+                                <BoxView Grid.Row="1"
+                                         Grid.ColumnSpan="2"
+                                         BackgroundColor="#c6c6c5" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Load"
+                    Command="{Binding LoadCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

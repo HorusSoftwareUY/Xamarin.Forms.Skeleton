@@ -26,7 +26,7 @@ namespace Xamarin.Forms.Skeleton.Animations
         {
             if (Skeleton.GetCancelAnimation(bindable))
             {
-                InitialStatus(bindable);
+                Skeleton.SetAnimating(bindable, false);
                 return false;
             }
             else
@@ -34,27 +34,6 @@ namespace Xamarin.Forms.Skeleton.Animations
                 await Animate(bindable);
                 return await Run(bindable);
             }
-        }
-
-        private void InitialStatus(BindableObject bindable)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                Layout self = bindable as Layout;
-                Skeleton.SetAnimating(bindable, false);
-                self.Children.ToList().ForEach(i => i.SetValue(VisualElement.IsVisibleProperty, true));
-
-                self.Children.ToList().ForEach(i =>
-                {
-                    if (i is VisualElement)
-                    {
-                        VisualElement child = (VisualElement)i;
-                        child.SetValue(VisualElement.IsVisibleProperty, true);
-                        child.BackgroundColor = Skeleton.GetOriginalBackgroundColor(child);
-                    }
-                });
-                self.BackgroundColor = Skeleton.GetOriginalBackgroundColor(bindable);
-            });
         }
     }
 }

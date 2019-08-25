@@ -17,6 +17,7 @@ namespace SkeletonExample
             InitializeComponent();
             this.Children.Add(new Page1());
             this.Children.Add(new Page2());
+            this.Children.Add(new Page3());
         }
     }
 }
