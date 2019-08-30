@@ -7,8 +7,7 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
     x:Class="SkeletonExample.Pages.Page1"
-    Title="Skeleton"
-    x:Name="Parent">
+    Title="Skeleton">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ItemTemplate">
@@ -28,7 +27,7 @@
                                                     HeightRequest="92"
                                                     Margin="8,8,0,0"
                                                     Aspect="AspectFit"
-                                                    extension:Skeleton.IsBusy="{Binding Source={x:Reference Parent}, Path=BindingContext.IsBusy}"
+                                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
                                                     extension:Skeleton.BackgroundColor="#c6c6c5" />
                         <StackLayout Grid.Column="1"
                                      Spacing="2"
@@ -38,12 +37,12 @@
                                    TextColor="#c92726"
                                    FontSize="Large"
                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                   extension:Skeleton.BackgroundColor="Red" />
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
                             <Label Text="{Binding Subtitle}"
                                    TextColor="#4c6277"
                                    FontSize="Medium"
-                                   extension:Skeleton.IsBusy="{Binding Source={x:Reference Parent}, Path=BindingContext.IsBusy}"
-                                   extension:Skeleton.BackgroundColor="Blue" />
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
                         </StackLayout>
                         <BoxView Grid.Row="1"
                                  Grid.ColumnSpan="2"
@@ -63,7 +62,7 @@
                       ItemsSource="{Binding Items}"
                       extension:Skeleton.IsParent="True"
                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                      extension:Skeleton.Animation="None" />
+                      extension:Skeleton.Animation="Fade" />
             <Button Text="Load"
                     Command="{Binding LoadCommand}" />
         </StackLayout>

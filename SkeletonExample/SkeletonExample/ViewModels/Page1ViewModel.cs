@@ -25,28 +25,28 @@ namespace SkeletonExample.ViewModels
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
-                    Title = "Skeleton Control Loading",
-                    Subtitle = "What is Skeleton?",
-                    Image = null,
+                    Title = "x",
+                    Subtitle = "x",
+                    IsBusy = true
                 },
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = null,
-                //},
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = null,
-                //},
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = null,
-                //},
+                new Item
+                {
+                    Title = "x",
+                    Subtitle = "x",
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = "x",
+                    Subtitle = "x",
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = "x",
+                    Subtitle = "x",
+                    IsBusy = true
+                },
             });
 
             this.IsBusy = true;
@@ -56,28 +56,28 @@ namespace SkeletonExample.ViewModels
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
-                    Title = "Skeleton Control",
-                    Subtitle = "What is Skeleton?",
+                    Title = "Xamarin",
+                    Subtitle = "Open-source mobile app platform for .NET",
                     Image = "xamarin.png",
                 },
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = "xamarin.png",
-                //},
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = "xamarin.png",
-                //},
-                //new Item
-                //{
-                //    Title = "Skeleton Control",
-                //    Subtitle = "What is Skeleton?",
-                //    Image = "xamarin.png",
-                //},
+                new Item
+                {
+                    Title = "Mono",
+                    Subtitle = "Cross platform, open source .NET framework",
+                    Image = "monkey.png",
+                },
+                new Item
+                {
+                    Title = "Xamarin.Forms.Skeleton",
+                    Subtitle = "The new loading approach for cool apps!",
+                    Image = "icon.png",
+                },
+                new Item
+                {
+                    Title = "Horus",
+                    Subtitle = "Mobile Development Studio",
+                    Image = "horus.png",
+                },
             });
         }
     }

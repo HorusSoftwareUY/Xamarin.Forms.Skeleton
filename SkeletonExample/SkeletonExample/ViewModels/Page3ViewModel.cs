@@ -22,10 +22,10 @@ namespace SkeletonExample.ViewModels
         {
             this.Item = new Item
             {
-                Title = "Skeleton Control",
-                Subtitle = "What is Skeleton?",
+                Title = "x",
+                Subtitle = "x",
                 Image = null,
-                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                Description = "Mono is a software platform designed to allow developers to easily create cross platform applications part of the .NET Foundation."
             };
 
             this.IsBusy = true;
@@ -34,10 +34,10 @@ namespace SkeletonExample.ViewModels
 
             this.Item = new Item
             {
-                Title = "Skeleton Control",
-                Subtitle = "What is Skeleton?",
+                Title = "Mono",
+                Subtitle = "Cross platform, open source .NET framework",
                 Image = "monkey.png",
-                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                Description = "Mono is a software platform designed to allow developers to easily create cross platform applications part of the .NET Foundation."
             };
         }
     }

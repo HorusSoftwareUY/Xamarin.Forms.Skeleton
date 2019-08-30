@@ -10,71 +10,97 @@
     x:Class="SkeletonExample.Pages.Page2"
     Title="Beat">
     <ContentPage.Content>
-        <StackLayout Spacing="16" Padding="16">
-            
-            <StackLayout Spacing="8" Padding="16"
-                         extension:Skeleton.IsParent="True"
-                         extension:Skeleton.IsBusy="{Binding IsBusy}"
-                         extension:Skeleton.BackgroundColor="#c6c6c5"
-                         extension:Skeleton.Animation="Beat">
-                <StackLayout Spacing="16" Orientation="Horizontal">
+        <ScrollView>
+            <StackLayout Spacing="16"
+                         Padding="16">
 
-                    <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
-			                                    Source="{Binding Item.Image}"
-                                                extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                extension:Skeleton.BackgroundColor="#ffffff"/>
-
-                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Item.Title}" TextColor="#c92726" FontSize="Large"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#ffffff"/>
-                        <Label Text="{Binding Item.Subtitle}" TextColor="#4c6277" FontSize="Medium"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#ffffff"/>
-                    </StackLayout>
-                </StackLayout>
-                <BoxView HeightRequest="8" BackgroundColor="#c92726"
+                <StackLayout Spacing="8"
+                             Padding="16"
+                             extension:Skeleton.IsParent="True"
                              extension:Skeleton.IsBusy="{Binding IsBusy}"
-                             extension:Skeleton.BackgroundColor="#ffffff"/>
-                <Label Text="{Binding Item.Description}"
-                       TextColor="#4c6277" FontSize="Small"
-                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                       extension:Skeleton.BackgroundColor="#ffffff" />
-            </StackLayout>
+                             extension:Skeleton.BackgroundColor="#c6c6c5"
+                             extension:Skeleton.Animation="Beat">
+                    <StackLayout Spacing="16"
+                                 Orientation="Horizontal">
 
-            <StackLayout Spacing="8" Padding="16"
-                         extension:Skeleton.IsParent="True"
-                         extension:Skeleton.IsBusy="{Binding IsBusy}"
-                         extension:Skeleton.Animation="Beat"
-                         extension:Skeleton.AnimationInterval="200"
-                         extension:Skeleton.AnimationParameter="1.1">
-                <StackLayout Spacing="16" Orientation="Horizontal">
+                        <ffimageloading:CachedImage WidthRequest="100"
+                                                    HeightRequest="100"
+                                                    Source="{Binding Item.Image}"
+                                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                                    extension:Skeleton.BackgroundColor="#ffffff" />
 
-                    <ffimageloading:CachedImage WidthRequest="100" HeightRequest="100"
-			                                    Source="{Binding Item.Image}"
-                                                extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                extension:Skeleton.BackgroundColor="#c6c6c5"/>
-
-                    <StackLayout Spacing="2" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Item.Title}" TextColor="#c92726" FontSize="Large"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
-                        <Label Text="{Binding Item.Subtitle}" TextColor="#4c6277" FontSize="Medium"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="#c6c6c5"/>
+                        <StackLayout Spacing="2"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Item.Title}"
+                                   TextColor="#c92726"
+                                   FontSize="Large"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#ffffff" />
+                            <Label Text="{Binding Item.Subtitle}"
+                                   TextColor="#4c6277"
+                                   FontSize="Medium"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#ffffff" />
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <BoxView HeightRequest="8" BackgroundColor="#c92726"
+                    <BoxView HeightRequest="8"
+                             BackgroundColor="#c92726"
                              extension:Skeleton.IsBusy="{Binding IsBusy}"
-                             extension:Skeleton.BackgroundColor="#c6c6c5"/>
-                <Label Text="{Binding Item.Description}"
-                       TextColor="#4c6277" FontSize="Small"
-                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                       extension:Skeleton.BackgroundColor="#c6c6c5" />
+                             extension:Skeleton.BackgroundColor="#ffffff" />
+                    <Label Text="{Binding Item.Description}"
+                           TextColor="#4c6277"
+                           FontSize="Small"
+                           extension:Skeleton.IsBusy="{Binding IsBusy}"
+                           extension:Skeleton.BackgroundColor="#ffffff" />
+                </StackLayout>
+
+                <StackLayout Spacing="8"
+                             Padding="16"
+                             extension:Skeleton.IsParent="True"
+                             extension:Skeleton.IsBusy="{Binding IsBusy}"
+                             extension:Skeleton.Animation="Beat"
+                             extension:Skeleton.AnimationInterval="200"
+                             extension:Skeleton.AnimationParameter="1.1">
+                    <StackLayout Spacing="16"
+                                 Orientation="Horizontal">
+
+                        <ffimageloading:CachedImage WidthRequest="100"
+                                                    HeightRequest="100"
+                                                    Source="{Binding Item.Image}"
+                                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                                    extension:Skeleton.BackgroundColor="#c6c6c5" />
+
+                        <StackLayout Spacing="2"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Item.Title}"
+                                   TextColor="#c92726"
+                                   FontSize="Large"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
+                            <Label Text="{Binding Item.Subtitle}"
+                                   TextColor="#4c6277"
+                                   FontSize="Medium"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HeightRequest="8"
+                             BackgroundColor="#c92726"
+                             extension:Skeleton.IsBusy="{Binding IsBusy}"
+                             extension:Skeleton.BackgroundColor="#c6c6c5" />
+                    <Label Text="{Binding Item.Description}"
+                           TextColor="#4c6277"
+                           FontSize="Small"
+                           extension:Skeleton.IsBusy="{Binding IsBusy}"
+                           extension:Skeleton.BackgroundColor="#c6c6c5" />
+                </StackLayout>
+
+                <Button Text="Load"
+                        Command="{Binding LoadCommand}" />
+
             </StackLayout>
-
-            <Button Text="Load" Command="{Binding LoadCommand}" />
-
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

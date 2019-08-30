@@ -13,7 +13,7 @@ namespace Xamarin.Forms.Skeleton.Animations
         protected override async Task<bool> Animate(BindableObject bindable)
         {
             Skeleton.SetAnimating(bindable, true);
-            Layout self = (Layout)bindable;
+            var self = (View)bindable;
             await self.TranslateTo(this.Parameter, 0, this.Interval);
             await self.TranslateTo(-this.Parameter, 0, this.Interval);
             return true;

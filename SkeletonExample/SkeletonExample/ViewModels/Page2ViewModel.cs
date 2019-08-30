@@ -23,10 +23,10 @@ namespace SkeletonExample.ViewModels
         {
             this.Item = new Item
             {
-                Title = "Skeleton Control",
-                Subtitle = "What is Skeleton?",
+                Title = "x",
+                Subtitle = "x",
                 Image = null,
-                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                Description = "Modern, performant mobile apps with .NET and C#. Use.NET and C# to create native apps for the billions of Android, iPhone, iPad, Mac, and Windows devices around the world. Add to that sharing code with any .NET app, empowering you to be more productive and build apps faster than ever across all platforms."
             };
 
             this.IsBusy = true;
@@ -35,10 +35,10 @@ namespace SkeletonExample.ViewModels
 
             this.Item = new Item
             {
-                Title = "Skeleton Control",
-                Subtitle = "What is Skeleton?",
+                Title = "Xamarin",
+                Subtitle = "Open-source mobile app platform for .NET",
                 Image = "xamarin.png",
-                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                Description = "Modern, performant mobile apps with .NET and C#. Use.NET and C# to create native apps for the billions of Android, iPhone, iPad, Mac, and Windows devices around the world. Add to that sharing code with any .NET app, empowering you to be more productive and build apps faster than ever across all platforms."
             };
         }
     }

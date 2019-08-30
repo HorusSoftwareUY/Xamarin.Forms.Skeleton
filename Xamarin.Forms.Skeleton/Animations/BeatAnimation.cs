@@ -13,7 +13,7 @@ namespace Xamarin.Forms.Skeleton.Animations
         protected override async Task<bool> Animate(BindableObject bindable)
         {
             Skeleton.SetAnimating(bindable, true);
-            Layout self = (Layout)bindable;
+            var self = (View)bindable;
             await self.ScaleTo(this.Parameter, this.Interval);
             await self.ScaleTo(1, this.Interval);
             return true;
@@ -21,7 +21,7 @@ namespace Xamarin.Forms.Skeleton.Animations
 
         protected override async Task StopAnimation(BindableObject bindable)
         {
-            Layout self = (Layout)bindable;
+            var self = (View)bindable;
             await self.ScaleTo(1, 100);
         }
     }
