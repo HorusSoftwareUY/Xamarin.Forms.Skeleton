@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    x:Class="SkeletonExample.Pages.Page1"
+    Title="Skeleton">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ItemTemplate">
+                <ViewCell>
+                    <Grid ColumnSpacing="16"
+                          RowSpacing="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ffimageloading:CachedImage Source="{Binding Image}"
+                                                    WidthRequest="92"
+                                                    HeightRequest="92"
+                                                    Margin="8,8,0,0"
+                                                    Aspect="AspectFit"
+                                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                                    extension:Skeleton.BackgroundColor="#c6c6c5" />
+                        <StackLayout Grid.Column="1"
+                                     Spacing="2"
+                                     Margin="0,0,8,0"
+                                     VerticalOptions="End">
+                            <Label Text="{Binding Title}"
+                                   TextColor="#c92726"
+                                   FontSize="Large"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
+                            <Label Text="{Binding Subtitle}"
+                                   TextColor="#4c6277"
+                                   FontSize="Medium"
+                                   extension:Skeleton.IsBusy="{Binding IsBusy}"
+                                   extension:Skeleton.BackgroundColor="#c6c6c5" />
+                        </StackLayout>
+                        <BoxView Grid.Row="1"
+                                 Grid.ColumnSpan="2"
+                                 BackgroundColor="#c6c6c5" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView RowHeight="109"
+                      SeparatorVisibility="None"
+                      SelectionMode="None"
+                      VerticalOptions="FillAndExpand"
+                      ItemTemplate="{StaticResource ItemTemplate}"
+                      ItemsSource="{Binding Items}"
+                      extension:Skeleton.IsParent="True"
+                      extension:Skeleton.IsBusy="{Binding IsBusy}"
+                      extension:Skeleton.Animation="Fade" />
+            <Button Text="Load"
+                    Command="{Binding LoadCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
