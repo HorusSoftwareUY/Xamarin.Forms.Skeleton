@@ -121,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkeletonExample\SkeletonExample.csproj">
-      <Project>{866FB212-CF5D-4920-94AD-C3FF1B9F67A2}</Project>
+      <Project>{D7C7DE33-2BAA-4DB9-A306-3ECD67B2FC30}</Project>
       <Name>SkeletonExample</Name>
     </ProjectReference>
   </ItemGroup>
