@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Xamarin.Forms.Skeleton.Animations
+﻿namespace Xamarin.Forms.Skeleton.Animations
 {
     public interface IAnimation
     {
