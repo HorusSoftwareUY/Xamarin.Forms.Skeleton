@@ -25,19 +25,19 @@ namespace SkeletonExample.ViewModels
                 Title = "x",
                 Subtitle = "x",
                 Image = null,
-                Description = "Mono is a software platform designed to allow developers to easily create cross platform applications part of the .NET Foundation."
+                Description = "We are a mobile development studio that is very passionate about creating quality mobile solutions.\n\nWe specialize in native and cross-platform mobile development. Beside that, we provide our clients help with UX / UI, web development and cloud computing."
             };
 
             this.IsBusy = true;
-            await Task.Delay(2000);
+            await Task.Delay(2500);
             this.IsBusy = false;
 
             this.Item = new Item
             {
-                Title = "Mono",
-                Subtitle = "Cross platform, open source .NET framework",
-                Image = "monkey.png",
-                Description = "Mono is a software platform designed to allow developers to easily create cross platform applications part of the .NET Foundation."
+                Title = "Horus",
+                Subtitle = "Mobile Development Studio",
+                Image = "horus2.png",
+                Description = "We are a mobile development studio that is very passionate about creating quality mobile solutions.\n\nWe specialize in native and cross-platform mobile development. Beside that, we provide our clients help with UX / UI, web development and cloud computing."
             };
         }
     }

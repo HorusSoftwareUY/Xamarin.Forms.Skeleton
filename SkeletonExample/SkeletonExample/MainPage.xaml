@@ -6,5 +6,8 @@
             mc:Ignorable="d"
             x:Class="SkeletonExample.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom">
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            SelectedTabColor="{StaticResource RedColor}"
+            UnselectedTabColor="{StaticResource WhiteColor}"
+            BarBackgroundColor="{StaticResource BlackColor}">
 </TabbedPage>

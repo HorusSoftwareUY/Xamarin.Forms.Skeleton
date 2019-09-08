@@ -140,6 +140,14 @@
     <BundleResource Include="Resources\horus.png" />
     <BundleResource Include="Resources\monkey.png" />
     <BundleResource Include="Resources\xamarin.png" />
+    <BundleResource Include="Resources\image4.jpg" />
+    <BundleResource Include="Resources\image1.jpg" />
+    <BundleResource Include="Resources\image2.jpg" />
+    <BundleResource Include="Resources\image3.jpg" />
+    <BundleResource Include="Resources\load.png" />
+    <BundleResource Include="Resources\back_gradient.png" />
+    <BundleResource Include="Resources\horus2.png" />
+    <BundleResource Include="Resources\ic_tab.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

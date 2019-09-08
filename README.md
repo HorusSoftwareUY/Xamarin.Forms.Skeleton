@@ -62,6 +62,10 @@ Add the following properties to set a load background color:
 - Background color of the control in busy state.
 - The default value is the xamarin forms default color.
 
+#### Hide (Boolean)
+- Indicates if the control is hide in busy state.
+- The default value is false.
+
 #### Animation (AnimationTypes)
 - Control animation in busy state.
 - Possible values: None, Fade and Beat.
