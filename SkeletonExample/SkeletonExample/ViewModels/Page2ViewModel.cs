@@ -26,19 +26,19 @@ namespace SkeletonExample.ViewModels
                 Title = "x",
                 Subtitle = "x",
                 Image = null,
-                Description = "Modern, performant mobile apps with .NET and C#. Use.NET and C# to create native apps for the billions of Android, iPhone, iPad, Mac, and Windows devices around the world. Add to that sharing code with any .NET app, empowering you to be more productive and build apps faster than ever across all platforms."
+                Description = "The new loading approach for cool apps in Xamarin Forms.\n\nAvailable on NuGet and support Xamarin.Forms >= 4.0.0.425677."
             };
 
             this.IsBusy = true;
-            await Task.Delay(2000);
+            await Task.Delay(2500);
             this.IsBusy = false;
 
             this.Item = new Item
             {
-                Title = "Xamarin",
-                Subtitle = "Open-source mobile app platform for .NET",
-                Image = "xamarin.png",
-                Description = "Modern, performant mobile apps with .NET and C#. Use.NET and C# to create native apps for the billions of Android, iPhone, iPad, Mac, and Windows devices around the world. Add to that sharing code with any .NET app, empowering you to be more productive and build apps faster than ever across all platforms."
+                Title = "Skeleton",
+                Subtitle = "Xamarin.Forms.Skeleton",
+                Image = "icon.png",
+                Description = "The new loading approach for cool apps in Xamarin Forms.\n\nAvailable on NuGet and support Xamarin.Forms >= 4.0.0.425677."
             };
         }
     }

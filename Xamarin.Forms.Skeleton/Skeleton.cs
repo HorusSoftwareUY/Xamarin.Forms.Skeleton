@@ -20,6 +20,12 @@ namespace Xamarin.Forms.Skeleton
 
         public static bool GetIsBusy(BindableObject b) => (bool)b.GetValue(IsBusyProperty);
 
+        public static readonly BindableProperty HideProperty = BindableProperty.CreateAttached("Hide", typeof(bool), typeof(View), default(bool));
+
+        public static void SetHide(BindableObject b, bool value) => b.SetValue(HideProperty, value);
+
+        public static bool GetHide(BindableObject b) => (bool)b.GetValue(HideProperty);
+
         public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(View), default(Color));
 
         public static void SetBackgroundColor(BindableObject b, Color value) => b.SetValue(BackgroundColorProperty, value);
@@ -99,30 +105,44 @@ namespace Xamarin.Forms.Skeleton
 
             var view = (View)bindable;             if (isBusyNewValue)
             {
-                if (view is Layout layout && !GetIsParent(bindable))
+                if (GetHide(bindable))
                 {
-                    SetLayoutChilds(layout);
+                    ((View)bindable).IsVisible = false;
                 }
-                else if (view is Label || view is Button)
+                else
                 {
-                    SetTextColor(view);
-                }
+                    if (view is Layout layout && !GetIsParent(bindable))
+                    {
+                        SetLayoutChilds(layout);
+                    }
+                    else if (view is Label || view is Button)
+                    {
+                        SetTextColor(view);
+                    }
 
-                SetBackgroundColor(view);
+                    SetBackgroundColor(view);
 
-                RunAnimation(view);             }             else
+                    RunAnimation(view);
+                }             }             else
             {
-                CancelAnimation(view);
-
-                RestoreBackgroundColor(view);
-
-                if (view is Layout layout && !GetIsParent(bindable))
+                if (GetHide(bindable))
                 {
-                    RestoreLayoutChilds(layout);
+                    ((View)bindable).IsVisible = true;
                 }
-                else if (view is Label || view is Button)
+                else
                 {
-                    RestoreTextColor(view);
+                    CancelAnimation(view);
+
+                    RestoreBackgroundColor(view);
+
+                    if (view is Layout layout && !GetIsParent(bindable))
+                    {
+                        RestoreLayoutChilds(layout);
+                    }
+                    else if (view is Label || view is Button)
+                    {
+                        RestoreTextColor(view);
+                    }
                 }
             }         }
 

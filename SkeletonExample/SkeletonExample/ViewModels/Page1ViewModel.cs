@@ -22,61 +22,63 @@ namespace SkeletonExample.ViewModels
 
         private async void OnLoadCommand()
         {
+            var now = DateTime.Now.ToShortDateString();
+
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
                     Title = "x",
-                    Subtitle = "x",
+                    Subtitle = now,
                     IsBusy = true
                 },
                 new Item
                 {
                     Title = "x",
-                    Subtitle = "x",
+                    Subtitle = now,
                     IsBusy = true
                 },
                 new Item
                 {
                     Title = "x",
-                    Subtitle = "x",
+                    Subtitle = now,
                     IsBusy = true
                 },
                 new Item
                 {
                     Title = "x",
-                    Subtitle = "x",
+                    Subtitle = now,
                     IsBusy = true
                 },
             });
 
             this.IsBusy = true;
-            await Task.Delay(2000);
+            await Task.Delay(2500);
             this.IsBusy = false;
 
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
-                    Title = "Xamarin",
-                    Subtitle = "Open-source mobile app platform for .NET",
-                    Image = "xamarin.png",
+                    Title = "Landscape 1",
+                    Subtitle = DateTime.Now.ToShortDateString(),
+                    Image = "image1.jpg",
                 },
                 new Item
                 {
-                    Title = "Mono",
-                    Subtitle = "Cross platform, open source .NET framework",
-                    Image = "monkey.png",
+                    Title = "Landscape 2",
+                    Subtitle = DateTime.Now.AddDays(-2).ToShortDateString(),
+                    Image = "image2.jpg",
                 },
                 new Item
                 {
-                    Title = "Xamarin.Forms.Skeleton",
-                    Subtitle = "The new loading approach for cool apps!",
-                    Image = "icon.png",
+                    Title = "Landscape 3",
+                    Subtitle = DateTime.Now.AddDays(-3).ToShortDateString(),
+                    Image = "image4.jpg",
                 },
                 new Item
                 {
-                    Title = "Horus",
-                    Subtitle = "Mobile Development Studio",
-                    Image = "horus.png",
+                    Title = "Landscape 4",
+                    Subtitle = DateTime.Now.AddDays(-5).ToShortDateString(),
+                    Image = "image3.jpg",
                 },
             });
         }
