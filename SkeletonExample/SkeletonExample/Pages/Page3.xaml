@@ -12,30 +12,30 @@
     BackgroundColor="{StaticResource DarkBlueColor}">
     <ContentPage.Content>
         <Grid ColumnSpacing="0"
-                RowSpacing="0">
+              RowSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="48" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="70" />
+                <RowDefinition Height="48" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Image Grid.Column="1"
-                    Source="horus.png"
-                    HorizontalOptions="Center"
-                    Aspect="AspectFit" />
+            <ffimageloading:CachedImage Grid.Column="1"
+                                        Source="horus.png"
+                                        HorizontalOptions="Center"
+                                        Aspect="AspectFit" />
             <ContentView Grid.Column="2">
                 <ContentView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding LoadCommand}" />
                 </ContentView.GestureRecognizers>
-                <Image Source="load.png"
-                        Aspect="AspectFit"
-                        HeightRequest="32"
-                        WidthRequest="32"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center" />
+                <ffimageloading:CachedImage Source="load.png"
+                                            Aspect="AspectFit"
+                                            HeightRequest="32"
+                                            WidthRequest="32"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
             </ContentView>
 
             <ScrollView Grid.Row="1"
