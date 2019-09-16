@@ -58,7 +58,7 @@ Add the following properties to set a loading animation with a specific backgrou
 - The default value is false.
 
 #### IsBusy (Boolean)
-- Indicates if the control is busy.
+- Indicates if the control is busy in a loading state.
 - The default value is false.
 
 #### BackgroundColor (Color)
