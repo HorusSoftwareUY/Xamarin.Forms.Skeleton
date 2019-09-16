@@ -88,7 +88,7 @@ https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonEx
 
 ## Roadmap
 - New animations 
-- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeteater, etc.
+- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeater, etc.
  
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>
