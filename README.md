@@ -1,7 +1,7 @@
 # Xamarin.Forms.Skeleton 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
 
-The latest trend on loading approaches for Xamarin Forms apps. Skeleton can be easily implemented on each view  contained in your Xaml.
+The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
 
 ## Sample
 
