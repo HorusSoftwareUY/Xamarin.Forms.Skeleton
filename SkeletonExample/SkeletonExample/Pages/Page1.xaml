@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<pages:BasePage
+    xmlns:pages="clr-namespace:SkeletonExample.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    ios:Page.UseSafeArea="true"
     x:Class="SkeletonExample.Pages.Page1"
-    Title="Skeleton"
-    IconImageSource="ic_tab.png"
-    BackgroundColor="{StaticResource DarkBlueColor}">
+    Title="Skeleton">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ItemTemplate">
@@ -101,4 +98,4 @@
                       extension:Skeleton.Animation="Fade" />
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</pages:BasePage>

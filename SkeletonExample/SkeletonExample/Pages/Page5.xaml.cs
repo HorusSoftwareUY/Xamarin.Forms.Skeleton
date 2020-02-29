@@ -2,12 +2,12 @@
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page1 : BasePage
+    public partial class Page5 : BasePage
     {
-        public Page1()
+        public Page5()
         {
             InitializeComponent();
-            this.BindingContext = new Page1ViewModel();
+            BindingContext = new Page5ViewModel();
         }
     }
 }

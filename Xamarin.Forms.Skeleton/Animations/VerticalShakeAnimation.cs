@@ -5,10 +5,10 @@ namespace Xamarin.Forms.Skeleton.Animations
 {
     public class VerticalShakeAnimation : BaseAnimation
     {
-        public VerticalShakeAnimation()
+        public VerticalShakeAnimation(int interval, double? parameter)
         {
-            this.Interval = 150;
-            this.Parameter = 15;
+            this.Interval = (uint)interval;
+            this.Parameter = parameter.HasValue ? parameter.Value : 15;
         }
 
         protected override async Task<bool> Animate(BindableObject bindable)
@@ -20,9 +20,10 @@ namespace Xamarin.Forms.Skeleton.Animations
             return true;
         }
 
-        protected override Task StopAnimation(BindableObject bindable)
+        protected override async Task StopAnimation(BindableObject bindable)
         {
-            throw new NotImplementedException();
+            if (bindable is View self)
+                await self.TranslateTo(0, 0, 100);
         }
     }
 }

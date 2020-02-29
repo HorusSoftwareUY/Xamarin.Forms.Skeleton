@@ -16,9 +16,7 @@ namespace SkeletonExample.ViewModels
             set { SetProperty(ref item, value); }
         }
 
-        public ICommand LoadCommand => new Command(OnLoadCommand);
-
-        private async void OnLoadCommand()
+        protected override async void OnLoadCommandExecute()
         {
             this.Item = new Item
             {

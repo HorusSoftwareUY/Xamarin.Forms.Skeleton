@@ -210,47 +210,48 @@ namespace Xamarin.Forms.Skeleton
         private static void RunAnimation(View view)
         {
             var animationType = GetAnimation(view);
-            if (animationType != AnimationTypes.None && !GetAnimating(view))
+
+            if (animationType == AnimationTypes.None || GetAnimating(view))
+                return;
+
+            SetCancelAnimation(view, false);
+
+            BaseAnimation animation = null;
+
+            switch (animationType)
             {
-                SetCancelAnimation(view, false);
+                case AnimationTypes.Beat:
+                    animation = new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
+                    break;
+                case AnimationTypes.Fade:
+                    animation = new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
+                    break;
+                case AnimationTypes.VerticalShake:
+                    animation = new VerticalShakeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
+                    break;
+                case AnimationTypes.HorizontalShake:
+                    animation = new HorizontalShakeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
+                    break;
+                default:
+                    break;
+            }
 
-                BaseAnimation animation = null;
-
-                switch (animationType)
-                {
-                    case AnimationTypes.Beat:
-                        animation = new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                        break;
-                    case AnimationTypes.Fade:
-                        animation = new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                        break;
-                    //case AnimationTypes.VerticalShake:
-                    //    new VerticalShakeAnimation().Start(view);
-                    //    break;
-                    //case AnimationTypes.HorizontalShake:
-                    //    new HorizontalShakeAnimation().Start(view);
-                    //    break;
-                    default:
-                        break;
-                }
-
-                if (animation != null)
-                {
-                    SetBaseAnimation(view, animation);
-                    animation.Start(view);
-                }
+            if (animation != null)
+            {
+                SetBaseAnimation(view, animation);
+                animation.Start(view);
             }
         }
 
         private static void CancelAnimation(View view)
         {
-            if (GetAnimation(view) != AnimationTypes.None)
-            {
-                SetCancelAnimation(view, true);
+            if (GetAnimation(view) == AnimationTypes.None)
+                return;
 
-                var animation = GetBaseAnimation(view);
-                animation.Stop(view);
-            }
+            SetCancelAnimation(view, true);
+
+            var animation = GetBaseAnimation(view);
+            animation.Stop(view);
         }
 
         #endregion Operations

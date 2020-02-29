@@ -4,10 +4,10 @@ namespace Xamarin.Forms.Skeleton.Animations
 {
     public class HorizontalShakeAnimation : BaseAnimation
     {
-        public HorizontalShakeAnimation()
+        public HorizontalShakeAnimation(int interval, double? parameter)
         {
-            this.Interval = 100;
-            this.Parameter = 10;
+            this.Interval = (uint)interval;
+            this.Parameter = parameter.HasValue ? parameter.Value : 10;
         }
 
         protected override async Task<bool> Animate(BindableObject bindable)
@@ -19,9 +19,10 @@ namespace Xamarin.Forms.Skeleton.Animations
             return true;
         }
 
-        protected override Task StopAnimation(BindableObject bindable)
+        protected override async Task StopAnimation(BindableObject bindable)
         {
-            throw new System.NotImplementedException();
+            if(bindable is View self)
+                await self.TranslateTo(0, 0, 100);
         }
     }
 }
