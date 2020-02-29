@@ -5,7 +5,6 @@ using Xamarin.Forms.Xaml;
 
 namespace SkeletonExample.Pages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasePage : ContentPage
     {
         public BasePage()
