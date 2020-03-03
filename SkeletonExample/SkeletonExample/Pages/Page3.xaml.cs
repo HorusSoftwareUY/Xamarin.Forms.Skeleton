@@ -5,21 +5,12 @@ using Xamarin.Forms;
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page3 : ContentPage
+    public partial class Page3 : BasePage
     {
         public Page3()
         {
             InitializeComponent();
             this.BindingContext = new Page3ViewModel();
-        }
-
-        protected override void OnAppearing()
-        {
-            var viewModel = this.BindingContext as Page3ViewModel;
-            if (viewModel != null)
-            {
-                viewModel.LoadCommand.Execute(null);
-            }
         }
     }
 }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SkeletonExample.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         bool isBusy = false;
 
@@ -14,6 +16,10 @@ namespace SkeletonExample.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
+
+        public ICommand LoadCommand => new Command(OnLoadCommandExecute);
+
+        protected abstract void OnLoadCommandExecute();
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName]string propertyName = "",

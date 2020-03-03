@@ -18,9 +18,7 @@ namespace SkeletonExample.ViewModels
             set { SetProperty(ref items, value); }
         }
 
-        public ICommand LoadCommand => new Command(OnLoadCommand);
-
-        private async void OnLoadCommand()
+        protected override async void OnLoadCommandExecute()
         {
             var now = DateTime.Now.ToShortDateString();
 
