@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Skeleton.Animations;
+using Xamarin.Forms.Skeleton.Extensions;
 
 namespace Xamarin.Forms.Skeleton
 {
@@ -71,6 +73,18 @@ namespace Xamarin.Forms.Skeleton
         internal static void SetOriginalBackgroundColor(BindableObject b, Color value) => b.SetValue(OriginalBackgroundColorProperty, value);
 
         internal static Color GetOriginalBackgroundColor(BindableObject b) => (Color)b.GetValue(OriginalBackgroundColorProperty);
+
+        internal static readonly BindableProperty UseDynamicTextColorProperty = BindableProperty.CreateAttached("UseDynamicTextColor", typeof(bool), typeof(View), default(bool));
+
+        internal static void SetUseDynamicTextColor(BindableObject b, bool value) => b.SetValue(UseDynamicTextColorProperty, value);
+
+        internal static bool GetUseDynamicTextColor(BindableObject b) => (bool)b.GetValue(UseDynamicTextColorProperty);
+
+        internal static readonly BindableProperty UseDynamicBackgroundColorProperty = BindableProperty.CreateAttached("UseDynamicBackground", typeof(bool), typeof(View), default(bool));
+
+        internal static bool GetUseDynamicBackgroundColor(BindableObject b) => (bool)b.GetValue(UseDynamicBackgroundColorProperty);
+
+        internal static void SetUseDynamicBackgroundColor(BindableObject b, bool value) => b.SetValue(UseDynamicBackgroundColorProperty, value);
 
         internal static readonly BindableProperty OriginalTextColorProperty = BindableProperty.CreateAttached("OriginalTextColor", typeof(Color), typeof(View), default(Color));
 
@@ -164,18 +178,28 @@ namespace Xamarin.Forms.Skeleton
 
         private static void SetBackgroundColor(View view)
         {
+            var hasDynamic = GetUseDynamicBackgroundColor(view)
+                || view.HasDynamicColorOnProperty(View.BackgroundColorProperty);
+
             var backgroundColor = GetBackgroundColor(view);
             if (backgroundColor != default(Color))
             {
                 SetOriginalBackgroundColor(view, view.BackgroundColor);
                 view.BackgroundColor = backgroundColor;
             }
+
+            SetUseDynamicBackgroundColor(view, hasDynamic);
         }
 
         private static void RestoreBackgroundColor(View view)
         {
+            var useDynamic = GetUseDynamicBackgroundColor(view);
             var backgroundColor = GetBackgroundColor(view);
-            if (backgroundColor != default(Color))
+            if (useDynamic)
+            {
+                view.ClearValue(View.BackgroundColorProperty);
+            }
+            else if (backgroundColor != default(Color))
             {
                 view.BackgroundColor = GetOriginalBackgroundColor(view);
             }
@@ -183,27 +207,49 @@ namespace Xamarin.Forms.Skeleton
 
         private static void SetTextColor(View view)
         {
+            var hasDynamic = GetUseDynamicTextColor(view);
             if (view is Label label)
             {
+                hasDynamic = hasDynamic || label.HasDynamicColorOnProperty(Label.TextColorProperty);
                 SetOriginalTextColor(label, label.TextColor);
                 label.TextColor = Color.Transparent;
             }
             else if (view is Button button)
             {
+                hasDynamic = hasDynamic || button.HasDynamicColorOnProperty(Button.TextColorProperty);
                 SetOriginalTextColor(button, button.TextColor);
                 button.TextColor = Color.Transparent;
             }
+
+            SetUseDynamicTextColor(view, hasDynamic);
         }
 
         private static void RestoreTextColor(View view)
         {
+            var useDynamic = GetUseDynamicTextColor(view);
             if (view is Label label)
             {
-                label.TextColor = GetOriginalTextColor(label);
+                if (useDynamic)
+                {
+                    var key = label.GetPropertyDynamicResourceKey(Label.TextColorProperty);
+                    label.SetDynamicResource(Label.TextColorProperty, key);
+                }
+                else
+                {
+                    label.TextColor = GetOriginalTextColor(view);
+                }
             }
             else if (view is Button button)
             {
-                button.TextColor = GetOriginalTextColor(button);
+                if (useDynamic)
+                {
+                    var key = button.GetPropertyDynamicResourceKey(Button.TextColorProperty);
+                    button.SetDynamicResource(Button.TextColorProperty, key);
+                }
+                else
+                {
+                    button.TextColor = GetOriginalTextColor(view);
+                }
             }
         }
 
