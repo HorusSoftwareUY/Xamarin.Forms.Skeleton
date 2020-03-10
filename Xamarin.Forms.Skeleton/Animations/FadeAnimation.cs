@@ -12,7 +12,6 @@ namespace Xamarin.Forms.Skeleton.Animations
 
         protected override async Task<bool> Animate(BindableObject bindable)
         {
-            Skeleton.SetAnimating(bindable, true);
             var self = (View)bindable;
             await self.FadeTo(this.Parameter, this.Interval);
             await self.FadeTo(1, this.Interval);

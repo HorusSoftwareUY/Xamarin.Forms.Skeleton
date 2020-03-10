@@ -22,6 +22,11 @@
     <ProjectReference Include="..\..\Xamarin.Forms.Skeleton\Xamarin.Forms.Skeleton.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Pages\Page6.xaml.cs">
+      <DependentUpon>Page6.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Pages\BasePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

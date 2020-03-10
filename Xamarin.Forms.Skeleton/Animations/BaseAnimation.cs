@@ -6,7 +6,7 @@ namespace Xamarin.Forms.Skeleton.Animations
     {
         public uint Interval { get; set; }
         public double Parameter { get; set; }
-        
+
         protected abstract Task<bool> Animate(BindableObject bindable);
 
         protected abstract Task StopAnimation(BindableObject bindable);
@@ -30,6 +30,7 @@ namespace Xamarin.Forms.Skeleton.Animations
             }
             else
             {
+                Skeleton.SetAnimating(bindable, true);
                 await Animate(bindable);
                 return await Run(bindable);
             }

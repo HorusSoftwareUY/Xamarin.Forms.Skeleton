@@ -32,23 +32,11 @@ namespace Xamarin.Forms.Skeleton
 
         public static Color GetBackgroundColor(BindableObject b) => (Color)b.GetValue(BackgroundColorProperty);
 
-        public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(AnimationTypes), typeof(View), AnimationTypes.None);
+        public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(BaseAnimation), typeof(View), null);
 
-        public static void SetAnimation(BindableObject b, AnimationTypes value) => b.SetValue(AnimationProperty, value);
+        public static void SetAnimation(BindableObject b, BaseAnimation value) => b.SetValue(AnimationProperty, value);
 
-        public static AnimationTypes GetAnimation(BindableObject b) => (AnimationTypes)b.GetValue(AnimationProperty);
-
-        public static readonly BindableProperty AnimationIntervalProperty = BindableProperty.CreateAttached("AnimationInterval", typeof(int), typeof(View), 500);
-
-        public static void SetAnimationInterval(BindableObject b, int value) => b.SetValue(AnimationIntervalProperty, value);
-
-        public static int GetAnimationInterval(BindableObject b) => (int)b.GetValue(AnimationIntervalProperty);
-
-        public static readonly BindableProperty AnimationParameterProperty = BindableProperty.CreateAttached("AnimationParameter", typeof(double?), typeof(View), null);
-
-        public static void SetAnimationParameter(BindableObject b, double? value) => b.SetValue(AnimationParameterProperty, value);
-
-        public static double? GetAnimationParameter(BindableObject b) => (double?)b.GetValue(AnimationParameterProperty);
+        public static BaseAnimation GetAnimation(BindableObject b) => (BaseAnimation)b.GetValue(AnimationProperty);
 
         #endregion Public Properties
 
@@ -77,12 +65,6 @@ namespace Xamarin.Forms.Skeleton
         internal static void SetOriginalTextColor(BindableObject b, Color value) => b.SetValue(OriginalTextColorProperty, value);
 
         internal static Color GetOriginalTextColor(BindableObject b) => (Color)b.GetValue(OriginalTextColorProperty);
-
-        internal static readonly BindableProperty BaseAnimationProperty = BindableProperty.CreateAttached("BaseAnimation", typeof(BaseAnimation), typeof(View), null);
-
-        internal static void SetBaseAnimation(BindableObject b, BaseAnimation value) => b.SetValue(BaseAnimationProperty, value);
-
-        internal static BaseAnimation GetBaseAnimation(BindableObject b) => (BaseAnimation)b.GetValue(BaseAnimationProperty);
 
         #endregion Internal Properties
 
@@ -209,48 +191,28 @@ namespace Xamarin.Forms.Skeleton
 
         private static void RunAnimation(View view)
         {
-            var animationType = GetAnimation(view);
+            var animation = GetAnimation(view);
 
-            if (animationType == AnimationTypes.None || GetAnimating(view))
+            if (animation == null || GetAnimating(view))
                 return;
 
             SetCancelAnimation(view, false);
 
-            BaseAnimation animation = null;
-
-            switch (animationType)
-            {
-                case AnimationTypes.Beat:
-                    animation = new BeatAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                    break;
-                case AnimationTypes.Fade:
-                    animation = new FadeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                    break;
-                case AnimationTypes.VerticalShake:
-                    animation = new VerticalShakeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                    break;
-                case AnimationTypes.HorizontalShake:
-                    animation = new HorizontalShakeAnimation(GetAnimationInterval(view), GetAnimationParameter(view));
-                    break;
-                default:
-                    break;
-            }
-
             if (animation != null)
             {
-                SetBaseAnimation(view, animation);
                 animation.Start(view);
             }
         }
 
         private static void CancelAnimation(View view)
         {
-            if (GetAnimation(view) == AnimationTypes.None)
+            var animation = GetAnimation(view);
+
+            if (animation == null)
                 return;
 
             SetCancelAnimation(view, true);
 
-            var animation = GetBaseAnimation(view);
             animation.Stop(view);
         }
 
