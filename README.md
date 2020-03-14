@@ -24,7 +24,7 @@ The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be e
 You must add this namespace to your xaml files:
 
 ```XML
-xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
 ```
 
 Add the following properties to generate a loading animation:
@@ -36,9 +36,9 @@ Add the following properties to generate a loading animation:
 	VerticalOptions="FillAndExpand"
 	ItemTemplate="{StaticResource ItemTemplate}"
 	ItemsSource="{Binding Items}"
-	extension:Skeleton.IsParent="True"
-	extension:Skeleton.IsBusy="{Binding IsBusy}"
-	extension:Skeleton.Animation="Fade" />
+	sk:Skeleton.IsParent="True"
+	sk:Skeleton.IsBusy="{Binding IsBusy}"
+	sk:Skeleton.Animation="{sk:DefaultAnimation Fade}" />
 ```
 
 Add the following properties to set a loading animation with a specific background color:
@@ -47,8 +47,8 @@ Add the following properties to set a loading animation with a specific backgrou
 <Label Text="{Binding Title}"
 	TextColor="#c92726"
 	FontSize="Large"
-	extension:Skeleton.IsBusy="{Binding IsBusy}"
-	extension:Skeleton.BackgroundColor="#c6c6c5" />
+	sk:Skeleton.IsBusy="{Binding IsBusy}"
+	sk:Skeleton.BackgroundColor="#c6c6c5" />
 ```
 
 ### Properties
@@ -69,9 +69,9 @@ Add the following properties to set a loading animation with a specific backgrou
 - Indicates if the control is hide when is busy.
 - The default value is false.
 
-#### Animation (AnimationTypes)
+#### Animation (BaseAnimation)
 - Control animation when is busy.
-- Possible values: None, Fade and Beat (working in new Animations for the next release)
+- Possible values: None, Fade, Beat, HorizontalShake, VerticalShake and custom animation inheriting from BaseAnimation.
 - The default value is None.
 
 #### AnimationInterval (Int)
@@ -87,8 +87,7 @@ Add the following properties to set a loading animation with a specific backgrou
 https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
 
 ## Roadmap
-- New animations 
-- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeater, etc.
+- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeater, BindableLayout, etc.
  
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>
