@@ -3,7 +3,7 @@
     xmlns:pages="clr-namespace:SkeletonExample.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+    xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Class="SkeletonExample.Pages.Page1"
     Title="Skeleton">
@@ -17,9 +17,9 @@
                            IsClippedToBounds="True"
                            Margin="10,0,10,16"
                            BackgroundColor="{StaticResource BlueColor}"
-                           extension:Skeleton.IsParent="True"
-                           extension:Skeleton.IsBusy="{Binding IsBusy}"
-                           extension:Skeleton.BackgroundColor="{StaticResource BlueColor}">
+                           sk:Skeleton.IsParent="True"
+                           sk:Skeleton.IsBusy="{Binding IsBusy}"
+                           sk:Skeleton.BackgroundColor="{StaticResource BlueColor}">
                         <AbsoluteLayout HeightRequest="200">
                             <ffimageloading:CachedImage Source="{Binding Image}"
                                                         Aspect="AspectFill"
@@ -29,8 +29,8 @@
                                                         Aspect="AspectFill"
                                                         AbsoluteLayout.LayoutFlags="All"
                                                         AbsoluteLayout.LayoutBounds="0,0,1,1"
-                                                        extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                        extension:Skeleton.Hide="True" />
+                                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                                        sk:Skeleton.Hide="True" />
                             <StackLayout Padding="16,12"
                                          Spacing="4"
                                          Orientation="Horizontal"
@@ -41,15 +41,15 @@
                                        FontSize="Title"
                                        FontAttributes="Bold"
                                        HorizontalOptions="FillAndExpand"
-                                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                       extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                                 <Label
                                     Text="{Binding Subtitle}"
                                     TextColor="{StaticResource WhiteColor}"
                                     FontSize="Medium"
                                     VerticalOptions="Center"
-                                    extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                    extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                             </StackLayout>
                         </AbsoluteLayout>
                     </Frame>
@@ -93,9 +93,9 @@
                       BackgroundColor="Transparent"
                       ItemTemplate="{StaticResource ItemTemplate}"
                       ItemsSource="{Binding Items}"
-                      extension:Skeleton.IsParent="True"
-                      extension:Skeleton.IsBusy="{Binding IsBusy}"
-                      extension:Skeleton.Animation="Fade" />
+                      sk:Skeleton.IsParent="True"
+                      sk:Skeleton.IsBusy="{Binding IsBusy}"
+                      sk:Skeleton.Animation="{sk:DefaultAnimation Fade}" />
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

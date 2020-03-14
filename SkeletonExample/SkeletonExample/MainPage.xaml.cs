@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SkeletonExample.Pages;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SkeletonExample.Pages;
 using Xamarin.Forms;
 
 namespace SkeletonExample
@@ -20,6 +15,7 @@ namespace SkeletonExample
             this.Children.Add(new Page3());
             this.Children.Add(new Page4());
             this.Children.Add(new Page5());
+            this.Children.Add(new Page6());
         }
     }
 }

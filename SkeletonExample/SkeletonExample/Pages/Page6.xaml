@@ -6,10 +6,10 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    x:Class="SkeletonExample.Pages.Page5"
+    x:Class="SkeletonExample.Pages.Page6"
     xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    Title="HorizontalShake">
+    Title="Custom Animation">
     <ContentPage.Content>
         <Grid ColumnSpacing="0"
               RowSpacing="8">
@@ -48,7 +48,7 @@
                                  sk:Skeleton.IsParent="True"
                                  sk:Skeleton.IsBusy="{Binding IsBusy}"
                                  sk:Skeleton.BackgroundColor="{StaticResource BlueColor}"
-                                 sk:Skeleton.Animation="{sk:DefaultAnimation HorizontalShake}">
+                                 sk:Skeleton.Animation="{Binding MyCustomAnimation}">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 
@@ -88,7 +88,7 @@
                                  Padding="16"
                                  sk:Skeleton.IsParent="True"
                                  sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                 sk:Skeleton.Animation="{sk:DefaultAnimation Source=HorizontalShake, Interval='900',Parameter='20'}">
+                                 sk:Skeleton.Animation="{Binding MyCustomAnimation}">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 

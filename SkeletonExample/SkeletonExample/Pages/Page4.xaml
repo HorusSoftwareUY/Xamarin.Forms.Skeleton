@@ -6,7 +6,7 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 mc:Ignorable="d"
                 x:Class="SkeletonExample.Pages.Page4"
-                xmlns:extension="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+                xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
                 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                 Title="VerticalShake">
     <ContentPage.Content>
@@ -44,18 +44,18 @@
 
                     <StackLayout Spacing="8"
                                  Padding="16"
-                                 extension:Skeleton.IsParent="True"
-                                 extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                 extension:Skeleton.BackgroundColor="{StaticResource BlueColor}"
-                                 extension:Skeleton.Animation="VerticalShake">
+                                 sk:Skeleton.IsParent="True"
+                                 sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                 sk:Skeleton.BackgroundColor="{StaticResource BlueColor}"
+                                 sk:Skeleton.Animation="{sk:DefaultAnimation VerticalShake}">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 
                             <ffimageloading:CachedImage WidthRequest="80"
                                                         HeightRequest="80"
                                                         Source="{Binding Item.Image}"
-                                                        extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                        extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                                        sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
 
                             <StackLayout Spacing="2"
                                          VerticalOptions="End"
@@ -63,41 +63,39 @@
                                 <Label Text="{Binding Item.Title}"
                                        TextColor="{StaticResource RedColor}"
                                        FontSize="Large"
-                                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                       extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                                 <Label Text="{Binding Item.Subtitle}"
                                        TextColor="{StaticResource WhiteColor}"
                                        FontSize="Medium"
-                                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                       extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                             </StackLayout>
                         </StackLayout>
                         <BoxView HeightRequest="4"
                                  BackgroundColor="{StaticResource DarkRedColor}"
-                                 extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                 extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                                 sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                 sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                         <Label Text="{Binding Item.Description}"
                                TextColor="{StaticResource WhiteColor}"
                                FontSize="Small"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
+                               sk:Skeleton.IsBusy="{Binding IsBusy}"
+                               sk:Skeleton.BackgroundColor="{StaticResource DarkBlueColor}" />
                     </StackLayout>
 
                     <StackLayout Spacing="8"
                                  Padding="16"
-                                 extension:Skeleton.IsParent="True"
-                                 extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                 extension:Skeleton.Animation="VerticalShake"
-                                 extension:Skeleton.AnimationInterval="900"
-                                 extension:Skeleton.AnimationParameter="20">
+                                 sk:Skeleton.IsParent="True"
+                                 sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                 sk:Skeleton.Animation="{sk:DefaultAnimation Source=VerticalShake, Interval='900', Parameter='20'}">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 
                             <ffimageloading:CachedImage WidthRequest="80"
                                                         HeightRequest="80"
                                                         Source="{Binding Item.Image}"
-                                                        extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                                        extension:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
+                                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                                        sk:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
 
                             <StackLayout Spacing="2"
                                          VerticalOptions="End"
@@ -105,24 +103,24 @@
                                 <Label Text="{Binding Item.Title}"
                                        TextColor="{StaticResource RedColor}"
                                        FontSize="Large"
-                                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                       extension:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
                                 <Label Text="{Binding Item.Subtitle}"
                                        TextColor="{StaticResource WhiteColor}"
                                        FontSize="Medium"
-                                       extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                       extension:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
                             </StackLayout>
                         </StackLayout>
                         <BoxView HeightRequest="4"
                                  BackgroundColor="{StaticResource DarkRedColor}"
-                                 extension:Skeleton.IsBusy="{Binding IsBusy}"
-                                 extension:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
+                                 sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                 sk:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
                         <Label Text="{Binding Item.Description}"
                                TextColor="{StaticResource WhiteColor}"
                                FontSize="Small"
-                               extension:Skeleton.IsBusy="{Binding IsBusy}"
-                               extension:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
+                               sk:Skeleton.IsBusy="{Binding IsBusy}"
+                               sk:Skeleton.BackgroundColor="{StaticResource BlueColor}" />
                     </StackLayout>
 
                 </StackLayout>
