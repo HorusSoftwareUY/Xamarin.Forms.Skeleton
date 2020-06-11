@@ -20,31 +20,43 @@ namespace SkeletonExample.ViewModels
 
         protected override async void OnLoadCommandExecute()
         {
-            var now = DateTime.Now.ToShortDateString();
+            var title = "xxxxxxxxxxx";
 
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
-                    Title = "x",
-                    Subtitle = now,
+                    Title = title,
+                    Subtitle = title,
                     IsBusy = true
                 },
                 new Item
                 {
-                    Title = "x",
-                    Subtitle = now,
+                    Title = title,
+                    Subtitle = title,
                     IsBusy = true
                 },
                 new Item
                 {
-                    Title = "x",
-                    Subtitle = now,
+                    Title = title,
+                    Subtitle = title,
                     IsBusy = true
                 },
                 new Item
                 {
-                    Title = "x",
-                    Subtitle = now,
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
                     IsBusy = true
                 },
             });
@@ -56,27 +68,39 @@ namespace SkeletonExample.ViewModels
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
                 {
-                    Title = "Landscape 1",
-                    Subtitle = DateTime.Now.ToShortDateString(),
-                    Image = "image1.jpg",
+                    Title = "Antelope Canyon",
+                    Subtitle = "Arizona, United States",
+                    Image = "img_1.jpg",
                 },
                 new Item
                 {
-                    Title = "Landscape 2",
-                    Subtitle = DateTime.Now.AddDays(-2).ToShortDateString(),
-                    Image = "image2.jpg",
+                    Title = "Giza Plateau",
+                    Subtitle = "Cairo, Egypt",
+                    Image = "img_2.jpg",
                 },
                 new Item
                 {
-                    Title = "Landscape 3",
-                    Subtitle = DateTime.Now.AddDays(-3).ToShortDateString(),
-                    Image = "image4.jpg",
+                    Title = "Machu Picchu",
+                    Subtitle = "Peru",
+                    Image = "img_3.jpg",
                 },
                 new Item
                 {
-                    Title = "Landscape 4",
-                    Subtitle = DateTime.Now.AddDays(-5).ToShortDateString(),
-                    Image = "image3.jpg",
+                    Title = "Lake Louise",
+                    Subtitle = "Alberta, Canada",
+                    Image = "img_4.jpg",
+                },
+                 new Item
+                {
+                    Title = "Navagio Beach",
+                    Subtitle = "Zakynthos, Greece",
+                    Image = "img_5.jpg",
+                },
+                new Item
+                {
+                    Title = "Angels Landing",
+                    Subtitle = "Utah, United States",
+                    Image = "img_6.jpg",
                 },
             });
         }

@@ -11,8 +11,8 @@
         <Color x:Key="BlackColor">#0d1a26</Color>
         <Color x:Key="RedColor">#e73d3b</Color>
         <Color x:Key="DarkRedColor">#c92726</Color>
-        <Color x:Key="DarkGrayColor">#6f6f6e</Color>
-        <Color x:Key="GrayColor">#c6c6c5</Color>
+        <Color x:Key="DarkGrayColor">#828282</Color>
+        <Color x:Key="GrayColor">#E3E3E3</Color>
         <Color x:Key="WhiteColor">#ffffff</Color>
     </Application.Resources>
 </Application>

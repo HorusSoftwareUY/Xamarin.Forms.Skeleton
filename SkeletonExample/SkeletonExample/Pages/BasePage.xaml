@@ -8,5 +8,5 @@
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              IconImageSource="ic_tab.png"
-             BackgroundColor="{StaticResource DarkBlueColor}">
+             BackgroundColor="{StaticResource WhiteColor}">
 </ContentPage>

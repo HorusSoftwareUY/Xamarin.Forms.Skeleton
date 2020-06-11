@@ -120,7 +120,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
@@ -148,6 +148,14 @@
     <BundleResource Include="Resources\back_gradient.png" />
     <BundleResource Include="Resources\horus2.png" />
     <BundleResource Include="Resources\ic_tab.png" />
+    <BundleResource Include="Resources\img_1.jpg" />
+    <BundleResource Include="Resources\health.png" />
+    <BundleResource Include="Resources\health_fill.png" />
+    <BundleResource Include="Resources\img_2.jpg" />
+    <BundleResource Include="Resources\img_3.jpg" />
+    <BundleResource Include="Resources\img_4.jpg" />
+    <BundleResource Include="Resources\img_5.jpg" />
+    <BundleResource Include="Resources\img_6.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
