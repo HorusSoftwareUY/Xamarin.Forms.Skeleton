@@ -20,7 +20,7 @@ namespace SkeletonExample.ViewModels
 
         protected override async void OnLoadCommandExecute()
         {
-            var title = "xxxxxxxxxxx";
+            var title = "XXXXXXXXXXXXXXXXX";
 
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
