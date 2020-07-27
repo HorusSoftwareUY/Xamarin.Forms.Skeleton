@@ -3,7 +3,7 @@
 namespace Xamarin.Forms.Skeleton.Animations
 {
     [Xaml.TypeConversion(typeof(BaseAnimation))]
-    public class AnimationTypesTypeConverter : TypeConverter
+    public class BaseAnimationTypeConverter : TypeConverter
     {
         public override object ConvertFromInvariantString(string value)
         {

@@ -36,10 +36,10 @@ namespace Xamarin.Forms.Skeleton
 
         public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(BaseAnimation), typeof(View), null);
 
-        [TypeConverter(typeof(AnimationTypesTypeConverter))]
+        [TypeConverter(typeof(BaseAnimationTypeConverter))]
         public static void SetAnimation(BindableObject b, BaseAnimation value) => b.SetValue(AnimationProperty, value);
 
-        [TypeConverter(typeof(AnimationTypesTypeConverter))]
+        [TypeConverter(typeof(BaseAnimationTypeConverter))]
         public static BaseAnimation GetAnimation(BindableObject b) => (BaseAnimation)b.GetValue(AnimationProperty);
 
         #endregion Public Properties
