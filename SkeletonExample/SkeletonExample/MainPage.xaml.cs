@@ -16,6 +16,7 @@ namespace SkeletonExample
             this.Children.Add(new Page4());
             this.Children.Add(new Page5());
             this.Children.Add(new Page6());
+            this.Children.Add(new Page7());
         }
     }
 }
