@@ -45,7 +45,7 @@
                                  sk:Skeleton.IsParent="True"
                                  sk:Skeleton.IsBusy="{Binding IsBusy}"
                                  sk:Skeleton.BackgroundColor="{StaticResource BlueColor}"
-                                 sk:Skeleton.Animation="{sk:DefaultAnimation Fade}">
+                                 sk:Skeleton.Animation="Fade">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 

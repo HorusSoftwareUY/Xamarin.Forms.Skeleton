@@ -47,7 +47,7 @@
                                  sk:Skeleton.IsParent="True"
                                  sk:Skeleton.IsBusy="{Binding IsBusy}"
                                  sk:Skeleton.BackgroundColor="{StaticResource BlueColor}"
-                                 sk:Skeleton.Animation="{sk:DefaultAnimation VerticalShake}">
+                                 sk:Skeleton.Animation="VerticalShake">
                         <StackLayout Spacing="16"
                                      Orientation="Horizontal">
 
