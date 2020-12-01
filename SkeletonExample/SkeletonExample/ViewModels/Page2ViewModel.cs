@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,35 +10,99 @@ namespace SkeletonExample.ViewModels
 {
     public class Page2ViewModel : BaseViewModel
     {
-        private Item item;
+        private ObservableCollection<Item> items;
 
-        public Item Item
+        public ObservableCollection<Item> Items
         {
-            get { return item; }
-            set { SetProperty(ref item, value); }
+            get { return items; }
+            set { SetProperty(ref items, value); }
         }
 
         protected override async void OnLoadCommandExecute()
         {
-            this.Item = new Item
-            {
-                Title = "x",
-                Subtitle = "x",
-                Image = null,
-                Description = "The new loading approach for cool apps in Xamarin Forms.\n\nAvailable on NuGet and support Xamarin.Forms >= 4.0.0.425677."
-            };
+            var title = "XXXXXXXXXXX";
+
+            this.Items = new ObservableCollection<Item>(new List<Item> {
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+                new Item
+                {
+                    Title = title,
+                    Subtitle = title,
+                    IsBusy = true
+                },
+            });
 
             this.IsBusy = true;
             await Task.Delay(2500);
             this.IsBusy = false;
 
-            this.Item = new Item
-            {
-                Title = "Skeleton",
-                Subtitle = "Xamarin.Forms.Skeleton",
-                Image = "icon.png",
-                Description = "The new loading approach for cool apps in Xamarin Forms.\n\nAvailable on NuGet and support Xamarin.Forms >= 4.0.0.425677."
-            };
+            this.Items = new ObservableCollection<Item>(new List<Item> {
+                new Item
+                {
+                    Title = "Antelope Canyon",
+                    Subtitle = "Arizona, United States",
+                    Image = "img_1.jpg",
+                },
+                new Item
+                {
+                    Title = "Giza Plateau",
+                    Subtitle = "Cairo, Egypt",
+                    Image = "img_2.jpg",
+                },
+                new Item
+                {
+                    Title = "Machu Picchu",
+                    Subtitle = "Peru",
+                    Image = "img_3.jpg",
+                },
+                new Item
+                {
+                    Title = "Lake Louise",
+                    Subtitle = "Alberta, Canada",
+                    Image = "img_4.jpg",
+                },
+                 new Item
+                {
+                    Title = "Navagio Beach",
+                    Subtitle = "Zakynthos, Greece",
+                    Image = "img_5.jpg",
+                },
+                new Item
+                {
+                    Title = "Angels Landing",
+                    Subtitle = "Utah, United States",
+                    Image = "img_6.jpg",
+                },
+            });
         }
     }
 }

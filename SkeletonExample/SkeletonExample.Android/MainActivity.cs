@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Platform;
 
 namespace SkeletonExample.Droid
 {
@@ -23,6 +24,8 @@ namespace SkeletonExample.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+
+            CachedImageRenderer.Init(true);
 
             Plugin.MaterialDesignControls.Android.Renderer.Init();
 

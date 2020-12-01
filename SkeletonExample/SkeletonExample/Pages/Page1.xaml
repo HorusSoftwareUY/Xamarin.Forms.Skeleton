@@ -106,7 +106,7 @@
                     sk:Skeleton.IsParent="True"
                     sk:Skeleton.IsBusy="{Binding IsBusy}"
                     sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
-                    sk:Skeleton.Animation="{sk:DefaultAnimation Fade}">
+                    sk:Skeleton.Animation="{sk:DefaultAnimation None}">
                     <AbsoluteLayout>
                         <ffimageloading:CachedImage
                             AbsoluteLayout.LayoutFlags="All"
@@ -200,9 +200,9 @@
                 <StackLayout
                     sk:Skeleton.IsBusy="{Binding IsBusy}"
                     sk:Skeleton.IsParent="True"
-                    sk:Skeleton.Animation="{sk:DefaultAnimation Fade}">
+                    sk:Skeleton.Animation="{sk:DefaultAnimation None}">
                     <Frame
-                        Margin="30,20,30,10"
+                        Margin="30,0,30,10"
                         BackgroundColor="Transparent"
                         HasShadow="False"
                         CornerRadius="5"

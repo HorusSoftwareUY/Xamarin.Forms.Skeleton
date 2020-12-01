@@ -2,12 +2,15 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace SkeletonExample
 {
     public partial class App : Application
     {
+
         public App()
         {
+            Device.SetFlags(new string[] { "Shapes_Experimental" });
             InitializeComponent();
 
             MainPage = new MainPage();
@@ -29,3 +32,6 @@ namespace SkeletonExample
         }
     }
 }
+
+
+
