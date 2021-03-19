@@ -81,7 +81,7 @@ namespace SkeletonExample.ViewModels
                 new Item
                 {
                     Title = "Machu Picchu",
-                    Subtitle = "Peru",
+                    Subtitle = "Urubamba, Peru",
                     Image = "img_3.jpg",
                 },
                 new Item
