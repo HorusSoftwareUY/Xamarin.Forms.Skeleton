@@ -8,6 +8,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Class="SkeletonExample.Pages.Page1"
     Title="Skeleton"
+    IconImageSource="ic_skeleton.png"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     ios:Page.UseSafeArea="False">
     <ContentPage.Resources>

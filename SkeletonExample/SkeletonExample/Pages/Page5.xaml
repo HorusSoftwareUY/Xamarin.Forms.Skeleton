@@ -12,6 +12,7 @@
     xmlns:controls="clr-namespace:SkeletonExample.Controls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="HorizontalShake"
+    IconImageSource="ic_horizontal_shake.png"
     ios:Page.UseSafeArea="False">
     <ContentPage.Resources>
         <ResourceDictionary>
