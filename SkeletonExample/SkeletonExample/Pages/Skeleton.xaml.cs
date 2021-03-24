@@ -4,19 +4,19 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page5 : BasePage
+    public partial class Skeleton : BasePage
     {
-        public Page5()
+        public Skeleton()
         {
             InitializeComponent();
-            this.BindingContext = new Page5ViewModel();
+            this.BindingContext = new SkeletonViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             if (Device.RuntimePlatform.Equals(Device.iOS))
-                mainGrid.Margin = new Thickness(30, On<Xamarin.Forms.PlatformConfiguration.iOS>().SafeAreaInsets().Top + 30, 30, 30);
+                mainGrid.Margin = new Thickness(30, On<Xamarin.Forms.PlatformConfiguration.iOS>().SafeAreaInsets().Top+30, 30, 30);
             else
                 mainGrid.Margin = new Thickness(30, 50, 30, 30);
         }

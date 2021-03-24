@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<pages:BasePage
-    xmlns:pages="clr-namespace:SkeletonExample.Pages"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
-    xmlns:controls="clr-namespace:SkeletonExample.Controls;assembly=SkeletonExample"
-    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    x:Class="SkeletonExample.Pages.Page1"
-    Title="Skeleton"
-    IconImageSource="ic_skeleton.png"
-    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-    ios:Page.UseSafeArea="False">
+<pages:BasePage xmlns:pages="clr-namespace:SkeletonExample.Pages"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+                xmlns:controls="clr-namespace:SkeletonExample.Controls" 
+                xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+                x:Class="SkeletonExample.Pages.Beat"
+                Title="Beat"
+                IconImageSource="ic_beat.png"
+                ios:Page.UseSafeArea="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ItemTemplate">
@@ -26,7 +26,8 @@
                                BackgroundColor="{StaticResource WhiteColor}"
                                sk:Skeleton.IsParent="True"
                                sk:Skeleton.IsBusy="{Binding IsBusy}"
-                               sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                               sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                               sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                             <ffimageloading:CachedImage Source="{Binding Image}"
                                                         Aspect="AspectFill"/>
                         </Frame>
@@ -38,7 +39,8 @@
                                    Padding="0"
                                    HorizontalOptions="Start"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                 <Label Text="{Binding Title}"
                                        TextColor="{StaticResource BlackColor}"
                                        FontSize="20"
@@ -51,7 +53,8 @@
                                    Padding="0"
                                    HorizontalOptions="Start"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                 <Label Text="{Binding Subtitle}"
                                        TextColor="{StaticResource DarkGrayColor}"
                                        FontSize="14"
@@ -69,7 +72,8 @@
                                    HorizontalOptions="End" 
                                    sk:Skeleton.IsParent="True"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                 <ffimageloading:CachedImage WidthRequest="20"
                                                             HeightRequest="20"
                                                             Source="health.png"
@@ -97,8 +101,7 @@
                        BackgroundColor="Transparent"
                        sk:Skeleton.IsParent="True"
                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                       sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
-                       sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                       sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
                     <AbsoluteLayout>
                         <ffimageloading:CachedImage AbsoluteLayout.LayoutFlags="All"
                                                     AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
@@ -111,7 +114,7 @@
                                                     AbsoluteLayout.LayoutFlags="All"
                                                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                                                     sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                                    sk:Skeleton.Hide="True" />
+                                                    sk:Skeleton.Hide="True"/>
 
                         <Grid AbsoluteLayout.LayoutFlags="All"
                               AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -137,7 +140,8 @@
                                     CornerRadius="5"
                                     Padding="0"
                                     sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                    sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}">
+                                    sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                    sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                             <ffimageloading:CachedImage Source="horus.png"
                                                         Margin="0"
                                                         HorizontalOptions="Center"
@@ -161,7 +165,8 @@
                                        CornerRadius="5"
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}">
+                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                 <ffimageloading:CachedImage Source="load.png"
                                                             Aspect="AspectFit"
                                                             HeightRequest="32"
@@ -182,7 +187,8 @@
                                        CornerRadius="5"
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}">
+                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                     <Label Text="Skeleton"
                                            TextColor="{StaticResource WhiteColor}"
                                            FontAttributes="Bold"
@@ -193,7 +199,8 @@
                                        CornerRadius="5"
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}">
+                                       sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                                     <Label Text="By Horus"
                                            TextColor="{StaticResource WhiteColor}"
                                            FontAttributes="Bold"
@@ -208,8 +215,7 @@
 
             <controls:StickyHeader.Content>
                 <StackLayout sk:Skeleton.IsBusy="{Binding IsBusy}"
-                             sk:Skeleton.IsParent="True"
-                             sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                             sk:Skeleton.IsParent="True">
                     <Frame Margin="30,0,30,0"
                            BackgroundColor="Transparent"
                            HasShadow="False"
@@ -219,7 +225,8 @@
                            MinimumHeightRequest="300"
                            HorizontalOptions="Start"
                            sk:Skeleton.IsBusy="{Binding IsBusy}"
-                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                           sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='500', Parameter='1.03'}">
                         <Label Text="Trending"
                                TextColor="{StaticResource BlackColor}"
                                FontAttributes="Bold"

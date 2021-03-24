@@ -4,12 +4,12 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page2 : BasePage
+    public partial class Beat : BasePage
     {
-        public Page2()
+        public Beat()
         {
             InitializeComponent();
-            this.BindingContext = new Page2ViewModel();
+            this.BindingContext = new BeatViewModel();
         }
 
         protected override void OnAppearing()

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace SkeletonExample.ViewModels
 {
-    public class Page5ViewModel : BaseViewModel
+    public class FadeViewModel : BaseViewModel
     {
         private ObservableCollection<Item> items;
 

@@ -5,7 +5,7 @@ using Xamarin.Forms.Skeleton.Animations;
 
 namespace SkeletonExample.ViewModels
 {
-    public class Page6ViewModel : Page5ViewModel
+    public class CustomAnimationViewModel : HorizontalShakeViewModel
     {
         public BaseAnimation MyCustomAnimation => new MyCustomAnimation();
     }

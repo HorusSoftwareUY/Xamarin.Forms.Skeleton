@@ -4,12 +4,12 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page3 : BasePage
+    public partial class CustomAnimation : BasePage
     {
-        public Page3()
+        public CustomAnimation()
         {
             InitializeComponent();
-            this.BindingContext = new Page3ViewModel();
+            BindingContext = new CustomAnimationViewModel();
         }
 
         protected override void OnAppearing()
@@ -20,7 +20,5 @@ namespace SkeletonExample.Pages
             else
                 mainGrid.Margin = new Thickness(30, 50, 30, 30);
         }
-
-
     }
 }

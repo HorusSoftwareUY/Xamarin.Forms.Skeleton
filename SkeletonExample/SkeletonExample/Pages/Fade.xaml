@@ -1,19 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:BasePage
-    xmlns:pages="clr-namespace:SkeletonExample.Pages"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    x:Class="SkeletonExample.Pages.Page6"
-    xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
-    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    Title="Custom Animation"
-    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    xmlns:controls="clr-namespace:SkeletonExample.Controls" 
-    ios:Page.UseSafeArea="False">
-<ContentPage.Resources>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage xmlns:pages="clr-namespace:SkeletonExample.Pages"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+                xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                xmlns:controls="clr-namespace:SkeletonExample.Controls"
+                x:Class="SkeletonExample.Pages.Fade"
+                Title="Fade"
+                IconImageSource="ic_fade.png"
+                ios:Page.UseSafeArea="False">
+   <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ItemTemplate">
                 <ViewCell>
@@ -28,7 +25,8 @@
                                BackgroundColor="{StaticResource WhiteColor}"
                                sk:Skeleton.IsParent="True"
                                sk:Skeleton.IsBusy="{Binding IsBusy}"
-                               sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                               sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                               sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                             <ffimageloading:CachedImage Source="{Binding Image}"
                                                         Aspect="AspectFill"/>
                         </Frame>
@@ -40,7 +38,8 @@
                                    Padding="0"
                                    HorizontalOptions="Start"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                 <Label Text="{Binding Title}"
                                        TextColor="{StaticResource BlackColor}"
                                        FontSize="20"
@@ -53,7 +52,8 @@
                                    Padding="0"
                                    HorizontalOptions="Start"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                 <Label Text="{Binding Subtitle}"
                                        TextColor="{StaticResource DarkGrayColor}"
                                        FontSize="14"
@@ -71,7 +71,8 @@
                                    HorizontalOptions="End" 
                                    sk:Skeleton.IsParent="True"
                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                   sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                                   sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                 <ffimageloading:CachedImage WidthRequest="20"
                                                             HeightRequest="20"
                                                             Source="health.png"
@@ -139,7 +140,7 @@
                                     Padding="0"
                                     sk:Skeleton.IsBusy="{Binding IsBusy}"
                                     sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
-                                    sk:Skeleton.Animation="{Binding MyCustomAnimation}">
+                                    sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                             <ffimageloading:CachedImage Source="horus.png"
                                                         Margin="0"
                                                         HorizontalOptions="Center"
@@ -164,7 +165,7 @@
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
                                        sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
-                                       sk:Skeleton.Animation="{Binding MyCustomAnimation}">
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                 <ffimageloading:CachedImage Source="load.png"
                                                             Aspect="AspectFit"
                                                             HeightRequest="32"
@@ -186,7 +187,7 @@
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
                                        sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
-                                       sk:Skeleton.Animation="{Binding MyCustomAnimation}">
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                     <Label Text="Skeleton"
                                            TextColor="{StaticResource WhiteColor}"
                                            FontAttributes="Bold"
@@ -198,7 +199,7 @@
                                        Padding="0"
                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
                                        sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
-                                       sk:Skeleton.Animation="{Binding MyCustomAnimation}">
+                                       sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                                     <Label Text="By Horus"
                                            TextColor="{StaticResource WhiteColor}"
                                            FontAttributes="Bold"
@@ -213,8 +214,7 @@
 
             <controls:StickyHeader.Content>
                 <StackLayout sk:Skeleton.IsBusy="{Binding IsBusy}"
-                             sk:Skeleton.IsParent="True"
-                             sk:Skeleton.Animation="{Binding MyCustomAnimation}">
+                             sk:Skeleton.IsParent="True">
                     <Frame Margin="30,0,30,0"
                            BackgroundColor="Transparent"
                            HasShadow="False"
@@ -224,7 +224,8 @@
                            MinimumHeightRequest="300"
                            HorizontalOptions="Start"
                            sk:Skeleton.IsBusy="{Binding IsBusy}"
-                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                           sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval='800',Parameter='0.3' }">
                         <Label Text="Trending"
                                TextColor="{StaticResource BlackColor}"
                                FontAttributes="Bold"
@@ -244,5 +245,3 @@
         </controls:StickyHeader>
     </ContentPage.Content>
 </pages:BasePage>
-
-

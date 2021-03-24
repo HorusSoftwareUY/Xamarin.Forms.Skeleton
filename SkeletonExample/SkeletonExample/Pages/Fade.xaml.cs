@@ -4,12 +4,12 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SkeletonExample.Pages
 {
-    public partial class Page6 : BasePage
+    public partial class Fade : BasePage
     {
-        public Page6()
+        public Fade()
         {
             InitializeComponent();
-            BindingContext = new Page6ViewModel();
+            this.BindingContext = new FadeViewModel();
         }
 
         protected override void OnAppearing()
@@ -20,5 +20,7 @@ namespace SkeletonExample.Pages
             else
                 mainGrid.Margin = new Thickness(30, 50, 30, 30);
         }
+
+
     }
 }
