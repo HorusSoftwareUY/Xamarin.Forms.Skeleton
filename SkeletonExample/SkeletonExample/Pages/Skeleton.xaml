@@ -15,7 +15,8 @@
             <DataTemplate x:Key="ItemTemplate">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal"
-                                 Margin="30,10"
+                                 Margin="30,0"
+                                 Padding="0,10"
                                  Spacing="20">
                         <Frame HasShadow="False"
                                CornerRadius="20"
