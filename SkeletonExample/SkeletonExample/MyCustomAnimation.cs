@@ -6,7 +6,7 @@ namespace SkeletonExample
 {
     public sealed class MyCustomAnimation : BaseAnimation
     {
-        private const int DEFAULT_DURATION = 500;
+        private const int DEFAULT_DURATION = 800;
         protected override async Task<bool> Animate(BindableObject bindable)
         {
             if (bindable is View target)
