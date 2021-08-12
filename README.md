@@ -1,13 +1,34 @@
 # Xamarin.Forms.Skeleton 
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/develop/icon.png" width="128">
 
 The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
 
 ## Sample
-
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/iOS.gif" width="300">
-
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Skeleton_general.gif" width="300">
+
+### Skeleton Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Skeleton_details.gif" width="300">
+
+### Beat Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Beat_details.gif" width="300">
+
+### Fade Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Fade_details.gif" width="300">
+
+### Vertical Shake Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Vertical_details.gif" width="300">
+
+### Horizontal Shake Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Horizontal_details.gif" width="300">
+
+### Custom Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/develop/screenshots/Custom_details.gif" width="300">
 
 ## Setup
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
