@@ -7,6 +7,8 @@ The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be e
 
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/iOS.gif" width="300">
 
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
+
 ## Setup
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
 * Install into your Core and Client projects.
