@@ -15,7 +15,7 @@
     <DocumentationFile>bin\Release\netstandard2.0\Xamarin.Forms.Skeleton.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />  
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Animations\" />
