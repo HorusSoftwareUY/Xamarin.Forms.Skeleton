@@ -4,8 +4,7 @@
 The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
 
 ## Sample
-
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/iOS.gif" width="300">
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
@@ -30,10 +29,11 @@ xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
 Add the following properties to generate a loading animation:
 
 ```XML
-<ListView RowHeight="109"
+<ListView RowHeight="90"
 	SeparatorVisibility="None"
 	SelectionMode="None"
 	VerticalOptions="FillAndExpand"
+	BackgroundColor="Transparent"
 	ItemTemplate="{StaticResource ItemTemplate}"
 	ItemsSource="{Binding Items}"
 	sk:Skeleton.IsParent="True"
@@ -44,11 +44,19 @@ Add the following properties to generate a loading animation:
 Add the following properties to set a loading animation with a specific background color:
 
 ```XML
-<Label Text="{Binding Title}"
-	TextColor="#c92726"
-	FontSize="Large"
-	sk:Skeleton.IsBusy="{Binding IsBusy}"
-	sk:Skeleton.BackgroundColor="#c6c6c5" />
+<Frame BackgroundColor="Transparent"
+       HasShadow="False"
+       CornerRadius="5"
+       Padding="0"
+       HorizontalOptions="Start"
+       sk:Skeleton.IsBusy="{Binding IsBusy}"
+       sk:Skeleton.BackgroundColor="#c6c6c5">
+			<Label Text="{Binding Title}"
+					TextColor="#000000"
+					FontSize="20"
+					FontAttributes="Bold"
+					HorizontalOptions="Start"/>
+</Frame>
 ```
 
 ### Properties
@@ -82,6 +90,33 @@ Add the following properties to set a loading animation with a specific backgrou
 #### AnimationParameter (Double?)
 - Animation parameter to modify the animation.
 - The default value is null.
+
+## Animations
+
+### Skeleton Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_details.gif" width="300">
+
+### Beat Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Beat_details.gif" width="300">
+
+### Fade Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Fade_details.gif" width="300">
+
+### Vertical Shake Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Vertical_details.gif" width="300">
+
+### Horizontal Shake Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Horizontal_details.gif" width="300">
+
+### Custom Animation
+
+<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Custom_details.gif" width="300">
+
 
 ## Demo
 https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample

@@ -10,13 +10,12 @@ namespace SkeletonExample
         public MainPage()
         {
             InitializeComponent();
-            this.Children.Add(new Page1());
-            this.Children.Add(new Page2());
-            this.Children.Add(new Page3());
-            this.Children.Add(new Page4());
-            this.Children.Add(new Page5());
-            this.Children.Add(new Page6());
-            this.Children.Add(new Page7());
+            this.Children.Add(new Skeleton());
+            this.Children.Add(new Beat());
+            this.Children.Add(new Fade());
+            this.Children.Add(new VerticalShake());
+            this.Children.Add(new HorizontalShake());
+            this.Children.Add(new CustomAnimation());
         }
     }
 }

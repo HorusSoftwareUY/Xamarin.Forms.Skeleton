@@ -7,6 +7,6 @@
              x:Class="SkeletonExample.Pages.BasePage"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
-             IconImageSource="ic_tab.png"
+             IconImageSource="ic_skeleton.png"
              BackgroundColor="{StaticResource WhiteColor}">
 </ContentPage>

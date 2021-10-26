@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="@color/splash_background"/>
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/icon2"
+        android:tileMode="disabled"
+        android:gravity="center"/>
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/power_2"
+        android:tileMode="disabled"
+        android:gravity="bottom"/>
+  </item>
+
+</layer-list>

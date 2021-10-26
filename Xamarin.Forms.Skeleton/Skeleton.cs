@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Skeleton.Animations;
 using Xamarin.Forms.Skeleton.Extensions;
 
