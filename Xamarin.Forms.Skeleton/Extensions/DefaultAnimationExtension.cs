@@ -1,8 +1,18 @@
 ﻿using System;
+
+#if NET6_0_OR_GREATER
+using Maui.Skeleton.Animations;
+#else
 using Xamarin.Forms.Skeleton.Animations;
 using Xamarin.Forms.Xaml;
+#endif
 
+
+#if NET6_0_OR_GREATER
+namespace Maui.Skeleton
+#else
 namespace Xamarin.Forms.Skeleton
+#endif
 {
     [ContentProperty(nameof(Source))]
     public sealed class DefaultAnimationExtension : IMarkupExtension<BaseAnimation>
