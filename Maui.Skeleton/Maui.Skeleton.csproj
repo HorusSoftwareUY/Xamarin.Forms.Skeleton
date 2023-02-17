@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseMaui>true</UseMaui>
 
-    <AssemblyName>Maui.Skeleton</AssemblyName>
+    <AssemblyName>Sharpnado.HorusSkeleton.Maui</AssemblyName>
     <RootNamespace>Maui.Skeleton</RootNamespace>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -25,9 +25,9 @@
     <Title>Skeleton component for .Net MAUI</Title>
     <Summary>Skeleton component for .Net MAUI</Summary>
     <Description>The new loading approach for cool apps in .Net MAUI</Description>
-    <Owners>AgustinBonillaHorus</Owners>
-    <Authors>Horus</Authors>
-    <Copyright>Copyright 2022 Horus</Copyright>
+    <Owners>AgustinBonillaHorus, Jean-Marie Alfonsi</Owners>
+    <Authors>Horus, Jean-Marie Alfonsi</Authors>
+    <Copyright>Copyright 2023 Horus and Sharpnado</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
