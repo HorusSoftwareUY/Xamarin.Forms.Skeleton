@@ -1,12 +1,13 @@
-# Xamarin.Forms.Skeleton 
+# Sharpnado.HorusSkeleton.Maui && Xamarin.Forms.Skeleton 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
 
-The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
+The latest trend for loading approaches in MAUI and Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
 
 ## Sample
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
+* Available on NuGet: [Sharpnado.HorusSkeleton.Maui](https://www.nuget.org/packages/Sharpnado.HorusSkeleton.Maui/) [![NuGet](https://img.shields.io/nuget/v/Sharpnado.HorusSkeleton.Maui.svg?label=NuGet)](https://www.nuget.org/packages/Sharpnado.HorusSkeleton.Maui/)
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
 * Install into your Core and Client projects.
 
@@ -17,6 +18,7 @@ The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be e
 |Xamarin.iOS|iOS 8+|
 |Xamarin.Android|API 16+|
 |Xamarin.Forms|>= 4.0.0.425677|
+|.net6 MAUI|ALL|
 
 ## API Usage
 
@@ -119,6 +121,12 @@ Add the following properties to set a loading animation with a specific backgrou
 
 
 ## Demo
+
+Warning: The sample app hasn't been ported to maui.
+If you want to see and example of skeleton implementation, checkout retronado.maui:
+https://github.com/roubachof/Sharpnado.TaskLoaderView
+
+Else, for xamarin.forms:
 https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
 
 ## Roadmap

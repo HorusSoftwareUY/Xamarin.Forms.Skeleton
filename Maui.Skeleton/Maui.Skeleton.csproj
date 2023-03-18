@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseMaui>true</UseMaui>
+
+    <AssemblyName>Sharpnado.HorusSkeleton.Maui</AssemblyName>
+    <RootNamespace>Maui.Skeleton</RootNamespace>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>2.0.0.0</AssemblyFileVersion>
+    <Version>2.0.0.0</Version>
+    <PackOnBuild>true</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <LangVersion>latest</LangVersion>
+
+    <PackageProjectUrl>https://github.com/roubachof/Maui.Skeleton/tree/master</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/roubachof/Maui.Skeleton/tree/master</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png</PackageIconUrl>
+    <PackageTags>maui, .net maui, xamarin, ios, android, xamarin.forms, plugin, component, skeleton, loader, loading, indicator, activity, activityindicator, horus</PackageTags>
+    <PackageReleaseNotes>First .Net MAUI (.net 6) release \o/</PackageReleaseNotes>
+    <Title>Skeleton component for .Net MAUI</Title>
+    <Summary>Skeleton component for .Net MAUI</Summary>
+    <Description>The new loading approach for cool apps in .Net MAUI</Description>
+    <Owners>AgustinBonillaHorus, Jean-Marie Alfonsi</Owners>
+    <Authors>Horus, Jean-Marie Alfonsi</Authors>
+    <Copyright>Copyright 2023 Horus and Sharpnado</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\AnimationTypes.cs">
+      <Link>Animations\AnimationTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\BaseAnimation.cs">
+      <Link>Animations\BaseAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\BeatAnimation.cs">
+      <Link>Animations\BeatAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\FadeAnimation.cs">
+      <Link>Animations\FadeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\HorizontalShakeAnimation.cs">
+      <Link>Animations\HorizontalShakeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\IAnimation.cs">
+      <Link>Animations\IAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\VerticalShakeAnimation.cs">
+      <Link>Animations\VerticalShakeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Extensions\DefaultAnimationExtension.cs">
+      <Link>Extensions\DefaultAnimationExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Extensions\ViewExtensions.cs">
+      <Link>Extensions\ViewExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Skeleton.cs">
+      <Link>Skeleton.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+
+</Project>
