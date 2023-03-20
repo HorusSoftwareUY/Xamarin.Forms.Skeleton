@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using SkeletonExample.Models;
-using Xamarin.Forms.Skeleton.Animations;
+using System.Windows.Input;
+using SkeletonSample.Models;
 
-namespace SkeletonExample.ViewModels
+namespace SkeletonSample.ViewModels
 {
-    public class Page7ViewModel : Page6ViewModel
+    public class SkeletonViewModel : BaseViewModel
     {
-
         private ObservableCollection<Item> items;
 
         public ObservableCollection<Item> Items
@@ -20,7 +19,7 @@ namespace SkeletonExample.ViewModels
 
         protected override async void OnLoadCommandExecute()
         {
-            var title = "xxxxxxxxxxx";
+            var title = "XXXXXXXXXXX";
 
             this.Items = new ObservableCollection<Item>(new List<Item> {
                 new Item
@@ -81,7 +80,7 @@ namespace SkeletonExample.ViewModels
                 new Item
                 {
                     Title = "Machu Picchu",
-                    Subtitle = "Peru",
+                    Subtitle = "Urubamba, Peru",
                     Image = "img_3.jpg",
                 },
                 new Item
