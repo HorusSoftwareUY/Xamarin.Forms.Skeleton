@@ -4,5 +4,7 @@
             x:Class="SkeletonSample.MainPage"
             SelectedTabColor="{StaticResource RedColor}"
             UnselectedTabColor="{StaticResource DarkGrayColor}"
-            BarBackgroundColor="{StaticResource WhiteColor}">
+            BarBackgroundColor="{StaticResource WhiteColor}"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            android:TabbedPage.ToolbarPlacement="Bottom">
 </TabbedPage>

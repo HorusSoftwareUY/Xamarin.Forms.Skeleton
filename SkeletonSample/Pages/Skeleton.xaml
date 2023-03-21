@@ -135,13 +135,13 @@
                               AbsoluteLayout.LayoutBounds="0,0,1,1"
                               Margin="30">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="48"/>
+                                <RowDefinition Height="54"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="54"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="54"/>
                             </Grid.ColumnDefinitions>
 
                             <Frame
@@ -175,7 +175,7 @@
                                     HeightRequest="36"
                                     WidthRequest="36"
                                     VerticalOptions="Center"
-                                    HorizontalOptions="End"
+                                    HorizontalOptions="Center"
                                     BackgroundColor="Transparent"
                                     HasShadow="False"
                                     CornerRadius="5"
