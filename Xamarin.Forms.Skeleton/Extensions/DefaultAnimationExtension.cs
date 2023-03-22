@@ -7,7 +7,6 @@ using Xamarin.Forms.Skeleton.Animations;
 using Xamarin.Forms.Xaml;
 #endif
 
-
 #if NET6_0_OR_GREATER
 namespace Maui.Skeleton
 #else

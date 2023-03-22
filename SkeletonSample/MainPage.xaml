@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="SkeletonSample.MainPage"
+            SelectedTabColor="{StaticResource RedColor}"
+            UnselectedTabColor="{StaticResource DarkGrayColor}"
+            BarBackgroundColor="{StaticResource WhiteColor}"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            android:TabbedPage.ToolbarPlacement="Bottom">
+</TabbedPage>

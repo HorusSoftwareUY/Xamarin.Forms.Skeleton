@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Maui.Skeleton"
+    xmlns:controls="clr-namespace:SkeletonSample.Controls"
+    x:Class="SkeletonSample.Pages.Skeleton"
+    Title="Skeleton"
+    IconImageSource="ic_skeleton.png"
+    BackgroundColor="{StaticResource WhiteColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate
+                x:Key="ItemTemplate">
+                <ViewCell>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Margin="30,0"
+                        Padding="0,10"
+                        Spacing="20">
+                        <Frame
+                            HasShadow="False"
+                            CornerRadius="20"
+                            Padding="0"
+                            WidthRequest="70"
+                            HeightRequest="70"
+                            IsClippedToBounds="True"
+                            BackgroundColor="{StaticResource WhiteColor}"
+                            sk:Skeleton.IsParent="True"
+                            sk:Skeleton.IsBusy="{Binding IsBusy}"
+                            sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                            <Image
+                                Source="{Binding Image}"
+                                Aspect="AspectFill"/>
+                        </Frame>
+
+                        <StackLayout
+                            Margin="15"
+                            Spacing="4">
+                            <Frame
+                                BackgroundColor="Transparent"
+                                HasShadow="False"
+                                CornerRadius="5"
+                                Padding="0"
+                                HorizontalOptions="Start"
+                                sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                <Label
+                                    Text="{Binding Title}"
+                                    TextColor="{StaticResource BlackColor}"
+                                    FontSize="20"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.Hide="True"/>
+                            </Frame>
+                            <Frame
+                                BackgroundColor="Transparent"
+                                HasShadow="False"
+                                CornerRadius="5"
+                                Padding="0"
+                                HorizontalOptions="Start"
+                                sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                <Label
+                                    Text="{Binding Subtitle}"
+                                    TextColor="{StaticResource DarkGrayColor}"
+                                    FontSize="14"
+                                    HorizontalOptions="Start"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.Hide="True"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout
+                            Margin="0,15"
+                            HorizontalOptions="EndAndExpand">
+                            <Frame
+                                HasShadow="False"
+                                CornerRadius="5"
+                                Padding="0"
+                                IsClippedToBounds="True"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="End" 
+                                sk:Skeleton.IsParent="True"
+                                sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                <Image
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    Source="health.png"
+                                    Aspect="AspectFill"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.Hide="True"/>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <controls:StickyHeader HeaderHeight="350"
+                               MinimumHeaderHeight="250"
+                               Animation="Resize">
+            <controls:StickyHeader.Header>
+                <Frame HasShadow="False"
+                       CornerRadius="30"
+                       Margin="0,-30,0,0"
+                       IsClippedToBounds="True"
+                       Padding="0"
+                       BackgroundColor="Transparent"
+                       sk:Skeleton.IsParent="True"
+                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                       sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                       sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                    <AbsoluteLayout>
+                        <Image
+                            AbsoluteLayout.LayoutFlags="All"
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                            Source="img_1.jpg"
+                            Aspect="AspectFill"
+                            sk:Skeleton.IsBusy="{Binding IsBusy}"
+                            sk:Skeleton.Hide="True"/>
+                        <Image
+                            Source="back_gradient.png"
+                            Aspect="AspectFill"
+                            AbsoluteLayout.LayoutFlags="All"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            sk:Skeleton.IsBusy="{Binding IsBusy}"
+                            sk:Skeleton.Hide="True" />
+
+                        <Grid AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              Margin="30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="54"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="54"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="54"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Margin="0"
+                                HeightRequest="36"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Transparent"
+                                HasShadow="False"
+                                CornerRadius="5"
+                                Padding="0">
+                                <Image
+                                    Source="horus.png"
+                                    Margin="0"
+                                    HorizontalOptions="Center"
+                                    Aspect="AspectFit"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.Hide="True"/>
+                            </Frame>
+
+                            <ContentView
+                                Grid.Column="2"
+                                Grid.Row="0">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding LoadCommand}" />
+                                </ContentView.GestureRecognizers>
+                                <Frame
+                                    HeightRequest="36"
+                                    WidthRequest="36"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    BackgroundColor="Transparent"
+                                    HasShadow="False"
+                                    CornerRadius="5"
+                                    Padding="0">
+                                    <Image
+                                        Source="load.png"
+                                        Aspect="AspectFit"
+                                        HeightRequest="32"
+                                        WidthRequest="32"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                        sk:Skeleton.Hide="True"/>
+                                </Frame>
+                            </ContentView>
+
+                            <StackLayout
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                VerticalOptions="EndAndExpand"
+                                Spacing="4">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    HasShadow="False"
+                                    CornerRadius="5"
+                                    Padding="0"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                    sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                                    <Label
+                                        Text="Skeleton"
+                                        TextColor="{StaticResource WhiteColor}"
+                                        FontAttributes="Bold"
+                                        FontSize="40"
+                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                        sk:Skeleton.Hide="True" />
+                                </Frame>
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    HasShadow="False"
+                                    CornerRadius="5"
+                                    Padding="0"
+                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                    sk:Skeleton.BackgroundColor="{StaticResource WhiteColor}"
+                                    sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                                    <Label
+                                        Text="By Horus"
+                                        TextColor="{StaticResource WhiteColor}"
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                        sk:Skeleton.Hide="True" />
+                                </Frame>
+
+                            </StackLayout>
+                        </Grid>
+                    </AbsoluteLayout>
+                </Frame>
+            </controls:StickyHeader.Header>
+
+            <controls:StickyHeader.Content>
+                <StackLayout
+                    sk:Skeleton.IsBusy="{Binding IsBusy}"
+                    sk:Skeleton.IsParent="True"
+                    sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                    <Frame
+                        Margin="30,0,30,30"
+                        BackgroundColor="Transparent"
+                        HasShadow="False"
+                        CornerRadius="5"
+                        Padding="0"
+                        WidthRequest="300"
+                        HorizontalOptions="Start"
+                        sk:Skeleton.IsBusy="{Binding IsBusy}"
+                        sk:Skeleton.BackgroundColor="{StaticResource GrayColor}"
+                        sk:Skeleton.Animation="{sk:DefaultAnimation None}">
+                        <Label
+                            Text="Trending"
+                            TextColor="{StaticResource BlackColor}"
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            sk:Skeleton.IsBusy="{Binding IsBusy}"
+                            sk:Skeleton.Hide="True"/>
+                    </Frame>
+                    <ListView
+                        RowHeight="90"
+                        SeparatorVisibility="None"
+                        SelectionMode="None"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent"
+                        ItemTemplate="{StaticResource ItemTemplate}"
+                        ItemsSource="{Binding Items}"
+                        sk:Skeleton.IsParent="True"
+                        sk:Skeleton.IsBusy="{Binding IsBusy}" />
+                </StackLayout>
+            </controls:StickyHeader.Content>
+        </controls:StickyHeader>
+    </ContentPage.Content>
+</ContentPage>

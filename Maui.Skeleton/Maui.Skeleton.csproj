@@ -6,46 +6,30 @@
     <Nullable>enable</Nullable>
     <UseMaui>true</UseMaui>
 
-    <AssemblyName>Sharpnado.HorusSkeleton.Maui</AssemblyName>
+    <AssemblyName>Maui.Skeleton</AssemblyName>
     <RootNamespace>Maui.Skeleton</RootNamespace>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <AssemblyFileVersion>2.0.0.0</AssemblyFileVersion>
-    <Version>2.0.0.0</Version>
-    <PackOnBuild>true</PackOnBuild>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <AssemblyFileVersion>2.0.0</AssemblyFileVersion>
+    <Version>2.0.0</Version>
+    <PackOnBuild>false</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
     <LangVersion>latest</LangVersion>
 
-    <PackageProjectUrl>https://github.com/roubachof/Maui.Skeleton/tree/master</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/roubachof/Maui.Skeleton/tree/master</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png</PackageIconUrl>
-    <PackageTags>maui, .net maui, xamarin, ios, android, xamarin.forms, plugin, component, skeleton, loader, loading, indicator, activity, activityindicator, horus</PackageTags>
-    <PackageReleaseNotes>First .Net MAUI (.net 6) release \o/</PackageReleaseNotes>
-    <Title>Skeleton component for .Net MAUI</Title>
-    <Summary>Skeleton component for .Net MAUI</Summary>
-    <Description>The new loading approach for cool apps in .Net MAUI</Description>
-    <Owners>AgustinBonillaHorus, Jean-Marie Alfonsi</Owners>
-    <Authors>Horus, Jean-Marie Alfonsi</Authors>
-    <Copyright>Copyright 2023 Horus and Sharpnado</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+		<DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
     <DebugType />
-  </PropertyGroup>
-
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+  
   <ItemGroup>
     <Compile Include="..\Xamarin.Forms.Skeleton\Animations\AnimationTypes.cs">
       <Link>Animations\AnimationTypes.cs</Link>
