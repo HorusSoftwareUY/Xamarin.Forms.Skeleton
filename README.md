@@ -1,4 +1,4 @@
-# Sharpnado.HorusSkeleton.Maui && Xamarin.Forms.Skeleton 
+# HorusStudio.Maui.Skeleton && Xamarin.Forms.Skeleton 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
 
 The latest trend for loading approaches in MAUI and Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
@@ -7,7 +7,7 @@ The latest trend for loading approaches in MAUI and Xamarin Forms apps. Skeleton
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
-* Available on NuGet: [Sharpnado.HorusSkeleton.Maui](https://www.nuget.org/packages/Sharpnado.HorusSkeleton.Maui/) [![NuGet](https://img.shields.io/nuget/v/Sharpnado.HorusSkeleton.Maui.svg?label=NuGet)](https://www.nuget.org/packages/Sharpnado.HorusSkeleton.Maui/)
+* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/HorusStudio.Maui.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
 * Install into your Core and Client projects.
 
@@ -122,15 +122,11 @@ Add the following properties to set a loading animation with a specific backgrou
 
 ## Demo
 
-Warning: The sample app hasn't been ported to maui.
-If you want to see and example of skeleton implementation, checkout retronado.maui:
-https://github.com/roubachof/Sharpnado.TaskLoaderView
+### MAUI
+https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonSample
 
-Else, for xamarin.forms:
+### Xamarin.Forms:
 https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
-
-## Roadmap
-- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeater, BindableLayout, etc.
  
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>
