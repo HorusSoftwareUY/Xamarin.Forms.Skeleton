@@ -1,9 +1,8 @@
-# HorusStudio.Maui.Skeleton && Xamarin.Forms.Skeleton 
+# Skeleton for Xamarin and MAUI apps
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
 
-The latest trend for loading approaches in MAUI and Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
+The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.
 
-## Sample
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
@@ -20,7 +19,7 @@ The latest trend for loading approaches in MAUI and Xamarin Forms apps. Skeleton
 |Xamarin.Forms|>= 4.0.0.425677|
 |.net6 MAUI|ALL|
 
-## API Usage
+## Usage
 
 You must add this namespace to your xaml files:
 

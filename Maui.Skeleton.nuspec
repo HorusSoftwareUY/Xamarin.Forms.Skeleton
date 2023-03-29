@@ -10,7 +10,7 @@
        <projectUrl>https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton</projectUrl> 
        <iconUrl>https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png</iconUrl>
        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-       <description>The new loading approach for cool apps in .Net MAUI</description>
+       <description>The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.</description>
        <releaseNotes></releaseNotes>
        <summary>Skeleton component for .Net MAUI</summary>
        <tags>maui, .net maui, xamarin, ios, android, xamarin.forms, plugin, component, skeleton, loader, loading, indicator, activity, activityindicator, horus</tags>
