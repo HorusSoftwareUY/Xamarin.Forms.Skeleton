@@ -1,8 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#if NET6_0_OR_GREATER
+using Microsoft.Maui.Controls.Internals;
+#else
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms.Internals;
+#endif
 
+#if NET6_0_OR_GREATER
+namespace Maui.Skeleton.Extensions
+#else
 namespace Xamarin.Forms.Skeleton.Extensions
+#endif
 {
     internal static class ViewExtensions
     {

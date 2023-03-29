@@ -1,12 +1,12 @@
-# Xamarin.Forms.Skeleton 
+# Skeleton for Xamarin and MAUI apps
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/icon.png" width="128">
 
-The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be easily implemented on each view contained in your Xaml.
+The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.
 
-## Sample
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
+* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/HorusStudio.Maui.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
 * Install into your Core and Client projects.
 
@@ -17,8 +17,9 @@ The latest trend for loading approaches in Xamarin Forms apps. Skeleton can be e
 |Xamarin.iOS|iOS 8+|
 |Xamarin.Android|API 16+|
 |Xamarin.Forms|>= 4.0.0.425677|
+|.net6 MAUI|ALL|
 
-## API Usage
+## Usage
 
 You must add this namespace to your xaml files:
 
@@ -119,10 +120,12 @@ Add the following properties to set a loading animation with a specific backgrou
 
 
 ## Demo
-https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
 
-## Roadmap
-- Automatic ItemsSource population (fake data) for skeleton preview in: ListView, CollectionView, Repeater, BindableLayout, etc.
+### MAUI
+https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonSample
+
+### Xamarin.Forms:
+https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
  
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>

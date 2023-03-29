@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseMaui>true</UseMaui>
+
+    <AssemblyName>Maui.Skeleton</AssemblyName>
+    <RootNamespace>Maui.Skeleton</RootNamespace>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <AssemblyFileVersion>2.0.0</AssemblyFileVersion>
+    <Version>2.0.0</Version>
+    <PackOnBuild>false</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <LangVersion>latest</LangVersion>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+		<DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <DebugType />
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\AnimationTypes.cs">
+      <Link>Animations\AnimationTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\BaseAnimation.cs">
+      <Link>Animations\BaseAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\BeatAnimation.cs">
+      <Link>Animations\BeatAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\FadeAnimation.cs">
+      <Link>Animations\FadeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\HorizontalShakeAnimation.cs">
+      <Link>Animations\HorizontalShakeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\IAnimation.cs">
+      <Link>Animations\IAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Animations\VerticalShakeAnimation.cs">
+      <Link>Animations\VerticalShakeAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Extensions\DefaultAnimationExtension.cs">
+      <Link>Extensions\DefaultAnimationExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Extensions\ViewExtensions.cs">
+      <Link>Extensions\ViewExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Xamarin.Forms.Skeleton\Skeleton.cs">
+      <Link>Skeleton.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+
+</Project>
