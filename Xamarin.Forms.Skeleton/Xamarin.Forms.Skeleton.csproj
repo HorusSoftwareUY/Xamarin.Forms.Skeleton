@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
+    <DebugType>portable</DebugType>
     <DocumentationFile>bin\Release\netstandard2.0\Xamarin.Forms.Skeleton.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
