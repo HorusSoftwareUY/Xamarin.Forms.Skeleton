@@ -6,22 +6,43 @@ The Skeleton control is a popular approach to loading content in mobile apps tha
 <img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
-* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/HorusStudio.Maui.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
-* Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
-* Install into your Core and Client projects.
 
-**Platform Support**
+### .NET MAUI
+
+* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/HorusStudio.Maui.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
+
+|Platform|Version|
+| ------------------- | :------------------: |
+|.NET|8, 9 and 10|
+|Android, iOS, macOS, Windows|all versions supported by .NET MAUI|
+
+Version 3.0.0 and later require .NET 8 or newer. Apps on .NET 6 or 7 should stay on 2.0.0, which keeps working.
+
+### Xamarin.Forms (legacy)
+
+* Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
+
+> [!IMPORTANT]
+> Xamarin.Forms reached end of support in May 2024. This package is frozen at 2.0.0 and will not receive
+> further updates. New work happens on the .NET MAUI package above.
 
 |Platform|Version|
 | ------------------- | :------------------: |
 |Xamarin.iOS|iOS 8+|
 |Xamarin.Android|API 16+|
 |Xamarin.Forms|>= 4.0.0.425677|
-|.net6 MAUI|ALL|
 
 ## Usage
 
-You must add this namespace to your xaml files:
+You must add this namespace to your xaml files.
+
+For .NET MAUI:
+
+```XML
+xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Maui.Skeleton"
+```
+
+For Xamarin.Forms:
 
 ```XML
 xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
