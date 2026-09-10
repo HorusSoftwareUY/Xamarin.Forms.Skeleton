@@ -1,0 +1,156 @@
+name: Build, pack and publish HorusStudio.Maui.Skeleton
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to NuGet.org. Leave unchecked for a dry run that only builds and packs."
+        type: boolean
+        default: false
+
+# Read-only by default. The publish job raises this for itself and nothing else does, so a build
+# that checks out and executes pull-request code never holds credentials it could misuse.
+permissions:
+  contents: read
+
+env:
+  CSPROJ_FILE_PATH: 'Maui.Skeleton/Maui.Skeleton.csproj'
+  ARTIFACTS_PATH: './artifacts'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.package.outputs.version }}
+      notes: ${{ steps.package.outputs.notes }}
+      publish: ${{ steps.gate.outputs.publish }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Every targeted band gets its SDK so the multi-target build does not depend on
+      # roll-forward behaviour.
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      # No MAUI workload is installed on purpose. The library has no platform-specific code and takes
+      # Microsoft.Maui.Controls as a plain PackageReference, so the workload step (by far the slowest
+      # one) is not needed. Only the library project is restored: the solution still carries the
+      # frozen Xamarin.Forms sample, which current tooling cannot restore.
+      - name: Restore
+        run: dotnet restore ${{ env.CSPROJ_FILE_PATH }}
+
+      - name: Build
+        run: dotnet build ${{ env.CSPROJ_FILE_PATH }} -c Release --no-restore
+
+      - name: Pack
+        run: dotnet pack ${{ env.CSPROJ_FILE_PATH }} -c Release --no-build -o ${{ env.ARTIFACTS_PATH }}
+
+      - name: Read package version and release notes
+        id: package
+        run: |
+          VERSION=$(dotnet msbuild ${{ env.CSPROJ_FILE_PATH }} -getProperty:Version -nologo)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Version: $VERSION"
+
+          NOTES=$(dotnet msbuild ${{ env.CSPROJ_FILE_PATH }} -getProperty:PackageReleaseNotes -nologo)
+          {
+            echo "notes<<PACKAGE_NOTES_EOF"
+            echo "$NOTES"
+            echo "PACKAGE_NOTES_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      # Always uploaded, so a dry run still lets you download and inspect the exact package that
+      # would have been published.
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HorusStudio.Maui.Skeleton.${{ steps.package.outputs.version }}
+          path: ${{ env.ARTIFACTS_PATH }}/*.nupkg
+          if-no-files-found: error
+
+      # Publishing is opt in and off by default. A push only publishes when the AUTO_PUBLISH
+      # repository variable is set to 'true'; a manual run only publishes when the box is ticked.
+      # With the variable unset nothing is ever pushed to NuGet.org.
+      - name: Resolve publish decision
+        id: gate
+        run: |
+          # Compared lower-cased so a value of True or TRUE behaves like true. Anything that is
+          # not "true" leaves publishing off, so an unset or misspelled value fails closed.
+          AUTO_PUBLISH=$(printf '%s' "${{ vars.AUTO_PUBLISH }}" | tr '[:upper:]' '[:lower:]')
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PUBLISH="${{ inputs.publish }}"
+          elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/master" ] && [ "$AUTO_PUBLISH" = "true" ]; then
+            PUBLISH="true"
+          else
+            PUBLISH="false"
+          fi
+          echo "publish=$PUBLISH" >> "$GITHUB_OUTPUT"
+          echo "Event        : ${{ github.event_name }}"
+          echo "AUTO_PUBLISH : ${{ vars.AUTO_PUBLISH || '(unset)' }}"
+          echo "Publishing   : $PUBLISH"
+
+  # Kept separate from the build so that the write permissions and the ability to mint an OIDC token
+  # only ever exist in a job that runs after the gate, and never in one that executes pull-request
+  # code. The nuget.org policy matches on repository and workflow file name rather than on branch or
+  # event, so a token minted anywhere in this file would be accepted.
+  publish:
+    needs: build
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Download package
+        uses: actions/download-artifact@v4
+        with:
+          name: HorusStudio.Maui.Skeleton.${{ needs.build.outputs.version }}
+          path: ${{ env.ARTIFACTS_PATH }}
+
+      # Trusted Publishing: no long-lived API key is stored anywhere. NuGet.org validates a GitHub
+      # OIDC token against the policy registered for this repository and workflow file, and hands
+      # back a key valid for one hour, so this runs right before the push. Renaming this workflow
+      # file breaks the policy match.
+      - name: NuGet login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish to NuGet.org
+        run: |
+          dotnet nuget push "${{ env.ARTIFACTS_PATH }}/*.nupkg" \
+            --source "https://api.nuget.org/v3/index.json" \
+            --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
+            --skip-duplicate
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.build.outputs.version }}
+          name: ${{ needs.build.outputs.version }}
+          body: |
+            [NuGet package](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/${{ needs.build.outputs.version }})
+
+            ${{ needs.build.outputs.notes }}
+          draft: false
+          prerelease: false
