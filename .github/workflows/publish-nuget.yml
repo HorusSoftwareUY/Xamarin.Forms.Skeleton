@@ -12,9 +12,10 @@ on:
         type: boolean
         default: false
 
+# Read-only by default. The publish job raises this for itself and nothing else does, so a build
+# that checks out and executes pull-request code never holds credentials it could misuse.
 permissions:
-  contents: write
-  id-token: write   # required so NuGet/login can exchange a GitHub OIDC token for a short-lived key
+  contents: read
 
 env:
   CSPROJ_FILE_PATH: 'Maui.Skeleton/Maui.Skeleton.csproj'
@@ -23,6 +24,12 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.package.outputs.version }}
+      notes: ${{ steps.package.outputs.notes }}
+      publish: ${{ steps.gate.outputs.publish }}
 
     steps:
       - uses: actions/checkout@v4
@@ -37,11 +44,10 @@ jobs:
             9.0.x
             10.0.x
 
-      # No MAUI workload is installed on purpose. The library has no platform-specific code
-      # and takes Microsoft.Maui.Controls as a plain PackageReference, so the workload step
-      # (by far the slowest one) is not needed. Only the library project is restored: the
-      # solution still carries the frozen Xamarin.Forms sample, which current tooling cannot
-      # restore.
+      # No MAUI workload is installed on purpose. The library has no platform-specific code and takes
+      # Microsoft.Maui.Controls as a plain PackageReference, so the workload step (by far the slowest
+      # one) is not needed. Only the library project is restored: the solution still carries the
+      # frozen Xamarin.Forms sample, which current tooling cannot restore.
       - name: Restore
         run: dotnet restore ${{ env.CSPROJ_FILE_PATH }}
 
@@ -65,8 +71,8 @@ jobs:
             echo "PACKAGE_NOTES_EOF"
           } >> "$GITHUB_OUTPUT"
 
-      # Always uploaded, so a dry run still lets you download and inspect the exact package
-      # that would have been published.
+      # Always uploaded, so a dry run still lets you download and inspect the exact package that
+      # would have been published.
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
@@ -75,8 +81,8 @@ jobs:
           if-no-files-found: error
 
       # Publishing is opt in and off by default. A push only publishes when the AUTO_PUBLISH
-      # repository variable is set to 'true'; a manual run only publishes when the box is
-      # ticked. With the variable unset nothing is ever pushed to NuGet.org.
+      # repository variable is set to 'true'; a manual run only publishes when the box is ticked.
+      # With the variable unset nothing is ever pushed to NuGet.org.
       - name: Resolve publish decision
         id: gate
         run: |
@@ -96,19 +102,41 @@ jobs:
           echo "AUTO_PUBLISH : ${{ vars.AUTO_PUBLISH || '(unset)' }}"
           echo "Publishing   : $PUBLISH"
 
-      # Trusted Publishing: no long-lived API key is stored anywhere. NuGet.org validates a
-      # GitHub OIDC token against the policy registered for this repository and workflow file,
-      # and hands back a key that is valid for one hour, so this runs right before the push.
-      # Renaming this workflow file breaks the policy match.
+  # Kept separate from the build so that the write permissions and the ability to mint an OIDC token
+  # only ever exist in a job that runs after the gate, and never in one that executes pull-request
+  # code. The nuget.org policy matches on repository and workflow file name rather than on branch or
+  # event, so a token minted anywhere in this file would be accepted.
+  publish:
+    needs: build
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Download package
+        uses: actions/download-artifact@v4
+        with:
+          name: HorusStudio.Maui.Skeleton.${{ needs.build.outputs.version }}
+          path: ${{ env.ARTIFACTS_PATH }}
+
+      # Trusted Publishing: no long-lived API key is stored anywhere. NuGet.org validates a GitHub
+      # OIDC token against the policy registered for this repository and workflow file, and hands
+      # back a key valid for one hour, so this runs right before the push. Renaming this workflow
+      # file breaks the policy match.
       - name: NuGet login
         id: login
-        if: steps.gate.outputs.publish == 'true'
         uses: NuGet/login@v1
         with:
           user: ${{ secrets.NUGET_USER }}
 
       - name: Publish to NuGet.org
-        if: steps.gate.outputs.publish == 'true'
         run: |
           dotnet nuget push "${{ env.ARTIFACTS_PATH }}/*.nupkg" \
             --source "https://api.nuget.org/v3/index.json" \
@@ -116,14 +144,13 @@ jobs:
             --skip-duplicate
 
       - name: Create GitHub release
-        if: steps.gate.outputs.publish == 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.package.outputs.version }}
-          name: ${{ steps.package.outputs.version }}
+          tag_name: ${{ needs.build.outputs.version }}
+          name: ${{ needs.build.outputs.version }}
           body: |
-            [NuGet package](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/${{ steps.package.outputs.version }})
+            [NuGet package](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/${{ needs.build.outputs.version }})
 
-            ${{ steps.package.outputs.notes }}
+            ${{ needs.build.outputs.notes }}
           draft: false
           prerelease: false
