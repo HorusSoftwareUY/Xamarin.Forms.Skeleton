@@ -32,7 +32,13 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>
+- Multi-targets .NET 8, 9 and 10, so each app gets a binary built against its own MAUI version.
+- Requires .NET 8 or newer. Apps on .NET 6 or 7 should stay on 2.0.0, which keeps working.
+- Fixes rapid flickering on devices where the system has animations turned off. The skeleton now settles into a static placeholder instead of spinning the animation loop.
+- Animations are now driven from the UI thread, and a failing animation no longer leaves a view unable to animate again.
+- Still zero dependencies.
+    </PackageReleaseNotes>
     <!-- The published 2.0.0 package declares no dependencies. Kept identical so the
          package keeps relying on the MAUI workload already present in consumer apps. -->
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
