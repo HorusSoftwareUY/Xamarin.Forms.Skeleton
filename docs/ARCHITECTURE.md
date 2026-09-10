@@ -130,8 +130,8 @@ container fades out whatever it is showing, so only its placeholder colour remai
 is untouched and each child declares its own treatment. Either way the container still paints its
 colour and runs its animation — `IsParent` only governs whether it touches what is inside.
 
-Until 3.0.0 this only worked for types deriving from `Layout`. `Border`, `Frame` and `ContentView` hold
-a single child and implement `IContentView` instead, so nothing faded and `IsParent` was inert on them
+Until 3.0.0 this only worked for types deriving from `Layout`. `Border`, `Frame`, `ContentView` and `ScrollView`
+hold a single child and implement `IContentView` instead, so nothing faded and `IsParent` was inert on them
 — see [#41](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/41). `ForEachContentChild`
 now walks both shapes.
 
