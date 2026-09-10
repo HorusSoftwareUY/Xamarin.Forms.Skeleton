@@ -174,9 +174,10 @@ The loop also runs inside `try/finally`. If `Animate` throws and the `Animating`
 1. Create the class in `Maui.Skeleton/`, inheriting `BaseAnimation`.
 2. Implement `Animate` (one cycle) and `StopAnimation` (settle immediately).
 3. Keep a cycle meaningfully longer than 16 ms or the guard will treat it as "not animating".
-4. To expose it through `{sk:DefaultAnimation Name}`, add it to the `AnimationTypes` enum and to the
-   switch in `DefaultAnimationExtension`. Both of those are shared files, so an addition there is
-   compiled into the Xamarin project too.
+4. To expose it through the markup extension, add it to the `AnimationTypes` enum and to the switch
+   in `DefaultAnimationExtension`. `Source` is that extension's content property, so both forms work:
+   `{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.
+   Both files are shared, so an addition there is compiled into the Xamarin project too.
 5. Add a page to `SkeletonSample/` to exercise it.
 
 Consumers can also subclass `BaseAnimation` in their own app; `SkeletonSample/MyCustomAnimation.cs`
