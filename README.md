@@ -3,7 +3,7 @@
 
 The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_general.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Skeleton_general.gif" width="300">
 
 ## Setup
 
@@ -22,9 +22,8 @@ Version 3.0.0 and later require .NET 8 or newer. Apps on .NET 6 or 7 should stay
 
 * Available on NuGet: [Xamarin.Forms.Skeleton](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/Xamarin.Forms.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.Forms.Skeleton/)
 
-> [!IMPORTANT]
-> Xamarin.Forms reached end of support in May 2024. This package is frozen at 2.0.0 and will not receive
-> further updates. New work happens on the .NET MAUI package above.
+**Xamarin.Forms reached end of support in May 2024.** This package is frozen at 2.0.0 and will not
+receive further updates. New work happens on the .NET MAUI package above.
 
 |Platform|Version|
 | ------------------- | :------------------: |
@@ -117,27 +116,27 @@ Add the following properties to set a loading animation with a specific backgrou
 
 ### Skeleton Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Skeleton_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Skeleton_details.gif" width="300">
 
 ### Beat Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Beat_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Beat_details.gif" width="300">
 
 ### Fade Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Fade_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Fade_details.gif" width="300">
 
 ### Vertical Shake Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Vertical_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Vertical_details.gif" width="300">
 
 ### Horizontal Shake Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Horizontal_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Horizontal_details.gif" width="300">
 
 ### Custom Animation
 
-<img src="https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/screenshots/Custom_details.gif" width="300">
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Custom_details.gif" width="300">
 
 
 ## Demo

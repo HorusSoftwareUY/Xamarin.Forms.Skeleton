@@ -25,7 +25,7 @@
     <Authors>Horus</Authors>
     <Description>The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.</Description>
     <PackageTags>maui;.net maui;xamarin;ios;android;plugin;component;skeleton;loader;loading;indicator;activity;activityindicator;horus</PackageTags>
-    <PackageProjectUrl>https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton</PackageProjectUrl>
+    <PackageProjectUrl>https://www.horus.com.uy/skeleton</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
