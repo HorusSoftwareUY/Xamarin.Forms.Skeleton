@@ -83,6 +83,12 @@ namespace Xamarin.Forms.Skeleton
 
         internal static void SetUseDynamicBackgroundColor(BindableObject b, bool value) => b.SetValue(UseDynamicBackgroundColorProperty, value);
 
+        internal static readonly BindableProperty OriginalOpacityProperty = BindableProperty.CreateAttached("OriginalOpacity", typeof(double), typeof(View), 1d);
+
+        internal static void SetOriginalOpacity(BindableObject b, double value) => b.SetValue(OriginalOpacityProperty, value);
+
+        internal static double GetOriginalOpacity(BindableObject b) => (double)b.GetValue(OriginalOpacityProperty);
+
         internal static readonly BindableProperty OriginalTextColorProperty = BindableProperty.CreateAttached("OriginalTextColor", typeof(Color), typeof(View), default(Color));
 
         internal static void SetOriginalTextColor(BindableObject b, Color value) => b.SetValue(OriginalTextColorProperty, value);
@@ -119,13 +125,13 @@ namespace Xamarin.Forms.Skeleton
                 }
                 else
                 {
-                    if (view is Layout layout && !GetIsParent(bindable))
-                    {
-                        SetLayoutChilds(layout);
-                    }
-                    else if (view is Label || view is Button)
+                    if (view is Label || view is Button)
                     {
                         SetTextColor(view);
+                    }
+                    else if (!GetIsParent(bindable))
+                    {
+                        HideContent(view);
                     }
 
                     SetBackgroundColor(view);
@@ -145,32 +151,68 @@ namespace Xamarin.Forms.Skeleton
 
                     RestoreBackgroundColor(view);
 
-                    if (view is Layout layout && !GetIsParent(bindable))
-                    {
-                        RestoreLayoutChilds(layout);
-                    }
-                    else if (view is Label || view is Button)
+                    if (view is Label || view is Button)
                     {
                         RestoreTextColor(view);
+                    }
+                    else if (!GetIsParent(bindable))
+                    {
+                        RestoreContent(view);
                     }
                 }
             }
         }
 
-        private static void SetLayoutChilds(Layout layout)
+        /// <summary>
+        /// Fades out whatever the container is showing, so the placeholder colour is what stays
+        /// visible, remembering each child's own opacity first. A view that was deliberately
+        /// translucent has to come back translucent, which is why this mirrors how the background
+        /// and text colours are saved rather than restoring a hard-coded 1.
+        /// </summary>
+        private static void HideContent(View view)
         {
-            if (layout.Children != null && layout.Children.Count > 0)
+            ForEachContentChild(view, child =>
             {
-                layout.Children.ToList().ForEach(x => ((View)x).SetValue(VisualElement.OpacityProperty, 0));
-            }
+                SetOriginalOpacity(child, child.Opacity);
+                child.SetValue(VisualElement.OpacityProperty, 0d);
+            });
         }
 
-        private static void RestoreLayoutChilds(Layout layout)
+        private static void RestoreContent(View view)
         {
-            if (layout.Children != null && layout.Children.Count > 0)
+            ForEachContentChild(view, child =>
+                child.SetValue(VisualElement.OpacityProperty, GetOriginalOpacity(child)));
+        }
+
+        /// <summary>
+        /// Walks whatever a container is showing. A Layout arranges several children, while a
+        /// Border, Frame or ContentView holds one. The second group needs its own branch because in
+        /// MAUI those do not derive from Layout, and without it their content stayed fully visible
+        /// on top of the placeholder.
+        /// </summary>
+        private static void ForEachContentChild(View view, Action<View> action)
+        {
+            if (view is Layout layout)
             {
-                layout.Children.ToList().ForEach(x => ((View)x).SetValue(VisualElement.OpacityProperty, 1));
+                if (layout.Children == null || layout.Children.Count == 0)
+                    return;
+
+                foreach (var child in layout.Children.ToList())
+                {
+                    // Not every child of a layout is necessarily a View.
+                    if (child is View childView)
+                        action(childView);
+                }
+
+                return;
             }
+
+#if NET6_0_OR_GREATER
+            if (view is IContentView contentView && contentView.PresentedContent is View content)
+            {
+                action(content);
+            }
+#endif
         }
 
         private static void SetBackgroundColor(View view)
