@@ -171,14 +171,37 @@ The loop also runs inside `try/finally`. If `Animate` throws and the `Animating`
 
 ### Adding an animation
 
-1. Create the class in `Maui.Skeleton/`, inheriting `BaseAnimation`.
-2. Implement `Animate` (one cycle) and `StopAnimation` (settle immediately).
-3. Keep a cycle meaningfully longer than 16 ms or the guard will treat it as "not animating".
-4. To expose it through the markup extension, add it to the `AnimationTypes` enum and to the switch
-   in `DefaultAnimationExtension`. `Source` is that extension's content property, so both forms work:
-   `{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.
-   Both files are shared, so an addition there is compiled into the Xamarin project too.
-5. Add a page to `SkeletonSample/` to exercise it.
+1. Inherit `BaseAnimation` and implement `Animate` (one cycle) and `StopAnimation` (settle
+   immediately).
+2. Keep a cycle meaningfully longer than 16 ms or the guard will treat it as "not animating".
+3. Add a page to `SkeletonSample/` to exercise it.
+
+**Where the class goes depends on whether it is reachable from `{sk:DefaultAnimation ...}`.**
+
+An animation consumers instantiate themselves, in XAML through a binding or in code, is MAUI-only and
+belongs in `Maui.Skeleton/`. Nothing else has to change.
+
+Exposing it through the markup extension means adding a value to the `AnimationTypes` enum and a case
+to the switch in `DefaultAnimationExtension`, and **both of those files are shared with the frozen
+Xamarin project**. A case there that refers to a class living only in `Maui.Skeleton/` breaks the
+Xamarin build:
+
+```
+error CS0246: The type or namespace name 'MyAnimation' could not be found
+```
+
+So a built-in animation has to do one of two things:
+
+- **live in `Xamarin.Forms.Skeleton/`** alongside the existing four, which means it also has to compile
+  against netstandard2.0 and Xamarin.Forms 4.4; or
+- **stay in `Maui.Skeleton/` and have its switch case guarded** with `#if NET6_0_OR_GREATER`, so the
+  Xamarin build never sees it.
+
+The second keeps new code free of the old framework and is the better default now that Xamarin is
+frozen.
+
+`Source` is the extension's content property, so both call forms work:
+`{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.
 
 Consumers can also subclass `BaseAnimation` in their own app; `SkeletonSample/MyCustomAnimation.cs`
 shows how.
@@ -197,8 +220,14 @@ Two consequences worth knowing:
   (`net10.0-android;net10.0-ios;...`) with `UseMaui` back on.
 
 Each `Microsoft.Maui.Controls` reference is pinned to the **baseline** of its band (8.0.3 / 9.0.0 /
-10.0.0). A `PackageReference` version is a floor, so pinning a later patch would force every consumer
-onto that patch or newer.
+10.0.0), for two reasons. It keeps the compiled surface to APIs that have been there since the start
+of each band, and a `PackageReference` version is a floor, so anything referencing this project
+directly has to resolve at least that version. Pinning a later patch made the sample fail to restore
+with `NU1605`, because the MAUI workload it uses resolves an earlier one.
+
+This does **not** constrain consumers who install the package, because
+`SuppressDependenciesWhenPacking` means the published package declares no dependency on
+`Microsoft.Maui.Controls` at all. They satisfy it through their own MAUI workload.
 
 Do not build the solution as a whole: it still contains the legacy Xamarin sample projects, which
 current tooling cannot restore. Build `Maui.Skeleton/Maui.Skeleton.csproj` directly.
