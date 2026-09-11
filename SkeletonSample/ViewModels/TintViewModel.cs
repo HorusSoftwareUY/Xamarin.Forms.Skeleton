@@ -61,7 +61,7 @@ namespace SkeletonSample.ViewModels
             });
 
             this.IsBusy = true;
-            await Task.Delay(2500);
+            await Task.Delay(5000);
             this.IsBusy = false;
 
             this.Items = new ObservableCollection<Item>(new List<Item> {
