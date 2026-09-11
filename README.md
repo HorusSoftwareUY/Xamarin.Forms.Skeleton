@@ -128,18 +128,21 @@ sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval=600, Parameter
 | `VerticalShake` | position | offset in units, up and down | 15 |
 | `HorizontalShake` | position | offset in units, left and right | 10 |
 | `Shimmer` | a band of light across the placeholder | not used, see below | — |
+| `Aurora` | a wide field of colour drifting back and forth | not used, see below | — |
 
-#### Shimmer
+#### Shimmer and Aurora
 
-`Shimmer` paints a band of light into the placeholder and slides it across, so it behaves a little
-differently from the other four.
+These paint a gradient into the placeholder and slide it, so they behave a little differently from
+the other four. `Shimmer` sends a band across and off the other side; `Aurora` pans a much wider
+field of colour back and forth, so colour is always on screen.
 
 - It must be attached to the element that shows the placeholder colour. It does not carry down to
   children the way `Fade` and `Beat` do.
 - **It does not work on `Frame`.** `Frame` is deprecated in MAUI and its renderer does not repaint
   when the background is replaced, so the band never moves. Use `Border`.
-- `Interval` is the duration of the whole pass, not of half a cycle. 1600 is a good value.
-- It ignores `Parameter`, and takes `Direction` and `SweepColors` instead.
+- `Interval` is the whole movement, not half a cycle: one pass for `Shimmer`, out and back for
+  `Aurora`. 1600 is a good value for either.
+- They ignore `Parameter`, and take `Direction` and `SweepColors` instead.
 
 ```XML
 <Border StrokeShape="RoundRectangle 5"
@@ -183,6 +186,10 @@ both themes with no extra work.
 ### Shimmer Animation
 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Shimmer_details.gif" width="300">
+
+### Aurora Animation
+
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Aurora_details.gif" width="300">
 
 ### Custom Animation
 

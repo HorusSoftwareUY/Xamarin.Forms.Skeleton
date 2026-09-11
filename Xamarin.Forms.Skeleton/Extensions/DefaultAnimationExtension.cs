@@ -24,9 +24,10 @@ namespace Xamarin.Forms.Skeleton
 
 #if NET6_0_OR_GREATER
         /// <summary>
-        /// Axis a sweeping animation travels along. Ignored by animations that do not sweep.
+        /// Axis a sweeping animation travels along. Left unset each animation uses its own default,
+        /// which is not the same for all of them. Ignored by animations that do not sweep.
         /// </summary>
-        public SweepAxis Direction { get; set; } = SweepAxis.Horizontal;
+        public SweepAxis? Direction { get; set; }
 
         /// <summary>
         /// Two or three colours for a sweeping animation's band, written as
@@ -55,6 +56,8 @@ namespace Xamarin.Forms.Skeleton
 #if NET6_0_OR_GREATER
                 case AnimationTypes.Shimmer:
                     return new ShimmerAnimation(Interval, Direction, SweepColors);
+                case AnimationTypes.Aurora:
+                    return new AuroraAnimation(Interval, Direction, SweepColors);
 #endif
                 case AnimationTypes.None:
                 default:

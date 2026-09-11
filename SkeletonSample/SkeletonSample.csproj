@@ -74,6 +74,7 @@
 	  <None Remove="Resources\Images\ic_skeleton.png" />
 	  <None Remove="Resources\Images\ic_more.png" />
 	  <None Remove="Resources\Images\ic_shimmer.png" />
+	  <None Remove="Resources\Images\ic_aurora.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -126,5 +127,6 @@
 	  <MauiImage Include="Resources\Images\ic_skeleton.png" />
 	  <MauiImage Include="Resources\Images\ic_more.png" />
 	  <MauiImage Include="Resources\Images\ic_shimmer.png" />
+	  <MauiImage Include="Resources\Images\ic_aurora.png" />
 	</ItemGroup>
 </Project>

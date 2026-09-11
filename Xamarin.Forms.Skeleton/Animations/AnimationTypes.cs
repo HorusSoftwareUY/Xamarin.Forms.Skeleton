@@ -11,6 +11,7 @@ namespace Xamarin.Forms.Skeleton.Animations
         Fade,
         VerticalShake,
         HorizontalShake,
-        Shimmer
+        Shimmer,
+        Aurora
     }
 }

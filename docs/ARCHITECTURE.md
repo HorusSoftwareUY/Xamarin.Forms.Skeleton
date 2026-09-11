@@ -221,11 +221,13 @@ frozen. `Shimmer` is the worked example: `ShimmerAnimation`, `SweepAxis` and
 `#if NET6_0_OR_GREATER`. Build **both** projects after adding one; the MAUI build passing proves
 nothing about the Xamarin one.
 
-### An animation that paints, rather than moves
+### Animations that paint, rather than move
 
 Fade, Beat and the two shakes animate a property of the view as a whole, so they carry down to
-everything inside it. `Shimmer` does not: it paints a gradient into the view's own
-`VisualElement.Background` and slides it. Two consequences follow, and both cost real time to find.
+everything inside it. `Shimmer` and `Aurora` do not: they paint a gradient into the view's own
+`VisualElement.Background` and slide it. `SweepAnimation` holds everything they share, so a new one
+declares only its stop offsets, its fallback colours and where its gradient sits at a given point of
+the pass. Two consequences follow, and both cost real time to find.
 
 **It has to be attached to the element that shows the placeholder colour.** On a transparent
 container it paints a gradient nobody can see, and unlike Fade it does not reach the children.
@@ -249,6 +251,16 @@ replaces the background instead of overlaying it. That is why `SweepColors` take
 they describe light falling on the placeholder. Left unset, the default follows the placeholder's
 luminance, light band over a dark placeholder and dark over a light one, so that the common case is
 never an invisible animation.
+
+**One axis for two things.** `Direction` sets both the gradient's angle and the direction it
+travels. The reference draws Aurora's bands at 115 degrees but pans them horizontally, its keyframes
+moving `background-position` from 0 to 100% with the vertical component fixed at 50%. Ours matches
+the travel and loses the tilt. Splitting them would mean a second public property for a difference
+that is hard to see.
+
+**`Direction` on the extension is nullable on purpose.** It always used to pass a value, which meant
+an animation's own default was never reachable through `{sk:DefaultAnimation ...}`. `Parameter` was
+already `double?` for the same reason.
 
 `Source` is the extension's content property, so both call forms work:
 `{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.

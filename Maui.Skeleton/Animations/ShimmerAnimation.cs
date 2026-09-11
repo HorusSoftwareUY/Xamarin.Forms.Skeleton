@@ -42,12 +42,19 @@ namespace Maui.Skeleton.Animations
             Color.FromArgb("#05000000")
         ];
 
-        public ShimmerAnimation() => Interval = DefaultInterval;
+        /// <summary>The reference sweeps a shimmer left to right.</summary>
+        const SweepAxis DefaultDirection = SweepAxis.Horizontal;
 
-        public ShimmerAnimation(int interval, SweepAxis direction, Color[]? sweepColors)
+        public ShimmerAnimation()
+        {
+            Interval = DefaultInterval;
+            Direction = DefaultDirection;
+        }
+
+        public ShimmerAnimation(int interval, SweepAxis? direction, Color[]? sweepColors)
         {
             Interval = (uint)interval;
-            Direction = direction;
+            Direction = direction ?? DefaultDirection;
             SweepColors = sweepColors;
         }
 

@@ -121,10 +121,11 @@ you want the defaults.
 | `VerticalShake` | position | offset in units, up and down | 15 |
 | `HorizontalShake` | position | offset in units, left and right | 10 |
 | `Shimmer` | a band of light across the placeholder | nothing, see below | — |
+| `Aurora` | a wide field of colour drifting back and forth | nothing, see below | — |
 
-### Shimmer
+### Shimmer and Aurora
 
-`Shimmer` works differently from the other four and has two rules of its own.
+These two work differently from the other four and share three rules.
 
 **It has to go on the element that shows the placeholder colour.** The band is painted into that
 element's own background, so it does not carry down to children the way `Fade` and `Beat` do. On a
@@ -142,7 +143,14 @@ It ignores `Parameter` and takes two settings of its own instead:
 | `SweepColors` | two or three colours, `#AARRGGBB`, comma separated | follows the placeholder |
 
 `Interval` also reads differently here. For `Fade` or `Beat` it is half a cycle, because those go out
-and back. A sweep only travels one way, so for `Shimmer` it is the whole pass. 1600 is a good value.
+and back. For these two it is the whole movement: one pass for `Shimmer`, which travels one way, and
+out and back for `Aurora`. 1600 is a good value for either.
+
+**What separates them.** `Shimmer` sends a band the width of the element across it and off the other
+side, so there is a moment between passes with nothing on screen; it reads as a sweep going by.
+`Aurora` holds a gradient far wider than the element and pans a window over it, so colour is always
+present and only shifts; it reads as a slow wash. Reach for `Shimmer` on a plain grey placeholder and
+for `Aurora` when you want the loading state to carry the product's colours.
 
 ```xml
 <Border StrokeShape="RoundRectangle 5"
@@ -168,6 +176,7 @@ The alpha of each is composited over the placeholder, so they describe light fal
 
 ```xml
 sk:Skeleton.Animation="{sk:DefaultAnimation Source=Shimmer, SweepColors='#0A000000,#33000000,#0A000000'}"
+sk:Skeleton.Animation="{sk:DefaultAnimation Source=Aurora, SweepColors='#4D63BEA6,#6B8E7BFF,#4DFF416A'}"
 ```
 
 Note the quotes. A markup extension separates its properties with commas, so a value containing
