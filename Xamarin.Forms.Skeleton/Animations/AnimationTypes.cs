@@ -10,6 +10,9 @@ namespace Xamarin.Forms.Skeleton.Animations
         Beat,
         Fade,
         VerticalShake,
-        HorizontalShake
+        HorizontalShake,
+        Shimmer,
+        Aurora,
+        Tint
     }
 }

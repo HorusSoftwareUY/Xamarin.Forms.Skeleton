@@ -73,6 +73,9 @@
 	  <None Remove="Resources\Images\back_gradient.png" />
 	  <None Remove="Resources\Images\ic_skeleton.png" />
 	  <None Remove="Resources\Images\ic_more.png" />
+	  <None Remove="Resources\Images\ic_shimmer.png" />
+	  <None Remove="Resources\Images\ic_aurora.png" />
+	  <None Remove="Resources\Images\ic_tint.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -124,5 +127,8 @@
 	  <MauiImage Include="Resources\Images\back_gradient.png" />
 	  <MauiImage Include="Resources\Images\ic_skeleton.png" />
 	  <MauiImage Include="Resources\Images\ic_more.png" />
+	  <MauiImage Include="Resources\Images\ic_shimmer.png" />
+	  <MauiImage Include="Resources\Images\ic_aurora.png" />
+	  <MauiImage Include="Resources\Images\ic_tint.png" />
 	</ItemGroup>
 </Project>

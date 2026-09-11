@@ -100,7 +100,7 @@ Add the following properties to set a loading animation with a specific backgrou
 
 #### Animation (BaseAnimation)
 - Control animation when is busy.
-- Possible values: None, Fade, Beat, HorizontalShake, VerticalShake and custom animation inheriting from BaseAnimation.
+- Possible values: None, Fade, Beat, HorizontalShake, VerticalShake, Shimmer, Aurora, Tint and custom animation inheriting from BaseAnimation.
 - The default value is null, which means no animation runs.
 
 ### Animation settings
@@ -127,6 +127,41 @@ sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval=600, Parameter
 | `Beat` | scale | scale to grow to | 1.03 |
 | `VerticalShake` | position | offset in units, up and down | 15 |
 | `HorizontalShake` | position | offset in units, left and right | 10 |
+| `Shimmer` | a band of light across the placeholder | not used, see below | — |
+| `Aurora` | a wide field of colour drifting back and forth | not used, see below | — |
+| `Tint` | the whole placeholder washing to a colour and back | not used, see below | — |
+
+#### Shimmer, Aurora and Tint
+
+These repaint the placeholder rather than animating a property of the view, so they behave a little
+differently from the other four. `Shimmer` sends a band of light across and off the other side;
+`Aurora` pans a much wider field of colour back and forth, so colour is always on screen; `Tint`
+washes the whole placeholder to a colour and back, with nothing moving at all.
+
+- It must be attached to the element that shows the placeholder colour. It does not carry down to
+  children the way `Fade` and `Beat` do.
+- **It does not work on `Frame`.** `Frame` is deprecated in MAUI and its renderer does not repaint
+  when the background is replaced, so the band never moves. Use `Border`.
+- `Interval` is the whole movement, not half a cycle: one pass for `Shimmer`, out and back for
+  `Aurora` and `Tint`. 1600 is a good value for any of them.
+- They ignore `Parameter`, and take `Direction` and `SweepColors` instead.
+
+```XML
+<Border StrokeShape="RoundRectangle 5"
+        StrokeThickness="0"
+        sk:Skeleton.IsBusy="{Binding IsBusy}"
+        sk:Skeleton.BackgroundColor="#c6c6c5"
+        sk:Skeleton.Animation="{sk:DefaultAnimation Source=Shimmer, Interval='1600', Direction='Diagonal'}" />
+```
+
+| Setting | Values | Default |
+| --- | --- | --- |
+| `Direction` | `Horizontal`, `Vertical`, `Diagonal`, `DiagonalReverse`. Not used by `Tint`. | `Horizontal` |
+| `SweepColors` | two or three `#AARRGGBB` colours, comma separated and quoted | follows the placeholder |
+
+Left alone, the band contrasts with the placeholder automatically: light over a dark placeholder,
+dark over a light one. A placeholder bound with `AppThemeBinding` therefore shimmers correctly in
+both themes with no extra work.
 
 ## Animations
 

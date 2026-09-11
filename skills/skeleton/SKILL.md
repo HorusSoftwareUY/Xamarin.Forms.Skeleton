@@ -120,7 +120,91 @@ you want the defaults.
 | `Beat` | scale | scale to grow to | 1.03 |
 | `VerticalShake` | position | offset in units, up and down | 15 |
 | `HorizontalShake` | position | offset in units, left and right | 10 |
+| `Shimmer` | a band of light across the placeholder | nothing, see below | — |
+| `Aurora` | a wide field of colour drifting back and forth | nothing, see below | — |
+| `Tint` | the whole placeholder washing to a colour and back | nothing, see below | — |
 | `None` | nothing | — | — |
+
+### Shimmer, Aurora and Tint
+
+These three work differently from the other four and share three rules.
+
+**It has to go on the element that shows the placeholder colour.** The band is painted into that
+element's own background, so it does not carry down to children the way `Fade` and `Beat` do. On a
+transparent container it does nothing at all.
+
+**A `Background` you set yourself comes back, but not a binding behind it.** These animations paint
+the element's background, so anything already there is saved and restored when loading finishes. If
+that background came from a `Binding` or a `DynamicResource`, the value returns but the expression
+does not, and it stops updating. Use `sk:Skeleton.BackgroundColor` for the placeholder and leave
+`Background` alone on elements you animate this way.
+
+**It does not work on `Frame`.** `Frame` is deprecated in MAUI and its renderer does not repaint when
+the background is replaced, so the band never moves and you get a static placeholder with no error.
+Use `Border`, or any other non-legacy control.
+
+They ignore `Parameter` and take settings of their own instead:
+
+| Setting | Values | Applies to | Default |
+| --- | --- | --- | --- |
+| `Direction` | `Horizontal`, `Vertical`, `Diagonal`, `DiagonalReverse` | `Shimmer`, `Aurora` | `Horizontal` |
+| `SweepColors` | two or three colours, `#AARRGGBB`, comma separated | all three | follows the placeholder |
+
+`Tint` has no direction: nothing about it moves for one to apply to. It reads only the middle colour
+of `SweepColors`, the one it washes to, so the same palette can be handed to any of the three.
+
+`Interval` also reads differently here. For `Fade` or `Beat` it is half a cycle, because those go out
+and back. For these three it is the whole movement: one pass for `Shimmer`, which travels one way,
+and out and back for `Aurora` and `Tint`. 1600 is a good value for any of them.
+
+**What separates them.** `Shimmer` sends a band the width of the element across it and off the other
+side, so there is a moment between passes with nothing on screen; it reads as a sweep going by.
+`Aurora` holds a gradient far wider than the element and pans a window over it, so colour is always
+present and only shifts; it reads as a slow wash. `Tint` has no gradient and nothing travels: the
+whole placeholder takes on a colour and lets it go.
+
+Reach for `Shimmer` on a plain grey placeholder, `Aurora` when the loading state should carry the
+product's colours, and `Tint` when it should stay in the background. `Tint` uses a single colour, the
+middle of `SweepColors`, so the same palette can be handed to any of the three.
+
+```xml
+<Border StrokeShape="RoundRectangle 5"
+        StrokeThickness="0"
+        sk:Skeleton.IsBusy="{Binding IsBusy}"
+        sk:Skeleton.BackgroundColor="{StaticResource Grey}"
+        sk:Skeleton.Animation="{sk:DefaultAnimation Source=Shimmer, Interval='1600', Direction='Diagonal'}">
+    <Label Text="{Binding Title}" />
+</Border>
+```
+
+Left alone, `SweepColors` picks a band that contrasts with the placeholder: light over a dark
+placeholder, dark over a light one. That is usually what you want, and it means a placeholder bound
+with `AppThemeBinding` gets a correct sweep in both themes without any extra work:
+
+```xml
+sk:Skeleton.BackgroundColor="{AppThemeBinding Light={StaticResource GreyLight}, Dark={StaticResource GreyDark}}"
+```
+
+To choose the colours yourself, write two or three of them. Two are read as edge and peak and
+mirrored; three are taken as written, which is how the band gets different colours at its two ends.
+The alpha of each is composited over the placeholder, so they describe light falling on it:
+
+```xml
+sk:Skeleton.Animation="{sk:DefaultAnimation Source=Shimmer, SweepColors='#0A000000,#33000000,#0A000000'}"
+sk:Skeleton.Animation="{sk:DefaultAnimation Source=Aurora, SweepColors='#4D63BEA6,#6B8E7BFF,#4DFF416A'}"
+sk:Skeleton.Animation="{sk:DefaultAnimation Source=Tint, SweepColors='#42FF3131,#70FF416A,#42FFB199'}"
+```
+
+Note the quotes. A markup extension separates its properties with commas, so a value containing
+commas has to be quoted or the parser reads it as several properties.
+
+`SweepColors` is a property of the markup extension, not a bindable property, so `{AppThemeBinding}`
+inside it is evaluated once and will not follow a theme change. If you need specific colours per
+theme rather than the automatic contrast, build the animation in code and bind it:
+
+```xml
+sk:Skeleton.Animation="{Binding ShimmerForCurrentTheme}"
+```
 
 `Interval` is the duration in milliseconds of **each half** of a cycle, so a `Fade` at 600 takes
 1200 ms to go down and back. It defaults to 500.

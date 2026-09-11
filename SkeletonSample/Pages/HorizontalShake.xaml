@@ -123,11 +123,26 @@
                             sk:Skeleton.IsBusy="{Binding IsBusy}"
                             sk:Skeleton.Hide="True" />
 
+                        <!-- Scrim superior: el gradiente de fondo solo oscurece hacia abajo, para el titulo.
+                             Sin esto el logo cae directo sobre la foto y el rojo de la marca se pierde. -->
+                        <BoxView
+                            AbsoluteLayout.LayoutFlags="All"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            InputTransparent="True"
+                            sk:Skeleton.IsBusy="{Binding IsBusy}"
+                            sk:Skeleton.Hide="True">
+                            <BoxView.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#99000000" Offset="0" />
+                                    <GradientStop Color="#00000000" Offset="0.58" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
                         <Grid AbsoluteLayout.LayoutFlags="All"
                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                              Margin="30">
+                              Margin="30,60,30,30">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="54"/>
+                                <RowDefinition Height="72"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -140,7 +155,7 @@
                                 Grid.Column="1"
                                 Grid.Row="0"
                                 Margin="0"
-                                HeightRequest="36"
+                                HeightRequest="62"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"
                                 BackgroundColor="Transparent"
@@ -156,33 +171,22 @@
                                     sk:Skeleton.Hide="True"/>
                             </Frame>
 
-                            <ContentView
+                            <ImageButton
+                                SemanticProperties.Description="Reload the sample data"
                                 Grid.Column="2"
-                                Grid.Row="0">
-                                <ContentView.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding LoadCommand}" />
-                                </ContentView.GestureRecognizers>
-                                <Frame
-                                    HeightRequest="36"
-                                    WidthRequest="36"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    BackgroundColor="Transparent"
-                                    HasShadow="False"
-                                    CornerRadius="5"
-                                    Padding="0">
-                                    <Image
-                                        Source="load.png"
-                                        Aspect="AspectFit"
-                                        HeightRequest="32"
-                                        WidthRequest="32"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                        sk:Skeleton.Hide="True"/>
-                                </Frame>
-                            </ContentView>
+                                Grid.Row="0"
+                                Source="load.png"
+                                Aspect="AspectFit"
+                                Command="{Binding LoadCommand}"
+                                BackgroundColor="Transparent"
+                                BorderWidth="0"
+                                Padding="0"
+                                HeightRequest="44"
+                                WidthRequest="44"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                sk:Skeleton.Hide="True"/>
 
                             <StackLayout
                                 Grid.Column="0"

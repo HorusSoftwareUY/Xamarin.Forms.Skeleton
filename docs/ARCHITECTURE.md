@@ -214,7 +214,55 @@ So a built-in animation has to do one of two things:
   Xamarin build never sees it.
 
 The second keeps new code free of the old framework and is the better default now that Xamarin is
-frozen.
+frozen. `Shimmer` is the worked example: `ShimmerAnimation`, `SweepAxis` and
+`SweepColorsTypeConverter` live in `Maui.Skeleton/`, the `Shimmer` value sits unguarded in the shared
+`AnimationTypes` enum because a name costs the Xamarin build nothing, and both the `case` and the
+`Direction`/`SweepColors` properties in `DefaultAnimationExtension` are wrapped in
+`#if NET6_0_OR_GREATER`. Build **both** projects after adding one; the MAUI build passing proves
+nothing about the Xamarin one.
+
+### Animations that paint, rather than move
+
+Fade, Beat and the two shakes animate a property of the view as a whole, so they carry down to
+everything inside it. `Shimmer`, `Aurora` and `Tint` do not: they paint the view's own
+`VisualElement.Background` and change what is painted. The machinery sits in two layers.
+`BackgroundAnimation` owns the loop, the frame pacing, the shared clock and the compositing, and asks
+a subclass for one thing: what brush to paint at a given point of the pass. `SweepAnimation` adds
+the gradient geometry on top, for the two that move one. `Tint` skips that layer entirely, since it
+has no gradient and nothing travels. Two consequences follow, and both cost real time to find.
+
+**It has to be attached to the element that shows the placeholder colour.** On a transparent
+container it paints a gradient nobody can see, and unlike Fade it does not reach the children.
+
+**`Frame` never repaints.** Replacing `Background` on a `Frame` leaves the old brush on screen, so the
+band freezes wherever it was first drawn and the placeholder looks static. `Border` repaints
+correctly. This was isolated by converting a single element in the sample page and watching only that
+one animate. `Handler.UpdateValue(nameof(VisualElement.Background))` does not help. There is no
+workaround short of platform code, which this library deliberately does not have, so the limitation is
+documented for consumers in `skills/skeleton/SKILL.md` instead.
+
+Two smaller things that also cost time:
+
+- **MAUI's own `Animation.Commit` stalls after a couple of ticks** when the tick assigns `Background`.
+  The sweep is driven by its own loop paced with `IDispatcher.DispatchDelayed` instead.
+- **Mutating a brush already assigned to `Background` does nothing.** The stops and endpoints are
+  bindable, but changing them does not repaint. Each frame assigns a fresh `LinearGradientBrush`.
+
+The colours are composited over the placeholder rather than drawn on top of it, because the gradient
+replaces the background instead of overlaying it. That is why `SweepColors` takes colours with alpha:
+they describe light falling on the placeholder. Left unset, the default follows the placeholder's
+luminance, light band over a dark placeholder and dark over a light one, so that the common case is
+never an invisible animation.
+
+**One axis for two things.** `Direction` sets both the gradient's angle and the direction it
+travels. The reference draws Aurora's bands at 115 degrees but pans them horizontally, its keyframes
+moving `background-position` from 0 to 100% with the vertical component fixed at 50%. Ours matches
+the travel and loses the tilt. Splitting them would mean a second public property for a difference
+that is hard to see.
+
+**`Direction` on the extension is nullable on purpose.** It always used to pass a value, which meant
+an animation's own default was never reachable through `{sk:DefaultAnimation ...}`. `Parameter` was
+already `double?` for the same reason.
 
 `Source` is the extension's content property, so both call forms work:
 `{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.
@@ -279,6 +327,19 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
 
 ## Open items
 
+- **Restoring `Background` puts back the brush, not the expression behind it.** The animations that
+  repaint the placeholder remember what a view was painted with and put it back, so a consumer's own
+  gradient survives. A `Binding` or a `DynamicResource` driving that property does not: assigning a
+  brush per frame clears the expression, and MAUI exposes no public way to read one back off a
+  bindable property, so there is nothing to restore. This is the same gap
+  `RestoreBackgroundColor` and `RestoreTextColor` have for colours, tracked as
+  [#45](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/45), and it should be closed
+  once for all four properties rather than patched here.
+
+- **The sample marks Shimmer, Aurora and Tint with a sparkle in their `Title`**, so they stand out in
+  the More menu as the new ones. That stops being true after the release that introduces them, and
+  the marker then has to come out: it is three `Title` attributes in `SkeletonSample/Pages/`.
+
 - **The Xamarin.Forms side of `RunOnMainThread` has never been executed.** It compiles, but the legacy
   sample cannot be built with current tooling, so `Device.BeginInvokeOnMainThread` is unverified.
 - **Windows has never been built or run.** There is no platform-specific code, so it should work, but
@@ -288,4 +349,8 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
   package is ever republished, which is not planned.
 - **The shared sources produce nullable warnings** under the MAUI build, which has `Nullable` enabled
   while the code is not annotated.
-- **The samples use `Frame` everywhere**, which is deprecated in MAUI in favour of `Border`.
+- **The six older sample pages use `Frame`**, which is deprecated in MAUI in favour of `Border`. This
+  is no longer only a deprecation: `Frame` does not repaint its background, so none of the three
+  animations that paint one can work on it. The `Shimmer`, `Aurora` and `Tint` pages use `Border` for
+  that reason; `Skeleton`, `Beat`, `Fade`, the two shakes and `CustomAnimation` would each have to be
+  converted before they could show one.
