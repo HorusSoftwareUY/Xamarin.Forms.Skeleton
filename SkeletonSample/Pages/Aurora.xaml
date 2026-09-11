@@ -5,7 +5,7 @@
     xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Maui.Skeleton"
     xmlns:controls="clr-namespace:SkeletonSample.Controls"
     x:Class="SkeletonSample.Pages.Aurora"
-    Title="Aurora"
+    Title="Aurora ✨"
     IconImageSource="ic_aurora.png"
     BackgroundColor="{StaticResource WhiteColor}">
    <ContentPage.Resources>

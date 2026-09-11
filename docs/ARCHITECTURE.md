@@ -327,6 +327,10 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
 
 ## Open items
 
+- **The sample marks Shimmer, Aurora and Tint with a sparkle in their `Title`**, so they stand out in
+  the More menu as the new ones. That stops being true after the release that introduces them, and
+  the marker then has to come out: it is three `Title` attributes in `SkeletonSample/Pages/`.
+
 - **The Xamarin.Forms side of `RunOnMainThread` has never been executed.** It compiles, but the legacy
   sample cannot be built with current tooling, so `Device.BeginInvokeOnMainThread` is unverified.
 - **Windows has never been built or run.** There is no platform-specific code, so it should work, but
