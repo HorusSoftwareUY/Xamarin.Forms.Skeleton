@@ -101,16 +101,32 @@ Add the following properties to set a loading animation with a specific backgrou
 #### Animation (BaseAnimation)
 - Control animation when is busy.
 - Possible values: None, Fade, Beat, HorizontalShake, VerticalShake and custom animation inheriting from BaseAnimation.
-- The default value is None.
+- The default value is null, which means no animation runs.
 
-#### AnimationInterval (Int)
-- Animation interval when is busy.
-- Value in milliseconds.
-- The default value is 500.
+### Animation settings
 
-#### AnimationParameter (Double?)
-- Animation parameter to modify the animation.
-- The default value is null.
+The interval and the parameter are **not** attached properties. They are set on the
+`DefaultAnimation` markup extension, alongside `Source`:
+
+```XML
+sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}"
+```
+
+`Source` is the extension's content property, so `{sk:DefaultAnimation Fade}` is shorthand for
+`{sk:DefaultAnimation Source=Fade}`.
+
+| Setting | Meaning | Default |
+| --- | --- | --- |
+| `Source` | Which built-in animation to use. `None` resolves to no animation at all. | `None` |
+| `Interval` | Duration in milliseconds of **each half** of a cycle, so a `Fade` at 600 takes 1.2s per pulse. | 500 |
+| `Parameter` | What the animation interpolates towards. See the table below. | per animation |
+
+| Source | What moves | `Parameter` means | Default |
+| --- | --- | --- | --- |
+| `Fade` | opacity | opacity to fade to | 0.6 |
+| `Beat` | scale | scale to grow to | 1.03 |
+| `VerticalShake` | position | offset in units, up and down | 15 |
+| `HorizontalShake` | position | offset in units, left and right | 10 |
 
 ## Animations
 

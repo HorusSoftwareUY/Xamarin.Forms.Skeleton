@@ -168,7 +168,7 @@ immediately, and an unguarded loop snaps the animated property between its two e
 thread allows — which is what flickering looks like. Measured on a moto g54 with animations off,
 before and after the guard:
 
-| | Iterations | Interval |
+| | Iterations | Time per iteration |
 | --- | --- | --- |
 | Unguarded, on a threadpool thread | ~47 per view | 30 ms |
 | Unguarded, on the UI thread | 37,846 | 0 ms |
@@ -279,8 +279,6 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
 
 ## Open items
 
-- **The README documents two properties that do not exist** — `AnimationInterval` and
-  `AnimationParameter`. See [#42](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/42).
 - **The Xamarin.Forms side of `RunOnMainThread` has never been executed.** It compiles, but the legacy
   sample cannot be built with current tooling, so `Device.BeginInvokeOnMainThread` is unverified.
 - **Windows has never been built or run.** There is no platform-specific code, so it should work, but
