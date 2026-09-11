@@ -58,6 +58,8 @@ namespace Xamarin.Forms.Skeleton
                     return new ShimmerAnimation(Interval, Direction, SweepColors);
                 case AnimationTypes.Aurora:
                     return new AuroraAnimation(Interval, Direction, SweepColors);
+                case AnimationTypes.Tint:
+                    return new TintAnimation(Interval, SweepColors);
 #endif
                 case AnimationTypes.None:
                 default:

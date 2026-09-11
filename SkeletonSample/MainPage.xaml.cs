@@ -14,6 +14,7 @@ public partial class MainPage : TabbedPage
         this.Children.Add(new HorizontalShake());
         this.Children.Add(new Shimmer());
         this.Children.Add(new Aurora());
+        this.Children.Add(new Tint());
         this.Children.Add(new CustomAnimation());
     }
 }

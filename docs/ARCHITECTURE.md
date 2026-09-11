@@ -224,10 +224,12 @@ nothing about the Xamarin one.
 ### Animations that paint, rather than move
 
 Fade, Beat and the two shakes animate a property of the view as a whole, so they carry down to
-everything inside it. `Shimmer` and `Aurora` do not: they paint a gradient into the view's own
-`VisualElement.Background` and slide it. `SweepAnimation` holds everything they share, so a new one
-declares only its stop offsets, its fallback colours and where its gradient sits at a given point of
-the pass. Two consequences follow, and both cost real time to find.
+everything inside it. `Shimmer`, `Aurora` and `Tint` do not: they paint the view's own
+`VisualElement.Background` and change what is painted. The machinery sits in two layers.
+`BackgroundAnimation` owns the loop, the frame pacing, the shared clock and the compositing, and asks
+a subclass for one thing: what brush to paint at a given point of the pass. `SweepAnimation` adds
+the gradient geometry on top, for the two that move one. `Tint` skips that layer entirely, since it
+has no gradient and nothing travels. Two consequences follow, and both cost real time to find.
 
 **It has to be attached to the element that shows the placeholder colour.** On a transparent
 container it paints a gradient nobody can see, and unlike Fade it does not reach the children.
