@@ -87,12 +87,13 @@ Read it carefully, because not everything in it is doing what it looks like it i
 - **The grey blocks come from `BackgroundColor` on the frames.** That is the actual placeholder.
 - **`Hide="True"` on the label** is what removes the text. Without it you would see the real title
   on top of the grey.
-- **`IsParent="True"` on the frame is decorative.** `Frame` is not a `Layout` in MAUI, so the branch
-  it controls never runs. See the open items at the end.
-- **The avatar is blank because the view model says so.** The image has no `Hide`; the loading items
-  in `SkeletonViewModel` simply carry no `Image`, so the binding resolves to null. Supplying empty
-  placeholder data is a legitimate technique, but it is the view model doing the work here, not
-  this library.
+- **`IsParent="True"` on the frame is what keeps the avatar visible.** Until 3.0.0 it did nothing
+  here — `Frame` is not a `Layout` in MAUI, and the branch it controls only looked for one. Now every
+  container honours it.
+- **The avatar was also blank because the view model said so.** The image has no `Hide`; the loading
+  items in `SkeletonViewModel` carry no `Image`, so the binding resolved to null. Supplying empty
+  placeholder data is a legitimate technique, but it was the view model doing the work, not this
+  library — worth knowing when reading the sample as a reference.
 
 Where `IsParent` genuinely matters is on a real layout. Given a `Grid` or a `StackLayout` with
 `IsBusy` set and no `IsParent`, every child is pushed to `Opacity = 0` and the whole block becomes a
@@ -117,10 +118,25 @@ and `SkeletonSample/MyCustomAnimation.cs` shows a consumer-defined one.
 `HandleIsBusyChanged` in `Skeleton.cs`:
 
 - `Hide` set: toggle `IsVisible` and stop there.
-- Otherwise, on the way in: a `Layout` that is not `IsParent` gets `Opacity = 0` on its children; a
-  `Label` or `Button` has its `TextColor` saved and set to transparent; the background colour is
-  swapped; the animation starts.
+- Otherwise, on the way in: a `Label` or `Button` has its `TextColor` saved and set to transparent;
+  any other container that is not `IsParent` has its content faded to `Opacity = 0`, the original
+  opacity saved first; the background colour is swapped; the animation starts.
 - On the way out, the same steps in reverse.
+
+### Containers and IsParent
+
+`IsParent` answers one question: is this container **one shape** or **several shapes**? Without it the
+container fades out whatever it is showing, so only its placeholder colour remains. With it the content
+is untouched and each child declares its own treatment. Either way the container still paints its
+colour and runs its animation — `IsParent` only governs whether it touches what is inside.
+
+Until 3.0.0 this only worked for types deriving from `Layout`. `Border`, `Frame`, `ContentView` and `ScrollView`
+hold a single child and implement `IContentView` instead, so nothing faded and `IsParent` was inert on them
+— see [#41](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/41). `ForEachContentChild`
+now walks both shapes.
+
+The original opacity of each child is saved before fading and restored afterwards, rather than reset to
+a hard-coded 1, so a deliberately translucent child comes back translucent.
 
 ### Theming
 
@@ -274,8 +290,4 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
   package is ever republished, which is not planned.
 - **The shared sources produce nullable warnings** under the MAUI build, which has `Nullable` enabled
   while the code is not annotated.
-- **`IsBusy` does not blank the content of `Border`, `Frame` or `ContentView`**, unlike on a `Layout`
-  and unlike on Xamarin.Forms, because none of them derive from `Layout` in MAUI. Parts of the sample
-  are misleading for this reason. See
-  [#41](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/41).
 - **The samples use `Frame` everywhere**, which is deprecated in MAUI in favour of `Border`.
