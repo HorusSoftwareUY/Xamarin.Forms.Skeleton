@@ -100,7 +100,7 @@ Add the following properties to set a loading animation with a specific backgrou
 
 #### Animation (BaseAnimation)
 - Control animation when is busy.
-- Possible values: None, Fade, Beat, HorizontalShake, VerticalShake and custom animation inheriting from BaseAnimation.
+- Possible values: None, Fade, Beat, HorizontalShake, VerticalShake, Shimmer, Aurora, Tint and custom animation inheriting from BaseAnimation.
 - The default value is null, which means no animation runs.
 
 ### Animation settings

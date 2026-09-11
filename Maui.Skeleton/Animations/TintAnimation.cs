@@ -45,7 +45,7 @@ namespace Maui.Skeleton.Animations
 
         public TintAnimation(int? interval, Color[]? sweepColors)
         {
-            Interval = (uint)(interval ?? DefaultInterval);
+            Interval = Duration(interval, DefaultInterval);
             SweepColors = sweepColors;
         }
 

@@ -60,6 +60,14 @@ namespace Maui.Skeleton.Animations
 
         Color[]? _sweepColors;
 
+        /// <summary>
+        /// What the view was painted with before the animation took over. Kept on the view rather
+        /// than on the animation, the way every flag Skeleton keeps is, so one instance can drive
+        /// many views.
+        /// </summary>
+        static readonly BindableProperty OriginalBackgroundProperty =
+            BindableProperty.CreateAttached("OriginalBackground", typeof(Brush), typeof(BackgroundAnimation), null);
+
         /// <summary>Colours to use when <see cref="SweepColors"/> was not set.</summary>
         protected abstract Color[] DefaultColorsFor(Color placeholder);
 
@@ -97,9 +105,17 @@ namespace Maui.Skeleton.Animations
             if (!await PlatformAnimates(view))
                 return false;
 
-            // Skeleton applies the placeholder colour before starting the animation, so this is the
-            // colour the animation plays over. It only changes between passes.
-            var colors = Prepare(view.BackgroundColor ?? Colors.Transparent);
+            // A view can arrive already carrying a background of its own, a gradient the consumer
+            // set. Painting over it every frame and then clearing on the way out would destroy it,
+            // so what was there is remembered before the first frame and put back at the end.
+            if (!view.IsSet(OriginalBackgroundProperty))
+                view.SetValue(OriginalBackgroundProperty, view.Background);
+
+            // The attached property first, so that a placeholder colour bound with AppThemeBinding is
+            // followed when the theme changes while the view is still loading. Skeleton copies it to
+            // BackgroundColor once, when IsBusy turns on, and never again.
+            var placeholder = Skeleton.GetBackgroundColor(view) ?? view.BackgroundColor ?? Colors.Transparent;
+            var colors = Prepare(placeholder);
 
             // Phase comes from a clock shared by every view, not from when this particular pass
             // started. Each view running its own stopwatch drifts, and a page full of placeholders
@@ -132,9 +148,14 @@ namespace Maui.Skeleton.Animations
         {
             if (bindable is View view)
             {
-                // Clearing Background rather than assigning one puts the view back under whatever
-                // BackgroundColor holds, which is what Skeleton restores separately.
-                view.ClearValue(VisualElement.BackgroundProperty);
+                // Put back whatever the view was painted with. Nothing means clearing Background, so
+                // the view falls under BackgroundColor again, which Skeleton restores separately.
+                if (view.IsSet(OriginalBackgroundProperty) && view.GetValue(OriginalBackgroundProperty) is Brush original)
+                    view.Background = original;
+                else
+                    view.ClearValue(VisualElement.BackgroundProperty);
+
+                view.ClearValue(OriginalBackgroundProperty);
             }
 
             return Task.CompletedTask;
@@ -230,6 +251,19 @@ namespace Maui.Skeleton.Animations
                 light.Blue * alpha + placeholder.Blue * (1 - alpha),
                 placeholder.Alpha);
         }
+
+        /// <summary>
+        /// Turns the interval a caller gave into a duration, falling back to the animation's own
+        /// default. Negative is rejected rather than cast: as a <c>uint</c>, -1 becomes about
+        /// 49 days, which looks like a frozen placeholder that is still allocating a brush a frame.
+        /// </summary>
+        protected static uint Duration(int? interval, int fallback) => interval switch
+        {
+            null => (uint)fallback,
+            < 0 => throw new ArgumentOutOfRangeException(
+                nameof(interval), interval, "An animation's interval cannot be negative."),
+            _ => (uint)interval.Value
+        };
 
         /// <summary>Relative luminance, the sRGB coefficients used by WCAG.</summary>
         protected static double Luminance(Color color) =>

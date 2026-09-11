@@ -64,7 +64,7 @@ namespace Maui.Skeleton.Animations
 
         public AuroraAnimation(int? interval, SweepAxis? direction, Color[]? sweepColors)
         {
-            Interval = (uint)(interval ?? DefaultInterval);
+            Interval = Duration(interval, DefaultInterval);
             Direction = direction ?? DefaultDirection;
             SweepColors = sweepColors;
         }
