@@ -340,7 +340,8 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
   package is ever republished, which is not planned.
 - **The shared sources produce nullable warnings** under the MAUI build, which has `Nullable` enabled
   while the code is not annotated.
-- **The samples use `Frame` everywhere**, which is deprecated in MAUI in favour of `Border`. This is
-  no longer only a deprecation: `Frame` does not repaint its background, so `Shimmer` cannot work on
-  it. The `Shimmer` page already uses `Border`; the other six still use `Frame` and would have to be
-  converted before they could show a sweeping animation.
+- **The six older sample pages use `Frame`**, which is deprecated in MAUI in favour of `Border`. This
+  is no longer only a deprecation: `Frame` does not repaint its background, so none of the three
+  animations that paint one can work on it. The `Shimmer`, `Aurora` and `Tint` pages use `Border` for
+  that reason; `Skeleton`, `Beat`, `Fade`, the two shakes and `CustomAnimation` would each have to be
+  converted before they could show one.

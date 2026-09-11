@@ -41,9 +41,6 @@ namespace Maui.Skeleton.Animations
             Color.FromArgb("#00000000")
         ];
 
-        Color _placeholder;
-        Color _tinted;
-
         public TintAnimation() => Interval = DefaultInterval;
 
         public TintAnimation(int interval, Color[]? sweepColors)
@@ -59,23 +56,20 @@ namespace Maui.Skeleton.Animations
         /// Resolves the two ends of the wash once per pass. Only the peak of the palette is used:
         /// there is no gradient here for the other two colours to sit in.
         /// </summary>
-        protected override void Prepare(Color placeholder)
-        {
-            _placeholder = placeholder;
-            _tinted = Over(Normalise(SweepColors ?? DefaultColorsFor(placeholder))[1], placeholder);
-        }
+        protected override Color[] Prepare(Color placeholder) =>
+            [placeholder, Over(Normalise(SweepColors ?? DefaultColorsFor(placeholder))[1], placeholder)];
 
         /// <summary>
         /// In over the first half of the pass and out over the second, easing at both ends and at the
         /// turn. The reference animates opacity from 0 to 1 and back with ease-in-out between each
         /// pair of keyframes, which is what the cosine reproduces without a bezier solver.
         /// </summary>
-        protected override Brush BrushAt(double progress)
+        protected override Brush BrushAt(Color[] colors, double progress)
         {
             var leg = progress < 0.5 ? progress * 2 : (1 - progress) * 2;
             var amount = (1 - Math.Cos(Math.PI * leg)) / 2;
 
-            return new SolidColorBrush(Blend(_placeholder, _tinted, amount));
+            return new SolidColorBrush(Blend(colors[0], colors[1], amount));
         }
 
         static Color Blend(Color from, Color to, double amount) => new(

@@ -24,6 +24,13 @@ namespace Maui.Skeleton.Animations
 
             var parts = text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
+            // Checked here rather than where the colours are used. Past this point the animation runs
+            // on a fire and forget task whose exceptions BaseAnimation only writes to debug output,
+            // so a malformed value would surface as a placeholder that silently never moves.
+            if (parts.Length is not (2 or 3))
+                throw new FormatException(
+                    $"Sweep colours take two or three values, got {parts.Length}: '{text}'. Two are read as edge and peak and mirrored, three as written.");
+
             var colors = new Color[parts.Length];
             for (var i = 0; i < parts.Length; i++)
             {

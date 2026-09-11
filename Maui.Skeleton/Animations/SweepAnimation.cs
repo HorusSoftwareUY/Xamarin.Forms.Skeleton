@@ -9,8 +9,6 @@ namespace Maui.Skeleton.Animations
     /// </remarks>
     public abstract class SweepAnimation : BackgroundAnimation
     {
-        Color[] _colors = [];
-
         /// <summary>The axis the gradient travels along.</summary>
         public SweepAxis Direction { get; set; } = SweepAxis.Horizontal;
 
@@ -28,11 +26,11 @@ namespace Maui.Skeleton.Animations
         /// placeholder itself, so the gradient pads out to it on both sides instead of smearing its
         /// own colour across the rest of the view.
         /// </summary>
-        protected override void Prepare(Color placeholder)
+        protected override Color[] Prepare(Color placeholder)
         {
             var sweep = Normalise(SweepColors ?? DefaultColorsFor(placeholder));
 
-            _colors =
+            return
             [
                 placeholder,
                 Over(sweep[0], placeholder),
@@ -51,7 +49,7 @@ namespace Maui.Skeleton.Animations
         /// wherever it was first drawn. Assigning a new brush does repaint. The colours are already
         /// resolved, so this allocates the brush and its stops and nothing else.
         /// </remarks>
-        protected override Brush BrushAt(double progress)
+        protected override Brush BrushAt(Color[] colors, double progress)
         {
             var (from, to) = ExtentAt(progress);
 
@@ -65,8 +63,8 @@ namespace Maui.Skeleton.Animations
 
             var stops = Stops;
             var collection = new GradientStopCollection();
-            for (var i = 0; i < _colors.Length; i++)
-                collection.Add(new GradientStop(_colors[i], stops[i]));
+            for (var i = 0; i < colors.Length; i++)
+                collection.Add(new GradientStop(colors[i], stops[i]));
 
             return new LinearGradientBrush { StartPoint = start, EndPoint = end, GradientStops = collection };
         }

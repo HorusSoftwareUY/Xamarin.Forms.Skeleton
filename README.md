@@ -185,18 +185,6 @@ both themes with no extra work.
 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Horizontal_details.gif" width="300">
 
-### Shimmer Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Shimmer_details.gif" width="300">
-
-### Aurora Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Aurora_details.gif" width="300">
-
-### Tint Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Tint_details.gif" width="300">
-
 ### Custom Animation
 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Custom_details.gif" width="300">

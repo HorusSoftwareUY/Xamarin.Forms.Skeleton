@@ -45,22 +45,36 @@ namespace Maui.Skeleton.Animations
         protected abstract Color[] DefaultColorsFor(Color placeholder);
 
         /// <summary>
-        /// Called once at the start of each pass, with the colour the animation plays over, so an
-        /// animation can resolve anything that does not change while it runs.
+        /// Resolves the colours the pass will paint with, given the placeholder it plays over.
         /// </summary>
-        protected abstract void Prepare(Color placeholder);
+        /// <remarks>
+        /// The result is handed back to <see cref="BrushAt"/> rather than kept on the animation.
+        /// One instance can drive several views at once, which is why every internal flag Skeleton
+        /// keeps lives on the view, and pass state has to do the same: held here, two views with
+        /// different placeholder colours would both paint whichever prepared last.
+        /// </remarks>
+        protected abstract Color[] Prepare(Color placeholder);
 
         /// <summary>What to paint at this point of the pass, 0 at its start and 1 at its end.</summary>
-        protected abstract Brush BrushAt(double progress);
+        protected abstract Brush BrushAt(Color[] colors, double progress);
 
         protected override async Task<bool> Animate(BindableObject bindable)
         {
             if (bindable is not View view)
                 return false;
 
+            // Platforms let the user turn animations off system wide, and BaseAnimation.Run stops any
+            // animation whose pass returns faster than a frame for exactly that reason. This loop
+            // paces itself, so it would sail past that guard and keep moving after the user asked for
+            // stillness. Probing a real platform animation first is what makes the guard apply here
+            // too: with animations off it returns at once, so this pass does as well, and Run settles
+            // the view into a static placeholder.
+            if (!await PlatformAnimates(view))
+                return false;
+
             // Skeleton applies the placeholder colour before starting the animation, so this is the
             // colour the animation plays over. It only changes between passes.
-            Prepare(view.BackgroundColor ?? Colors.Transparent);
+            var colors = Prepare(view.BackgroundColor ?? Colors.Transparent);
 
             // Phase comes from a clock shared by every view, not from when this particular pass
             // started. Each view running its own stopwatch drifts, and a page full of placeholders
@@ -77,7 +91,7 @@ namespace Maui.Skeleton.Animations
             {
                 var now = Environment.TickCount64;
 
-                view.Background = BrushAt(now % interval / (double)interval);
+                view.Background = BrushAt(colors, now % interval / (double)interval);
 
                 if (now - began >= interval)
                     break;
@@ -98,6 +112,37 @@ namespace Maui.Skeleton.Animations
             }
 
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Whether the platform is actually animating, asked once and remembered.
+        /// </summary>
+        /// <remarks>
+        /// Fades the view to the opacity it already has, so nothing shows, and times it: a real
+        /// animation takes about as long as it was asked for, while one the system has disabled
+        /// returns immediately.
+        ///
+        /// Cached because it is not free. A page of placeholders starts two dozen of these at once
+        /// and the probe queues behind all of them; measured on a moto g54, one that asked for 32 ms
+        /// came back after 1039. Paid once per pass that would have eaten a large part of every one.
+        /// The setting it reads does not change while an app is in front of someone.
+        /// </remarks>
+        static Task<bool>? _platformAnimates;
+
+        static Task<bool> PlatformAnimates(View view) => _platformAnimates ??= Probe(view);
+
+        static async Task<bool> Probe(View view)
+        {
+            // Long enough that scheduling noise cannot be mistaken for movement. A page of
+            // placeholders starts everything at once, so the continuation after a disabled animation
+            // can still come back tens of milliseconds late; measured against a 32 ms probe that read
+            // as animating and the placeholders kept moving with animations switched off.
+            const int Length = 250;
+
+            var elapsed = System.Diagnostics.Stopwatch.StartNew();
+            await view.FadeTo(view.Opacity, Length);
+
+            return elapsed.ElapsedMilliseconds >= Length / 2;
         }
 
         /// <summary>Waits one frame on the view's own dispatcher.</summary>

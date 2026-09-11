@@ -123,6 +123,7 @@ you want the defaults.
 | `Shimmer` | a band of light across the placeholder | nothing, see below | — |
 | `Aurora` | a wide field of colour drifting back and forth | nothing, see below | — |
 | `Tint` | the whole placeholder washing to a colour and back | nothing, see below | — |
+| `None` | nothing | — | — |
 
 ### Shimmer, Aurora and Tint
 
@@ -195,7 +196,6 @@ theme rather than the automatic contrast, build the animation in code and bind i
 ```xml
 sk:Skeleton.Animation="{Binding ShimmerForCurrentTheme}"
 ```
-| `None` | nothing | — | — |
 
 `Interval` is the duration in milliseconds of **each half** of a cycle, so a `Fade` at 600 takes
 1200 ms to go down and back. It defaults to 500.
