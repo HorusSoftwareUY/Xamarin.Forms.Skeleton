@@ -22,7 +22,10 @@ namespace Maui.Skeleton.Animations
             if (value is not string text || string.IsNullOrWhiteSpace(text))
                 return null;
 
-            var parts = text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            // Empty entries are kept on purpose. Dropping them turns "#05FFFFFF,,#24FFFFFF", where
+            // someone meant three colours and typed one comma too many, into a valid two colour
+            // palette that is silently mirrored instead of reported.
+            var parts = text.Split(',', StringSplitOptions.TrimEntries);
 
             // Checked here rather than where the colours are used. Past this point the animation runs
             // on a fire and forget task whose exceptions BaseAnimation only writes to debug output,

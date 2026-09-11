@@ -51,9 +51,9 @@ namespace Maui.Skeleton.Animations
             Direction = DefaultDirection;
         }
 
-        public ShimmerAnimation(int interval, SweepAxis? direction, Color[]? sweepColors)
+        public ShimmerAnimation(int? interval, SweepAxis? direction, Color[]? sweepColors)
         {
-            Interval = (uint)interval;
+            Interval = (uint)(interval ?? DefaultInterval);
             Direction = direction ?? DefaultDirection;
             SweepColors = sweepColors;
         }

@@ -39,7 +39,26 @@ namespace Maui.Skeleton.Animations
         /// the same colour as <c>#RRGGBBAA</c>.
         /// </remarks>
         [System.ComponentModel.TypeConverter(typeof(SweepColorsTypeConverter))]
-        public Color[]? SweepColors { get; set; }
+        public Color[]? SweepColors
+        {
+            get => _sweepColors;
+
+            // Checked on the way in, not where the colours are used. Past this point the animation
+            // runs on a fire and forget task whose exceptions BaseAnimation only writes to debug
+            // output, so a wrong length assigned from code would surface as a placeholder that
+            // silently never moves. The XAML converter reports the same mistake at parse time.
+            set
+            {
+                if (value is not null && value.Length is not (2 or 3))
+                    throw new ArgumentException(
+                        $"Sweep colours take two or three values, got {value.Length}. Two are read as edge and peak and mirrored, three as written.",
+                        nameof(SweepColors));
+
+                _sweepColors = value;
+            }
+        }
+
+        Color[]? _sweepColors;
 
         /// <summary>Colours to use when <see cref="SweepColors"/> was not set.</summary>
         protected abstract Color[] DefaultColorsFor(Color placeholder);

@@ -145,8 +145,8 @@ It ignores `Parameter` and takes two settings of its own instead:
 | `SweepColors` | two or three colours, `#AARRGGBB`, comma separated | follows the placeholder |
 
 `Interval` also reads differently here. For `Fade` or `Beat` it is half a cycle, because those go out
-and back. For these two it is the whole movement: one pass for `Shimmer`, which travels one way, and
-out and back for `Aurora`. 1600 is a good value for either.
+and back. For these three it is the whole movement: one pass for `Shimmer`, which travels one way,
+and out and back for `Aurora` and `Tint`. 1600 is a good value for any of them.
 
 **What separates them.** `Shimmer` sends a band the width of the element across it and off the other
 side, so there is a moment between passes with nothing on screen; it reads as a sweep going by.
