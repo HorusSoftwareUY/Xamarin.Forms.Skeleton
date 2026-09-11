@@ -38,9 +38,13 @@ not exist in the MAUI assembly.
 | `Skeleton.Animation` | BaseAnimation | Optional motion while busy. |
 
 **`IsBusy` is not inherited.** Every element that should react needs its own
-`sk:Skeleton.IsBusy="{Binding ...}"`. Setting it once on the page or on an outer layout does nothing
-for the elements inside. This is the single most common mistake — a page where only the outer
-container carries the binding renders no placeholders at all.
+`sk:Skeleton.IsBusy="{Binding ...}"`. Setting it once on an outer layout does nothing for the
+elements inside. This is the single most common mistake — a page where only the outer container
+carries the binding renders no placeholders at all.
+
+**Never set it on the page itself.** The properties are only valid on `View` and its subclasses;
+`ContentPage` is not one, and the library throws `NotSupportedException` the moment the binding
+resolves. Attach to the layouts and controls inside the page, not to the page.
 
 Bind `IsBusy` to the loading property the view model already exposes (`IsLoading`, `IsBusy`,
 `IsRefreshing`, whatever it is called). Only add a new property if there genuinely is none, and say so.
@@ -197,10 +201,18 @@ using Maui.Skeleton.Animations;
 
 public sealed class PulseAnimation : BaseAnimation
 {
+    // Interval and Parameter start at zero. Left alone, every FadeTo would complete
+    // instantly and the library would stop the loop as "not animating".
+    public PulseAnimation()
+    {
+        Interval = 600;
+        Parameter = 0.4;
+    }
+
     protected override async Task<bool> Animate(BindableObject bindable)
     {
         if (bindable is not View view) return false;
-        await view.FadeTo(0.4, Interval);
+        await view.FadeTo(Parameter, Interval);
         await view.FadeTo(1, Interval);
         return true;
     }
