@@ -133,6 +133,12 @@ These three work differently from the other four and share three rules.
 element's own background, so it does not carry down to children the way `Fade` and `Beat` do. On a
 transparent container it does nothing at all.
 
+**A `Background` you set yourself comes back, but not a binding behind it.** These animations paint
+the element's background, so anything already there is saved and restored when loading finishes. If
+that background came from a `Binding` or a `DynamicResource`, the value returns but the expression
+does not, and it stops updating. Use `sk:Skeleton.BackgroundColor` for the placeholder and leave
+`Background` alone on elements you animate this way.
+
 **It does not work on `Frame`.** `Frame` is deprecated in MAUI and its renderer does not repaint when
 the background is replaced, so the band never moves and you get a static placeholder with no error.
 Use `Border`, or any other non-legacy control.

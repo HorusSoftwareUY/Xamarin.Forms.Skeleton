@@ -327,6 +327,15 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
 
 ## Open items
 
+- **Restoring `Background` puts back the brush, not the expression behind it.** The animations that
+  repaint the placeholder remember what a view was painted with and put it back, so a consumer's own
+  gradient survives. A `Binding` or a `DynamicResource` driving that property does not: assigning a
+  brush per frame clears the expression, and MAUI exposes no public way to read one back off a
+  bindable property, so there is nothing to restore. This is the same gap
+  `RestoreBackgroundColor` and `RestoreTextColor` have for colours, tracked as
+  [#45](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/issues/45), and it should be closed
+  once for all four properties rather than patched here.
+
 - **The sample marks Shimmer, Aurora and Tint with a sparkle in their `Title`**, so they stand out in
   the More menu as the new ones. That stops being true after the release that introduces them, and
   the marker then has to come out: it is three `Title` attributes in `SkeletonSample/Pages/`.
