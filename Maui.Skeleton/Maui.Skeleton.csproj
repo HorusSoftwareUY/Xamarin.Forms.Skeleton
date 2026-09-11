@@ -38,6 +38,7 @@
 - Fixes rapid flickering on devices where the system has animations turned off. The skeleton now settles into a static placeholder instead of spinning the animation loop.
 - Behaviour change: Border, Frame, ContentView and ScrollView now fade out their content while busy, like Grid and StackLayout already did, and Skeleton.IsParent works on them. Children previously marked with Skeleton.Hide as a workaround keep working; the attribute is now redundant.
 - Animations are now driven from the UI thread, and a failing animation no longer leaves a view unable to animate again.
+- New Shimmer animation: a band of light that sweeps across the placeholder, with a Direction of Horizontal, Vertical, Diagonal or DiagonalReverse and optional SweepColors. Left alone the band contrasts with the placeholder colour, so it works on light and dark themes without configuration. Shimmer paints the element's own background, so it has to be attached to the element showing the placeholder and does not work on the deprecated Frame; use Border.
 - Still zero dependencies.
     </PackageReleaseNotes>
     <!-- The published 2.0.0 package declares no dependencies. Kept identical so the

@@ -22,6 +22,24 @@ namespace Xamarin.Forms.Skeleton
 
         public AnimationTypes Source { get; set; }
 
+#if NET6_0_OR_GREATER
+        /// <summary>
+        /// Axis a sweeping animation travels along. Ignored by animations that do not sweep.
+        /// </summary>
+        public SweepAxis Direction { get; set; } = SweepAxis.Horizontal;
+
+        /// <summary>
+        /// Two or three colours for a sweeping animation's band, written as
+        /// <c>"#05FFFFFF,#24FFFFFF,#05FFFFFF"</c>. Ignored by animations that do not sweep.
+        /// </summary>
+        /// <remarks>
+        /// A markup extension separates its properties with commas, so this value has to be quoted:
+        /// <c>SweepColors='#05FFFFFF,#24FFFFFF'</c>.
+        /// </remarks>
+        [System.ComponentModel.TypeConverter(typeof(SweepColorsTypeConverter))]
+        public Color[] SweepColors { get; set; }
+#endif
+
         public BaseAnimation ProvideValue(IServiceProvider serviceProvider)
         {
             switch (Source)
@@ -34,6 +52,10 @@ namespace Xamarin.Forms.Skeleton
                     return new VerticalShakeAnimation(Interval, Parameter);
                 case AnimationTypes.HorizontalShake:
                     return new HorizontalShakeAnimation(Interval, Parameter);
+#if NET6_0_OR_GREATER
+                case AnimationTypes.Shimmer:
+                    return new ShimmerAnimation(Interval, Direction, SweepColors);
+#endif
                 case AnimationTypes.None:
                 default:
                     return null;

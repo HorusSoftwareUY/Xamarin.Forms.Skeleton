@@ -73,6 +73,7 @@
 	  <None Remove="Resources\Images\back_gradient.png" />
 	  <None Remove="Resources\Images\ic_skeleton.png" />
 	  <None Remove="Resources\Images\ic_more.png" />
+	  <None Remove="Resources\Images\ic_shimmer.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -124,5 +125,6 @@
 	  <MauiImage Include="Resources\Images\back_gradient.png" />
 	  <MauiImage Include="Resources\Images\ic_skeleton.png" />
 	  <MauiImage Include="Resources\Images\ic_more.png" />
+	  <MauiImage Include="Resources\Images\ic_shimmer.png" />
 	</ItemGroup>
 </Project>

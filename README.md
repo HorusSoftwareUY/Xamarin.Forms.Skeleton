@@ -127,6 +127,36 @@ sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval=600, Parameter
 | `Beat` | scale | scale to grow to | 1.03 |
 | `VerticalShake` | position | offset in units, up and down | 15 |
 | `HorizontalShake` | position | offset in units, left and right | 10 |
+| `Shimmer` | a band of light across the placeholder | not used, see below | — |
+
+#### Shimmer
+
+`Shimmer` paints a band of light into the placeholder and slides it across, so it behaves a little
+differently from the other four.
+
+- It must be attached to the element that shows the placeholder colour. It does not carry down to
+  children the way `Fade` and `Beat` do.
+- **It does not work on `Frame`.** `Frame` is deprecated in MAUI and its renderer does not repaint
+  when the background is replaced, so the band never moves. Use `Border`.
+- `Interval` is the duration of the whole pass, not of half a cycle. 1600 is a good value.
+- It ignores `Parameter`, and takes `Direction` and `SweepColors` instead.
+
+```XML
+<Border StrokeShape="RoundRectangle 5"
+        StrokeThickness="0"
+        sk:Skeleton.IsBusy="{Binding IsBusy}"
+        sk:Skeleton.BackgroundColor="#c6c6c5"
+        sk:Skeleton.Animation="{sk:DefaultAnimation Source=Shimmer, Interval='1600', Direction='Diagonal'}" />
+```
+
+| Setting | Values | Default |
+| --- | --- | --- |
+| `Direction` | `Horizontal`, `Vertical`, `Diagonal`, `DiagonalReverse` | `Horizontal` |
+| `SweepColors` | two or three `#AARRGGBB` colours, comma separated and quoted | follows the placeholder |
+
+Left alone, the band contrasts with the placeholder automatically: light over a dark placeholder,
+dark over a light one. A placeholder bound with `AppThemeBinding` therefore shimmers correctly in
+both themes with no extra work.
 
 ## Animations
 
@@ -149,6 +179,10 @@ sk:Skeleton.Animation="{sk:DefaultAnimation Source=Fade, Interval=600, Parameter
 ### Horizontal Shake Animation
 
 <img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Horizontal_details.gif" width="300">
+
+### Shimmer Animation
+
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Shimmer_details.gif" width="300">
 
 ### Custom Animation
 

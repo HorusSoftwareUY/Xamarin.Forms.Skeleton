@@ -214,7 +214,41 @@ So a built-in animation has to do one of two things:
   Xamarin build never sees it.
 
 The second keeps new code free of the old framework and is the better default now that Xamarin is
-frozen.
+frozen. `Shimmer` is the worked example: `ShimmerAnimation`, `SweepAxis` and
+`SweepColorsTypeConverter` live in `Maui.Skeleton/`, the `Shimmer` value sits unguarded in the shared
+`AnimationTypes` enum because a name costs the Xamarin build nothing, and both the `case` and the
+`Direction`/`SweepColors` properties in `DefaultAnimationExtension` are wrapped in
+`#if NET6_0_OR_GREATER`. Build **both** projects after adding one; the MAUI build passing proves
+nothing about the Xamarin one.
+
+### An animation that paints, rather than moves
+
+Fade, Beat and the two shakes animate a property of the view as a whole, so they carry down to
+everything inside it. `Shimmer` does not: it paints a gradient into the view's own
+`VisualElement.Background` and slides it. Two consequences follow, and both cost real time to find.
+
+**It has to be attached to the element that shows the placeholder colour.** On a transparent
+container it paints a gradient nobody can see, and unlike Fade it does not reach the children.
+
+**`Frame` never repaints.** Replacing `Background` on a `Frame` leaves the old brush on screen, so the
+band freezes wherever it was first drawn and the placeholder looks static. `Border` repaints
+correctly. This was isolated by converting a single element in the sample page and watching only that
+one animate. `Handler.UpdateValue(nameof(VisualElement.Background))` does not help. There is no
+workaround short of platform code, which this library deliberately does not have, so the limitation is
+documented for consumers in `skills/skeleton/SKILL.md` instead.
+
+Two smaller things that also cost time:
+
+- **MAUI's own `Animation.Commit` stalls after a couple of ticks** when the tick assigns `Background`.
+  The sweep is driven by its own loop paced with `IDispatcher.DispatchDelayed` instead.
+- **Mutating a brush already assigned to `Background` does nothing.** The stops and endpoints are
+  bindable, but changing them does not repaint. Each frame assigns a fresh `LinearGradientBrush`.
+
+The colours are composited over the placeholder rather than drawn on top of it, because the gradient
+replaces the background instead of overlaying it. That is why `SweepColors` takes colours with alpha:
+they describe light falling on the placeholder. Left unset, the default follows the placeholder's
+luminance, light band over a dark placeholder and dark over a light one, so that the common case is
+never an invisible animation.
 
 `Source` is the extension's content property, so both call forms work:
 `{sk:DefaultAnimation Fade}` and `{sk:DefaultAnimation Source=Fade, Interval=600, Parameter=0.3}`.
@@ -288,4 +322,7 @@ though the public API is untouched. That is why dropping `net6.0` produced 3.0.0
   package is ever republished, which is not planned.
 - **The shared sources produce nullable warnings** under the MAUI build, which has `Nullable` enabled
   while the code is not annotated.
-- **The samples use `Frame` everywhere**, which is deprecated in MAUI in favour of `Border`.
+- **The samples use `Frame` everywhere**, which is deprecated in MAUI in favour of `Border`. This is
+  no longer only a deprecation: `Frame` does not repaint its background, so `Shimmer` cannot work on
+  it. The `Shimmer` page already uses `Border`; the other six still use `Frame` and would have to be
+  converted before they could show a sweeping animation.
