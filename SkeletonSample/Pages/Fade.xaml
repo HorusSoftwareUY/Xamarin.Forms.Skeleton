@@ -26,7 +26,6 @@
                             HeightRequest="70"
                             IsClippedToBounds="True"
                             BackgroundColor="{StaticResource WhiteColor}"
-                            sk:Skeleton.IsParent="True"
                             sk:Skeleton.IsBusy="{Binding IsBusy}"
                             sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
                             <Image
@@ -50,9 +49,7 @@
                                     TextColor="{StaticResource BlackColor}"
                                     FontSize="20"
                                     FontAttributes="Bold"
-                                    HorizontalOptions="Start"
-                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                    sk:Skeleton.Hide="True"/>
+                                    HorizontalOptions="Start"/>
                             </Frame>
                             <Frame
                                 BackgroundColor="Transparent"
@@ -66,9 +63,7 @@
                                     Text="{Binding Subtitle}"
                                     TextColor="{StaticResource DarkGrayColor}"
                                     FontSize="14"
-                                    HorizontalOptions="Start"
-                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                    sk:Skeleton.Hide="True"/>
+                                    HorizontalOptions="Start"/>
                             </Frame>
                         </StackLayout>
 
@@ -82,16 +77,13 @@
                                 IsClippedToBounds="True"
                                 BackgroundColor="Transparent"
                                 HorizontalOptions="End" 
-                                sk:Skeleton.IsParent="True"
                                 sk:Skeleton.IsBusy="{Binding IsBusy}"
                                 sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
                                 <Image
                                     WidthRequest="20"
                                     HeightRequest="20"
                                     Source="health.png"
-                                    Aspect="AspectFill"
-                                    sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                    sk:Skeleton.Hide="True"/>
+                                    Aspect="AspectFill"/>
                             </Frame>
                         </StackLayout>
                     </StackLayout>
@@ -210,9 +202,7 @@
                                         Text="Skeleton"
                                         TextColor="{StaticResource WhiteColor}"
                                         FontAttributes="Bold"
-                                        FontSize="40"
-                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                        sk:Skeleton.Hide="True" />
+                                        FontSize="40" />
                                 </Frame>
                                 <Frame
                                     BackgroundColor="Transparent"
@@ -226,9 +216,7 @@
                                         Text="By Horus"
                                         TextColor="{StaticResource WhiteColor}"
                                         FontAttributes="Bold"
-                                        FontSize="20"
-                                        sk:Skeleton.IsBusy="{Binding IsBusy}"
-                                        sk:Skeleton.Hide="True" />
+                                        FontSize="20" />
                                 </Frame>
 
                             </StackLayout>
@@ -257,9 +245,7 @@
                             Text="Trending"
                             TextColor="{StaticResource BlackColor}"
                             FontAttributes="Bold"
-                            FontSize="24"
-                            sk:Skeleton.IsBusy="{Binding IsBusy}"
-                            sk:Skeleton.Hide="True"/>
+                            FontSize="24"/>
                     </Frame>
                     <ListView
                         RowHeight="90"
