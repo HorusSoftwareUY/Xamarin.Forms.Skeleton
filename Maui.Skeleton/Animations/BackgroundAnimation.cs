@@ -82,6 +82,12 @@ namespace Maui.Skeleton.Animations
             if (bindable is not View view)
                 return false;
 
+            // An interval of zero is not a very fast animation, it is no animation. Clamping it to
+            // a millisecond would still wait a frame each pass, which is long enough to slip past
+            // the guard below and repaint one unchanging phase forever.
+            if (Interval == 0)
+                return false;
+
             // Platforms let the user turn animations off system wide, and BaseAnimation.Run stops any
             // animation whose pass returns faster than a frame for exactly that reason. This loop
             // paces itself, so it would sail past that guard and keep moving after the user asked for
@@ -103,7 +109,7 @@ namespace Maui.Skeleton.Animations
             // The pass still lasts a full interval of wall time. That keeps it honest for the guard
             // in BaseAnimation.Run, which stops an animation that returns faster than a frame, and it
             // means a busy UI thread drops frames rather than stretching the movement.
-            var interval = Math.Max(1u, Interval);
+            var interval = Interval;
             var began = Environment.TickCount64;
 
             while (!Skeleton.GetCancelAnimation(view))
@@ -115,7 +121,8 @@ namespace Maui.Skeleton.Animations
                 if (now - began >= interval)
                     break;
 
-                await NextFrame(view);
+                if (!await NextFrame(view))
+                    break;
             }
 
             return true;
@@ -144,11 +151,29 @@ namespace Maui.Skeleton.Animations
         /// Cached because it is not free. A page of placeholders starts two dozen of these at once
         /// and the probe queues behind all of them; measured on a moto g54, one that asked for 32 ms
         /// came back after 1039. Paid once per pass that would have eaten a large part of every one.
-        /// The setting it reads does not change while an app is in front of someone.
         /// </remarks>
         static Task<bool>? _platformAnimates;
+        static long _probedAt;
 
-        static Task<bool> PlatformAnimates(View view) => _platformAnimates ??= Probe(view);
+        /// <summary>
+        /// How long a probe stays good for. Someone can leave the app, switch animations off and come
+        /// back, so the answer cannot be cached forever; at a pass every second or two this still
+        /// costs one probe a minute rather than one per pass.
+        /// </summary>
+        const int ProbeHoldsFor = 30_000;
+
+        static Task<bool> PlatformAnimates(View view)
+        {
+            var now = Environment.TickCount64;
+
+            if (_platformAnimates is null || now - _probedAt > ProbeHoldsFor)
+            {
+                _probedAt = now;
+                _platformAnimates = Probe(view);
+            }
+
+            return _platformAnimates;
+        }
 
         static async Task<bool> Probe(View view)
         {
@@ -164,11 +189,21 @@ namespace Maui.Skeleton.Animations
             return elapsed.ElapsedMilliseconds >= Length / 2;
         }
 
-        /// <summary>Waits one frame on the view's own dispatcher.</summary>
-        static Task NextFrame(View view)
+        /// <summary>
+        /// Waits one frame on the view's own dispatcher, reporting false if it refused the callback.
+        /// </summary>
+        /// <remarks>
+        /// A refusal has to end the pass. Returning a task nobody will ever complete would leave the
+        /// animation holding the view with its Animating flag still set, and Skeleton skips any view
+        /// carrying that flag, so it would never animate again.
+        /// </remarks>
+        static Task<bool> NextFrame(View view)
         {
             var next = new TaskCompletionSource<bool>();
-            view.Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(FrameRate), () => next.TrySetResult(true));
+
+            if (!view.Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(FrameRate), () => next.TrySetResult(true)))
+                next.TrySetResult(false);
+
             return next.Task;
         }
 

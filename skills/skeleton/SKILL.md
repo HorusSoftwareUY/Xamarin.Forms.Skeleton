@@ -137,12 +137,15 @@ transparent container it does nothing at all.
 the background is replaced, so the band never moves and you get a static placeholder with no error.
 Use `Border`, or any other non-legacy control.
 
-It ignores `Parameter` and takes two settings of its own instead:
+They ignore `Parameter` and take settings of their own instead:
 
-| Setting | Values | Default |
-| --- | --- | --- |
-| `Direction` | `Horizontal`, `Vertical`, `Diagonal`, `DiagonalReverse` | `Horizontal` |
-| `SweepColors` | two or three colours, `#AARRGGBB`, comma separated | follows the placeholder |
+| Setting | Values | Applies to | Default |
+| --- | --- | --- | --- |
+| `Direction` | `Horizontal`, `Vertical`, `Diagonal`, `DiagonalReverse` | `Shimmer`, `Aurora` | `Horizontal` |
+| `SweepColors` | two or three colours, `#AARRGGBB`, comma separated | all three | follows the placeholder |
+
+`Tint` has no direction: nothing about it moves for one to apply to. It reads only the middle colour
+of `SweepColors`, the one it washes to, so the same palette can be handed to any of the three.
 
 `Interval` also reads differently here. For `Fade` or `Beat` it is half a cycle, because those go out
 and back. For these three it is the whole movement: one pass for `Shimmer`, which travels one way,
