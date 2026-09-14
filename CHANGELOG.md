@@ -1,6 +1,7 @@
 # Changelog
 
-All notable changes to this project are documented here.
+Notable changes to this project, from 3.0.0 onwards. Earlier releases are not reconstructed here;
+see the note at the end for where to find them.
 
 This project ships two packages from one source tree. `HorusStudio.Maui.Skeleton` is the .NET MAUI
 package and is where new work happens. `Xamarin.Forms.Skeleton` is frozen at 2.0.0 and is not
