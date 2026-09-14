@@ -81,9 +81,10 @@ A container without `IsParent` **and** without `BackgroundColor` leaves an empty
 fades but nothing is painted in its place. If you leave `IsParent` off, give it a colour.
 
 **Which containers fade their content changed in 3.0.0.** Up to 2.0.0 only a `Layout` did, such as
-`Grid` or `StackLayout`. Now a view holding a single piece of content does too. The test is any
-`View` implementing `IContentView`, among them `Border`, `Frame`, `ContentView`, `ScrollView`,
-`RefreshView`, `SwipeView` and anything built on `TemplatedView`, such as `RadioButton`. Those
+`Grid` or `StackLayout`. Now a view holding a single piece of content does too. The test is two
+conditions: a `View` implementing `IContentView`, whose content is itself a `View`. `Border`,
+`Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both in
+ordinary use. Those
 previously painted the placeholder and left their content visible on top of it, so markup written
 against 2.0.0 usually worked around it with `Skeleton.Hide="True"` on every child. From 3.0.0 those containers behave like the rest, so
 the workaround is redundant — harmless, but worth removing when you touch the file. If someone

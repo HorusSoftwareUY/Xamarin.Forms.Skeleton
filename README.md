@@ -145,9 +145,9 @@ showing on top of it, which is why samples and apps used `Skeleton.Hide="True"` 
 out of the way. Those views now behave like every other container, so that workaround is no longer
 needed. It still works, it is just redundant.
 
-The test is any `View` implementing `IContentView`, among them `Border`, `Frame`, `ContentView`,
-`ScrollView`, `RefreshView`, `SwipeView` and anything built on `TemplatedView`, such as
-`RadioButton`.
+The test is two conditions: a `View` implementing `IContentView`, whose content is itself a `View`.
+`Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet
+both in ordinary use.
 
 If content that used to stay visible now disappears, that container is the one deciding it: set
 `sk:Skeleton.IsParent="True"` on it to get the old behaviour back.
