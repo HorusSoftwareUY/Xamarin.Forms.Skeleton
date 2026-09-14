@@ -259,6 +259,11 @@ https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonSa
 ### Xamarin.Forms:
 https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonExample
  
+## Changelog
+
+What changed in each release, including the behaviour change in 3.0.0 and how to opt out of it, is
+in [CHANGELOG.md](CHANGELOG.md).
+
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>
 
