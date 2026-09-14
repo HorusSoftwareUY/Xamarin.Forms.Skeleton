@@ -262,7 +262,7 @@ https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/SkeletonEx
 ## Changelog
 
 What changed in each release, including the behaviour change in 3.0.0 and how to opt out of it, is
-in [CHANGELOG.md](CHANGELOG.md).
+in [CHANGELOG.md](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/CHANGELOG.md).
 
 ## Developed by
 <a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>

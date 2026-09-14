@@ -38,8 +38,9 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 - Animations are **driven from the UI thread**, which is where both frameworks expect to be called
   from. The loop had been running on a threadpool thread and only working by accident. ([#40])
 - The README now explains what `IsBusy` and `IsParent` actually do, with worked examples — including
-  that `IsBusy` is not inherited and that `IsParent="True"` means "leave my children alone".
-  ([#48], [#52])
+  that `IsBusy` is not inherited and that `IsParent="True"` means "leave my children alone". ([#52])
+- The animation documentation now describes the API that exists, rather than properties that were
+  never there. ([#48])
 
 ### Fixed
 
@@ -63,8 +64,9 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
   hidden. Its native colour is one per state — normal, disabled, pressed — and restoring a single one
   would stop a disabled button looking disabled. Give it a `TextColor` to have its text hidden like
   any other control. Tracked in [#56].
-- Restoring a colour that had a **binding or a dynamic resource** behind it puts the value back but
-  loses the expression. Tracked in [#45].
+- Restoring a colour that came from a **binding** puts the value back but not the binding, so the
+  property stops tracking its source. A dynamic resource is handled and comes back intact; the
+  `Opacity` a container restores to its children is not. Tracked in [#45].
 
 ### Still
 
