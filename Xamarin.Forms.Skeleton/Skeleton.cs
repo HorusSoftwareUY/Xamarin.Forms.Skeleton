@@ -270,25 +270,30 @@ namespace Xamarin.Forms.Skeleton
             var hasDynamic = GetUseDynamicTextColor(view);
 
             // What to put back when loading ends. A control that declared a colour hands it over
-            // directly; one drawing with the platform's has it read off the native control. When
-            // neither works there is nothing that could restore it, so it is left readable rather
-            // than hidden for good. See issue #50.
+            // directly. One drawing with the platform's has it read off the native control, but
+            // only when it is a Label: a Button's native colour is a set of them, one per state --
+            // normal, disabled, pressed -- and putting a single colour back would flatten that, so
+            // a disabled button would stop looking disabled. A Button with no colour of its own is
+            // left readable instead, as it is today. See issues #50 and #56.
             var toRestore = GetTextColorOf(view);
-            var fromPlatform = toRestore == default(Color);
-            if (fromPlatform)
+            var readFromPlatform = toRestore == default(Color) && view is Label;
+
+            if (readFromPlatform)
                 toRestore = TryReadPlatformTextColor(view);
 
             if (toRestore == default(Color))
             {
-                // Nothing readable yet. On first load that is normal rather than final: IsBusy is
-                // typically already true before the native control exists, so there is no colour to
-                // read at this point. Wait for it and hide then, instead of giving up and letting
-                // the text sit on top of the placeholder.
-                DeferTextColorUntilHandler(view);
+                // Nothing readable yet. For a Label that is normal rather than final on first load:
+                // IsBusy is typically already true before the native control exists, so there is no
+                // colour to read at this point. Wait for it and hide then, instead of giving up and
+                // letting the text sit on top of the placeholder.
+                if (readFromPlatform)
+                    DeferTextColorUntilHandler(view);
+
                 return;
             }
 
-            SetTextColorFromPlatform(view, fromPlatform);
+            SetTextColorFromPlatform(view, readFromPlatform);
 
             if (view is Label label)
             {
@@ -452,11 +457,10 @@ namespace Xamarin.Forms.Skeleton
                         ((argb >> 24) & 0xFF) / 255.0);
                 }
 
-                // iOS and Mac Catalyst: UILabel.TextColor, or UIButton.CurrentTitleColor. Both hand
-                // back a UIColor, whose channels only come out through GetRGBA's out parameters,
-                // which is what the boxed argument array is for.
-                var uiColor = ReadProperty(platformView, type, "TextColor")
-                    ?? ReadProperty(platformView, type, "CurrentTitleColor");
+                // iOS and Mac Catalyst: UILabel.TextColor hands back a UIColor, whose channels only
+                // come out through GetRGBA's out parameters, which is what the boxed argument array
+                // is for.
+                var uiColor = ReadProperty(platformView, type, "TextColor");
                 if (uiColor != null)
                 {
                     var getRgba = uiColor.GetType().GetMethod("GetRGBA");

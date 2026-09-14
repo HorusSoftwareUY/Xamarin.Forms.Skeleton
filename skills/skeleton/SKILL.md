@@ -339,9 +339,11 @@ sk:Skeleton.Animation="{Binding MyAnimation}"
 - **Wrapping everything in new `Border` elements to get grey blocks.** `Label` and `Button` paint
   their own; only reach for a container when the element cannot paint itself, like an `Image`.
   One condition: a `Label` or `Button` hides its text by turning that colour transparent, so there
-  has to be a colour to put back afterwards. One that declares no `TextColor` has its colour read
-  off the native control instead. Where that cannot be read the text is left readable while loading
-  rather than hidden and lost, so give such a control a `TextColor` when it matters.
+  has to be a colour to put back afterwards. A `Label` that declares no `TextColor` has its colour
+  read off the native control instead, so it still hides. A **`Button` that declares none is left
+  readable** while loading: its native colour is one per state, and putting a single colour back
+  would stop a disabled button looking disabled. Give a `Button` a `TextColor` of its own when its
+  text should disappear during loading.
 
 ## After editing
 
