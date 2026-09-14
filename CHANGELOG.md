@@ -34,12 +34,13 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 - **Multi-targets .NET 8, 9 and 10**, so each app gets a binary built against its own MAUI version.
   Packaging moved from a hand-written `.nuspec` into the project file. ([#40])
 - **A view holding a single piece of content now fades that content while busy**, as every `Layout`
-  already did, and `Skeleton.IsParent` works on it. That is any `View` implementing `IContentView`:
-  `Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView`, `SwipeView`, `TemplatedView` and `ContentPresenter`. This is the one
-  change that can alter how an existing app looks: if content that used to stay visible now
-  disappears, set `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back.
-  Children previously marked with `Skeleton.Hide` as a workaround keep working; the attribute is now
-  redundant. ([#44], [#47])
+  already did, and `Skeleton.IsParent` works on it. The test is any `View` implementing
+  `IContentView`, among them `Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView`,
+  `SwipeView` and anything built on `TemplatedView`, such as `RadioButton`. This is the one change
+  that can alter how an existing app looks: if content that used to stay visible now disappears, set
+  `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back. Children previously
+  marked with `Skeleton.Hide` as a workaround keep working; the attribute is now redundant.
+  ([#44], [#47])
 - Animations are **driven from the UI thread**, which is where both frameworks expect to be called
   from. The loop had been running on a threadpool thread and only working by accident. ([#40])
 - The README now explains what `IsBusy` and `IsParent` actually do, with worked examples — including
