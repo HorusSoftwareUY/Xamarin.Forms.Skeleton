@@ -89,18 +89,6 @@ namespace Xamarin.Forms.Skeleton
 
         internal static double GetOriginalOpacity(BindableObject b) => (double)b.GetValue(OriginalOpacityProperty);
 
-        /// <summary>
-        /// Opacity a text control had before it was hidden that way. Separate from
-        /// <see cref="OriginalOpacityProperty"/>, which a container writes on its children: a label
-        /// can be both a child of a busy container and busy in its own right, and one saved value
-        /// would overwrite the other.
-        /// </summary>
-        internal static readonly BindableProperty OriginalTextOpacityProperty = BindableProperty.CreateAttached("OriginalTextOpacity", typeof(double), typeof(View), -1d);
-
-        internal static void SetOriginalTextOpacity(BindableObject b, double value) => b.SetValue(OriginalTextOpacityProperty, value);
-
-        internal static double GetOriginalTextOpacity(BindableObject b) => (double)b.GetValue(OriginalTextOpacityProperty);
-
         internal static readonly BindableProperty OriginalTextColorProperty = BindableProperty.CreateAttached("OriginalTextColor", typeof(Color), typeof(View), default(Color));
 
         internal static void SetOriginalTextColor(BindableObject b, Color value) => b.SetValue(OriginalTextColorProperty, value);
@@ -268,16 +256,13 @@ namespace Xamarin.Forms.Skeleton
         private static void SetTextColor(View view)
         {
             var hasDynamic = GetUseDynamicTextColor(view);
-            // Only a control that already has a colour of its own can have one put back: the
+            // Only a control that already has a colour of its own can have one put back. The
             // platform's default text colour is not something this can read, and writing null or
-            // clearing does not repaint. Such a control is hidden by its opacity instead, which is a
-            // double and comes back reliably. See issue #50.
+            // clearing does not repaint, so hiding such a control would be permanent. It is left
+            // alone instead: put a Label inside a container that carries the placeholder colour, the
+            // way the samples do, and the container covers it. See issue #50.
             if (GetTextColorOf(view) == default(Color))
-            {
-                SetOriginalTextOpacity(view, view.Opacity);
-                view.SetValue(VisualElement.OpacityProperty, 0d);
                 return;
-            }
 
             if (view is Label label)
             {
@@ -320,14 +305,6 @@ namespace Xamarin.Forms.Skeleton
 
         private static void RestoreTextColor(View view)
         {
-            var textOpacity = GetOriginalTextOpacity(view);
-            if (textOpacity >= 0d)
-            {
-                view.SetValue(VisualElement.OpacityProperty, textOpacity);
-                view.ClearValue(OriginalTextOpacityProperty);
-                return;
-            }
-
             var useDynamic = GetUseDynamicTextColor(view);
             if (view is Label label)
             {
