@@ -95,6 +95,18 @@ namespace Xamarin.Forms.Skeleton
 
         internal static Color GetOriginalTextColor(BindableObject b) => (Color)b.GetValue(OriginalTextColorProperty);
 
+        internal static readonly BindableProperty TextColorFromPlatformProperty = BindableProperty.CreateAttached("TextColorFromPlatform", typeof(bool), typeof(View), default(bool));
+
+        internal static void SetTextColorFromPlatform(BindableObject b, bool value) => b.SetValue(TextColorFromPlatformProperty, value);
+
+        internal static bool GetTextColorFromPlatform(BindableObject b) => (bool)b.GetValue(TextColorFromPlatformProperty);
+
+        internal static readonly BindableProperty TextColorDeferredProperty = BindableProperty.CreateAttached("TextColorDeferred", typeof(bool), typeof(View), default(bool));
+
+        internal static void SetTextColorDeferred(BindableObject b, bool value) => b.SetValue(TextColorDeferredProperty, value);
+
+        internal static bool GetTextColorDeferred(BindableObject b) => (bool)b.GetValue(TextColorDeferredProperty);
+
         #endregion Internal Properties
 
         #region Operations
@@ -262,7 +274,8 @@ namespace Xamarin.Forms.Skeleton
             // neither works there is nothing that could restore it, so it is left readable rather
             // than hidden for good. See issue #50.
             var toRestore = GetTextColorOf(view);
-            if (toRestore == default(Color))
+            var fromPlatform = toRestore == default(Color);
+            if (fromPlatform)
                 toRestore = TryReadPlatformTextColor(view);
 
             if (toRestore == default(Color))
@@ -274,6 +287,8 @@ namespace Xamarin.Forms.Skeleton
                 DeferTextColorUntilHandler(view);
                 return;
             }
+
+            SetTextColorFromPlatform(view, fromPlatform);
 
             if (view is Label label)
             {
@@ -347,19 +362,46 @@ namespace Xamarin.Forms.Skeleton
         }
 
         /// <summary>
+        /// Hands a platform colour back to the platform after it has been repainted.
+        /// <para>
+        /// The colour read off the native control is a snapshot of one moment. Assigning it is what
+        /// repaints — writing null does nothing — but leaving it assigned would pin a control that
+        /// used to follow the platform to that snapshot, so it would keep the dark theme's text
+        /// colour after the user switches to the light one. Clearing straight after drops the local
+        /// value without repainting, so the pixels stay correct now and the platform is free to
+        /// resolve the colour itself again later.
+        /// </para>
+        /// </summary>
+        private static void ReleasePlatformTextColor(View view, BindableProperty property)
+        {
+            if (!GetTextColorFromPlatform(view))
+                return;
+
+            SetTextColorFromPlatform(view, false);
+            view.ClearValue(property);
+        }
+
+        /// <summary>
         /// Runs the hiding again once the native control is there to be read. Does nothing when a
         /// handler already exists, which makes this terminate: the second attempt cannot re-arm it.
         /// </summary>
         private static void DeferTextColorUntilHandler(View view)
         {
 #if NET6_0_OR_GREATER
-            if (view.Handler != null)
+            // Only ever one armed at a time. IsBusy can go true, false and true again before the
+            // native control exists, and two callbacks would both run when it arrives: the first
+            // hides the text, the second then reads that transparency and saves it as the colour to
+            // restore, leaving the control blank for good.
+            if (view.Handler != null || GetTextColorDeferred(view))
                 return;
+
+            SetTextColorDeferred(view, true);
 
             EventHandler onHandlerChanged = null;
             onHandlerChanged = (sender, args) =>
             {
                 view.HandlerChanged -= onHandlerChanged;
+                SetTextColorDeferred(view, false);
 
                 if (GetIsBusy(view))
                     SetTextColor(view);
@@ -469,6 +511,7 @@ namespace Xamarin.Forms.Skeleton
                 else
                 {
                     label.TextColor = GetOriginalTextColor(view);
+                    ReleasePlatformTextColor(label, Label.TextColorProperty);
                 }
             }
             else if (view is Button button)
@@ -481,6 +524,7 @@ namespace Xamarin.Forms.Skeleton
                 else
                 {
                     button.TextColor = GetOriginalTextColor(view);
+                    ReleasePlatformTextColor(button, Button.TextColorProperty);
                 }
             }
         }
