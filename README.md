@@ -133,14 +133,13 @@ governs whether it touches what is inside.
 </VerticalStackLayout>
 ```
 
-**What changed in 3.0.0.** Until 2.0.0 only `Grid` and `StackLayout` hid their content. A control
-holding a single piece of content — anything implementing `IContentView`, which is
-`Border`, `Frame`, `ContentView`, `ScrollView`, `ContentPage`, `RefreshView` and `SwipeView` — painted the placeholder and left its
-content showing on top of it, which is why samples and apps used `Skeleton.Hide="True"` on each
-child to get out of the way. They now behave like every other container, so that workaround is no
-longer needed — it still works, it is just redundant.
+**What changed in 3.0.0.** Until 2.0.0 only a `Layout`, such as `Grid` or `StackLayout`, hid its
+content. A view holding a single piece of content painted the placeholder and left its content
+showing on top of it, which is why samples and apps used `Skeleton.Hide="True"` on each child to get
+out of the way. Those views now behave like every other container, so that workaround is no longer
+needed. It still works, it is just redundant.
 
-Note this reaches `ContentPage`: `Skeleton.IsBusy` on a page now fades everything inside it.
+They are the views implementing `IContentView`: `Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView`, `SwipeView`, `TemplatedView` and `ContentPresenter`.
 
 If content that used to stay visible now disappears, that container is the one deciding it: set
 `sk:Skeleton.IsParent="True"` on it to get the old behaviour back.
