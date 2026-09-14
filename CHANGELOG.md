@@ -36,10 +36,11 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 - **A view holding a single piece of content now fades that content while busy**, as every `Layout`
   already did, and `Skeleton.IsParent` works on it. The test is two conditions: a `View`
   implementing `IContentView`, whose content is itself a `View`. `Border`, `Frame`, `ContentView`,
-  `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both in ordinary use. This is the one change
-  that can alter how an existing app looks: if content that used to stay visible now disappears, set
-  `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back. Children previously
-  marked with `Skeleton.Hide` as a workaround keep working; the attribute is now redundant.
+  `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both in ordinary use. This is
+  the one change that can alter how an existing app looks: if content that used to stay visible now
+  disappears, set `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back.
+  Children previously marked with `Skeleton.Hide` as a workaround keep working; the attribute is
+  now redundant.
   ([#44], [#47])
 - Animations are **driven from the UI thread**, which is where both frameworks expect to be called
   from. The loop had been running on a threadpool thread and only working by accident. ([#40])
