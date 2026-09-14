@@ -82,13 +82,65 @@ Add the following properties to set a loading animation with a specific backgrou
 
 ### Properties
 
-#### IsParent (Boolean)
-- Indicates if it is a parent control which has skeleton children controls.
-- The default value is false.
-
 #### IsBusy (Boolean)
 - Indicates if the control is busy in a loading state.
 - The default value is false.
+
+**`IsBusy` is not inherited.** Every element that should react needs its own
+`sk:Skeleton.IsBusy="{Binding ...}"`. Setting it once on an outer layout does nothing for the
+elements inside it.
+
+#### IsParent (Boolean)
+- Controls whether a container covers its own content or lets each child draw itself.
+- The default value is false.
+
+**The name reads backwards from what it does.** `IsParent="True"` does not mean "handle my
+children" — it means **"leave my children alone, they handle themselves"**.
+
+| | What happens |
+| --- | --- |
+| `IsParent="False"` (default) | The container hides its content and paints its own `BackgroundColor`. You get **one solid shape**. |
+| `IsParent="True"` | The content is left untouched. **Every child that should show a placeholder needs its own `IsBusy`.** |
+
+Either way the container still paints its own colour and runs its own animation. `IsParent` only
+governs whether it touches what is inside.
+
+**One solid shape** — no `IsParent`, and the container needs a colour:
+
+```XML
+<Border sk:Skeleton.IsBusy="{Binding IsBusy}"
+        sk:Skeleton.BackgroundColor="#c6c6c5">
+    <Label Text="{Binding Title}" />
+</Border>
+```
+
+**Several shapes** — `IsParent="True"`, and each child declares itself:
+
+```XML
+<VerticalStackLayout sk:Skeleton.IsParent="True"
+                     sk:Skeleton.IsBusy="{Binding IsBusy}">
+
+    <Border sk:Skeleton.IsBusy="{Binding IsBusy}"
+            sk:Skeleton.BackgroundColor="#c6c6c5">
+        <Label Text="{Binding Title}" />
+    </Border>
+
+    <Border sk:Skeleton.IsBusy="{Binding IsBusy}"
+            sk:Skeleton.BackgroundColor="#c6c6c5">
+        <Label Text="{Binding Subtitle}" />
+    </Border>
+
+</VerticalStackLayout>
+```
+
+**Three mistakes this prevents**, none of which reports an error:
+
+- `IsParent="True"` with a child that declares nothing does **nothing at all** to that child. If it
+  holds real content, the content shows straight through the loading state. If you drew your own
+  placeholder shape there, it stays on screen after loading finishes, on top of the real content.
+- No `IsParent` and no `BackgroundColor` leaves an empty hole: the content is hidden and nothing is
+  painted in its place.
+- `IsBusy` on an outer layout alone renders no placeholders at all, because it is not inherited.
 
 #### BackgroundColor (Color)
 - Control background color when is busy.
