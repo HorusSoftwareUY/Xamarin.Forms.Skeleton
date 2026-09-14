@@ -133,6 +133,15 @@ governs whether it touches what is inside.
 </VerticalStackLayout>
 ```
 
+**What changed in 3.0.0.** Until 2.0.0 only `Grid` and `StackLayout` hid their content. `Border`,
+`Frame`, `ContentView` and `ScrollView` painted the placeholder and left their content showing on
+top of it, which is why samples and apps used `Skeleton.Hide="True"` on each child to get out of the
+way. They now behave like every other container, so that workaround is no longer needed — it still
+works, it is just redundant.
+
+If content that used to stay visible now disappears, that container is the one deciding it: set
+`sk:Skeleton.IsParent="True"` on it to get the old behaviour back.
+
 **Three mistakes this prevents**, none of which reports an error:
 
 - `IsParent="True"` with a child that declares nothing does **nothing at all** to that child. If it
