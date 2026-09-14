@@ -330,6 +330,10 @@ sk:Skeleton.Animation="{Binding MyAnimation}"
 - **Adding a new `IsLoading` property when the view model already has one.** Wire up what exists.
 - **Wrapping everything in new `Border` elements to get grey blocks.** `Label` and `Button` paint
   their own; only reach for a container when the element cannot paint itself, like an `Image`.
+  One condition: a `Label` or `Button` hides its text by turning that colour transparent, so it needs
+  a `TextColor` of its own for there to be a colour to put back afterwards. One drawing with the
+  platform default is left readable while loading rather than hidden and lost. Either give it a
+  colour or put it inside a container that carries the placeholder.
 
 ## After editing
 

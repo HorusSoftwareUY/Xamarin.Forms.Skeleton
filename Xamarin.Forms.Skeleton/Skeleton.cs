@@ -240,13 +240,30 @@ namespace Xamarin.Forms.Skeleton
             }
             else if (backgroundColor != default(Color))
             {
-                view.BackgroundColor = GetOriginalBackgroundColor(view);
+                // A view that never declared a colour saved null here, and writing null back leaves
+                // the placeholder on screen: neither that nor ClearValue repaints, measured on
+                // device. Assigning does, so the fallback is transparent, which is what such a view
+                // looked like to begin with.
+                var original = GetOriginalBackgroundColor(view);
+#if NET6_0_OR_GREATER
+                view.BackgroundColor = original ?? Colors.Transparent;
+#else
+                view.BackgroundColor = original == default(Color) ? Color.Transparent : original;
+#endif
             }
         }
 
         private static void SetTextColor(View view)
         {
             var hasDynamic = GetUseDynamicTextColor(view);
+            // Only a control that already has a colour of its own can have one put back. The
+            // platform's default text colour is not something this can read, and writing null or
+            // clearing does not repaint, so hiding such a control would be permanent. It is left
+            // alone instead: put a Label inside a container that carries the placeholder colour, the
+            // way the samples do, and the container covers it. See issue #50.
+            if (GetTextColorOf(view) == default(Color))
+                return;
+
             if (view is Label label)
             {
                 hasDynamic = hasDynamic || label.HasDynamicColorOnProperty(Label.TextColorProperty);
@@ -269,6 +286,21 @@ namespace Xamarin.Forms.Skeleton
             }
 
             SetUseDynamicTextColor(view, hasDynamic);
+        }
+
+        /// <summary>
+        /// The colour a text control currently carries, or null when it never declared one and is
+        /// drawing with whatever the platform decided.
+        /// </summary>
+        private static Color GetTextColorOf(View view)
+        {
+            if (view is Label label)
+                return label.TextColor;
+
+            if (view is Button button)
+                return button.TextColor;
+
+            return default(Color);
         }
 
         private static void RestoreTextColor(View view)
