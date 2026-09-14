@@ -33,8 +33,11 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 
 - **Multi-targets .NET 8, 9 and 10**, so each app gets a binary built against its own MAUI version.
   Packaging moved from a hand-written `.nuspec` into the project file. ([#40])
-- **`Border`, `Frame`, `ContentView` and `ScrollView` now fade out their content while busy**, as
-  `Grid` and `StackLayout` already did, and `Skeleton.IsParent` works on them. This is the one change
+- **Every control that holds a single piece of content now fades that content while busy**, as
+  `Grid` and `StackLayout` already did, and `Skeleton.IsParent` works on them. That is anything
+  implementing `IContentView`: `Border`, `Frame`, `ContentView`, `ScrollView`, `ContentPage`, `RefreshView` and `SwipeView` among them — so
+  `Skeleton.IsBusy` on a `ContentPage` now fades the whole page, where in 2.0.0 it did nothing to
+  what was inside. This is the one change
   that can alter how an existing app looks: if content that used to stay visible now disappears, set
   `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back. Children previously
   marked with `Skeleton.Hide` as a workaround keep working; the attribute is now redundant.

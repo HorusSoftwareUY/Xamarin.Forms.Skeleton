@@ -81,8 +81,9 @@ A container without `IsParent` **and** without `BackgroundColor` leaves an empty
 fades but nothing is painted in its place. If you leave `IsParent` off, give it a colour.
 
 **Which containers fade their content changed in 3.0.0.** Up to 2.0.0 only `Grid` and
-`StackLayout` did; `Border`, `Frame`, `ContentView` and `ScrollView` painted the placeholder and
-left their content visible on top of it. Markup written against 2.0.0 usually worked around that
+`StackLayout` did. Now anything implementing `IContentView` does too — `Border`, `Frame`, `ContentView`, `ScrollView`, `ContentPage`, `RefreshView` and `SwipeView` — which previously painted the placeholder and left their
+content visible on top of it. Note that this includes `ContentPage`, so `IsBusy` on a page fades
+everything inside it. Markup written against 2.0.0 usually worked around that
 with `Skeleton.Hide="True"` on every child. From 3.0.0 those containers behave like the rest, so
 the workaround is redundant — harmless, but worth removing when you touch the file. If someone
 reports that content which used to stay visible now disappears, the fix is `IsParent="True"` on
