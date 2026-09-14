@@ -31,6 +31,12 @@ receive further updates. New work happens on the .NET MAUI package above.
 |Xamarin.Android|API 16+|
 |Xamarin.Forms|>= 4.0.0.425677|
 
+## Agent skill
+
+Rather than learning the API, you can have a coding agent apply it for you. The skill and the two
+ways to use it are in
+[skills/](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/skills).
+
 ## Usage
 
 You must add this namespace to your xaml files.
