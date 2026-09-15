@@ -7,10 +7,7 @@ This project ships two packages from one source tree. `HorusStudio.Maui.Skeleton
 package and is where new work happens. `Xamarin.Forms.Skeleton` is frozen at 2.0.0 and is not
 republished; it keeps working for apps that still need it.
 
-## [3.0.0] - Unreleased
-
-> Everything below is on `master` and packaged, but 3.0.0 is not on nuget.org yet. On the day it is
-> published, swap **Unreleased** for that date and point the `[3.0.0]` link at the release tag.
+## [3.0.0] - 2026-09-15
 
 The first release since MAUI support landed in 2023. It requires **.NET 8 or newer** — an app on
 .NET 6 or 7 stays on 2.0.0, which keeps working.
@@ -87,7 +84,7 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 [nuget.org](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton) and in the repository history.
 2.0.0 added .NET MAUI support alongside the original Xamarin.Forms package.
 
-[3.0.0]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/commits/master
+[3.0.0]: https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/3.0.0
 [#40]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/40
 [#43]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/43
 [#44]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/44
