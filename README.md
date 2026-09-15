@@ -148,7 +148,7 @@ needed. It still works, it is just redundant.
 The test is two conditions: a `View` implementing `IContentView`, whose presented content is a
 `View`. `Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones
 that meet both. Implementing the interface is not enough on its own: a `RadioButton` does, but
-presents no content, so nothing of it fades.
+with its default template it presents nothing, so nothing of it fades.
 
 If content that used to stay visible now disappears, that container is the one deciding it: set
 `sk:Skeleton.IsParent="True"` on it to get the old behaviour back.

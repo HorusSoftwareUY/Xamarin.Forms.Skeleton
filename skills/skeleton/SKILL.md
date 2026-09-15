@@ -84,8 +84,7 @@ fades but nothing is painted in its place. If you leave `IsParent` off, give it 
 `Grid` or `StackLayout`. Now a view holding a single piece of content does too. The test is two
 conditions: a `View` implementing `IContentView`, whose presented content is a `View`. `Border`,
 `Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both.
-Implementing the interface is not enough on its own: a `RadioButton` does, but presents no
-content, so nothing of it fades. Those previously painted the placeholder and left their content
+Implementing the interface is not enough on its own: a `RadioButton` does, but with its default template it presents nothing, so nothing of it fades. Those previously painted the placeholder and left their content
 visible on top of it, so markup written against 2.0.0 usually worked around it with
 `Skeleton.Hide="True"` on every child. From 3.0.0 they behave like the rest, so the workaround is
 redundant: harmless, but worth removing when you touch the file. If someone reports that content
