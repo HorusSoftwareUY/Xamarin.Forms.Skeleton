@@ -83,13 +83,14 @@ fades but nothing is painted in its place. If you leave `IsParent` off, give it 
 **Which containers fade their content changed in 3.0.0.** Up to 2.0.0 only a `Layout` did, such as
 `Grid` or `StackLayout`. Now a view holding a single piece of content does too. The test is two
 conditions: a `View` implementing `IContentView`, whose presented content is a `View`. `Border`,
-`Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the usual ones. Templated
-controls take the same path, where what gets faded is the control template's root rather than the
-`Content` property. Those previously painted the placeholder and left their content visible on top
-of it, so markup written against 2.0.0 usually worked around it with `Skeleton.Hide="True"` on
-every child. From 3.0.0 they behave like the rest, so the workaround is redundant: harmless, but
-worth removing when you touch the file. If someone reports that content which used to stay visible
-now disappears, the fix is `IsParent="True"` on that container, not `Hide` on the children.
+`Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both.
+Implementing the interface is not enough on its own: a `RadioButton` does, but presents no
+content, so nothing of it fades. Those previously painted the placeholder and left their content
+visible on top of it, so markup written against 2.0.0 usually worked around it with
+`Skeleton.Hide="True"` on every child. From 3.0.0 they behave like the rest, so the workaround is
+redundant: harmless, but worth removing when you touch the file. If someone reports that content
+which used to stay visible now disappears, the fix is `IsParent="True"` on that container, not
+`Hide` on the children.
 
 **A `Label` or a `Button`** paints its own placeholder — the library makes the text transparent, so
 the background colour becomes the grey bar:
