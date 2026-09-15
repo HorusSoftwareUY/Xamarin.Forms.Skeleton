@@ -31,6 +31,12 @@ receive further updates. New work happens on the .NET MAUI package above.
 |Xamarin.Android|API 16+|
 |Xamarin.Forms|>= 4.0.0.425677|
 
+## Agent skill
+
+Rather than learning the API, you can have a coding agent apply it for you. The skill and the two
+ways to use it are in
+[skills/](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/tree/master/skills).
+
 ## Usage
 
 You must add this namespace to your xaml files.
@@ -133,11 +139,16 @@ governs whether it touches what is inside.
 </VerticalStackLayout>
 ```
 
-**What changed in 3.0.0.** Until 2.0.0 only `Grid` and `StackLayout` hid their content. `Border`,
-`Frame`, `ContentView` and `ScrollView` painted the placeholder and left their content showing on
-top of it, which is why samples and apps used `Skeleton.Hide="True"` on each child to get out of the
-way. They now behave like every other container, so that workaround is no longer needed — it still
-works, it is just redundant.
+**What changed in 3.0.0.** Until 2.0.0 only a `Layout`, such as `Grid` or `StackLayout`, hid its
+content. A view holding a single piece of content painted the placeholder and left its content
+showing on top of it, which is why samples and apps used `Skeleton.Hide="True"` on each child to get
+out of the way. Those views now behave like every other container, so that workaround is no longer
+needed. It still works, it is just redundant.
+
+The test is two conditions: a `View` implementing `IContentView`, whose presented content is a
+`View`. `Border`, `Frame`, `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones
+that meet both. Implementing the interface is not enough on its own: a `RadioButton` does, but
+with its default template it presents nothing, so nothing of it fades.
 
 If content that used to stay visible now disappears, that container is the one deciding it: set
 `sk:Skeleton.IsParent="True"` on it to get the old behaviour back.

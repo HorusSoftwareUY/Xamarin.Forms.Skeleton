@@ -13,11 +13,11 @@ inside *your* project, each in its own directory. Copy the skill there:
 One command, run from the root of your app:
 
 ```bash
-mkdir -p .claude/skills/skeleton && curl -fsSL https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/skills/skeleton/SKILL.md -o .claude/skills/skeleton/SKILL.md
+mkdir -p .claude/skills/skeleton && curl -fsSL https://skills.horus.com.uy/skeleton -o .claude/skills/skeleton/SKILL.md
 ```
 
 Swap `.claude` for `.agents` for Codex. Or simply tell your agent:
 
-> Read https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/skills/skeleton/SKILL.md and add skeleton loading to MainPage.xaml
+> Read https://skills.horus.com.uy/skeleton and add skeleton loading to MainPage.xaml
 
 The skill is a single Markdown file with no scripts — open the link and read it before you install it.

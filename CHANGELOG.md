@@ -7,10 +7,7 @@ This project ships two packages from one source tree. `HorusStudio.Maui.Skeleton
 package and is where new work happens. `Xamarin.Forms.Skeleton` is frozen at 2.0.0 and is not
 republished; it keeps working for apps that still need it.
 
-## [3.0.0] - Unreleased
-
-> Everything below is on `master` and packaged, but 3.0.0 is not on nuget.org yet. On the day it is
-> published, swap **Unreleased** for that date and point the `[3.0.0]` link at the release tag.
+## [3.0.0] - 2026-09-15
 
 The first release since MAUI support landed in 2023. It requires **.NET 8 or newer** — an app on
 .NET 6 or 7 stays on 2.0.0, which keeps working.
@@ -33,11 +30,16 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 
 - **Multi-targets .NET 8, 9 and 10**, so each app gets a binary built against its own MAUI version.
   Packaging moved from a hand-written `.nuspec` into the project file. ([#40])
-- **`Border`, `Frame`, `ContentView` and `ScrollView` now fade out their content while busy**, as
-  `Grid` and `StackLayout` already did, and `Skeleton.IsParent` works on them. This is the one change
-  that can alter how an existing app looks: if content that used to stay visible now disappears, set
-  `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back. Children previously
-  marked with `Skeleton.Hide` as a workaround keep working; the attribute is now redundant.
+- **A view holding a single piece of content now fades that content while busy**, as every `Layout`
+  already did, and `Skeleton.IsParent` works on it. The test is two conditions: a `View`
+  implementing `IContentView`, whose presented content is a `View`. `Border`, `Frame`,
+  `ContentView`, `ScrollView`, `RefreshView` and `SwipeView` are the ones that meet both.
+  Implementing the interface is not enough on its own: a `RadioButton` does, but with its default
+  template it presents nothing, so nothing of it fades. This is the one change that can alter how
+  an existing app looks: if content that used to stay visible now disappears, set
+  `sk:Skeleton.IsParent="True"` on that container to get the old behaviour back. Children
+  previously marked with `Skeleton.Hide` as a workaround keep working; the attribute is now
+  redundant.
   ([#44], [#47])
 - Animations are **driven from the UI thread**, which is where both frameworks expect to be called
   from. The loop had been running on a threadpool thread and only working by accident. ([#40])
@@ -82,7 +84,7 @@ The first release since MAUI support landed in 2023. It requires **.NET 8 or new
 [nuget.org](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton) and in the repository history.
 2.0.0 added .NET MAUI support alongside the original Xamarin.Forms package.
 
-[3.0.0]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/commits/master
+[3.0.0]: https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/3.0.0
 [#40]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/40
 [#43]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/43
 [#44]: https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/pull/44
