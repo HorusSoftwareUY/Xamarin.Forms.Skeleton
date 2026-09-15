@@ -3,13 +3,23 @@
 
 The Skeleton control is a popular approach to loading content in mobile apps that provides one or more visual placeholders while content is being loaded. This technique is particularly useful for improving user experience, as it reduces perceived load times and provides a more engaging experience.
 
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Skeleton_general.gif" width="300">
+#
+
+[![Playground Try it live](https://img.shields.io/badge/Playground-Try%20it%20live-red)](https://horus.com.uy/skeleton)
+[![AI Skill skill.md](https://img.shields.io/badge/AI%20Skill-skill.md-red)](https://skills.horus.com.uy/skeleton)
+## Playground | Find the animation that fits your app
+
+Six layouts, seven animations and every property we expose. Switch between them and keep the one that belongs in your .NET MAUI project. After installing the NuGet package, you can use your own colors and apply the animations to any layout.
+
+**[horus.com.uy/skeleton](https://horus.com.uy/skeleton)**
+
+<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Skeleton.gif" width="800">
 
 ## Setup
 
 ### .NET MAUI
 
-* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet](https://img.shields.io/nuget/v/HorusStudio.Maui.Skeleton.svg?label=NuGet)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
+* Available on NuGet: [HorusStudio.Maui.Skeleton](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/) [![NuGet v3.0.0](https://img.shields.io/badge/NuGet-v3.0.0-red)](https://www.nuget.org/packages/HorusStudio.Maui.Skeleton/)
 
 |Platform|Version|
 | ------------------- | :------------------: |
@@ -235,32 +245,6 @@ Left alone, the band contrasts with the placeholder automatically: light over a 
 dark over a light one. A placeholder bound with `AppThemeBinding` therefore shimmers correctly in
 both themes with no extra work.
 
-## Animations
-
-### Skeleton Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Skeleton_details.gif" width="300">
-
-### Beat Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Beat_details.gif" width="300">
-
-### Fade Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Fade_details.gif" width="300">
-
-### Vertical Shake Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Vertical_details.gif" width="300">
-
-### Horizontal Shake Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Horizontal_details.gif" width="300">
-
-### Custom Animation
-
-<img src="https://raw.githubusercontent.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/master/screenshots/Custom_details.gif" width="300">
-
 
 ## Demo
 
@@ -276,7 +260,7 @@ What changed in each release, including the behaviour change in 3.0.0 and how to
 in [CHANGELOG.md](https://github.com/HorusSoftwareUY/Xamarin.Forms.Skeleton/blob/master/CHANGELOG.md).
 
 ## Developed by
-<a href="http://horus.com.uy" ><img src="https://horus.com.uy/img/logo_horus.png" width="128"></a>
+<a href="http://horus.com.uy" ><img src="https://cdn.prod.website-files.com/64a7016392b0b7da3a8604e3/6aa9893608391fb09df87302_horus-github.png" width="128"></a>
 
 ## Contributions
 Contributions are welcome! If you find a bug want a feature added please report it.
