@@ -37,13 +37,13 @@ namespace Xamarin.Forms.Skeleton
 
         public static bool GetHide(BindableObject b) => (bool)b.GetValue(HideProperty);
 
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(View), default(Color));
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(View), default(Color), propertyChanged: (b, oldValue, newValue) => OnIsBusyChanged(b, GetIsBusy(b)));
 
         public static void SetBackgroundColor(BindableObject b, Color value) => b.SetValue(BackgroundColorProperty, value);
 
         public static Color GetBackgroundColor(BindableObject b) => (Color)b.GetValue(BackgroundColorProperty);
 
-        public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(BaseAnimation), typeof(View), null);
+        public static readonly BindableProperty AnimationProperty = BindableProperty.CreateAttached("Animation", typeof(BaseAnimation), typeof(View), null, propertyChanged: (b, oldValue, newValue) => OnIsBusyChanged(b, GetIsBusy(b)));
 
         public static void SetAnimation(BindableObject b, BaseAnimation value) => b.SetValue(AnimationProperty, value);
 
